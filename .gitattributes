@@ -1,0 +1,15 @@
+* text=auto
+
+# text
+
+*.txt text
+*.md text
+*.java text
+
+/LICENSE text
+.gitignore text
+.gitattributes text
+
+# binary
+
+*.jar binary
