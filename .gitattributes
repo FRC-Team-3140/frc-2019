@@ -5,10 +5,18 @@
 *.txt text
 *.md text
 *.java text
+*.bat text
+*.json text
+*.grade text
+*.properties text
 
 /LICENSE text
+/.settings/org.eclipse.buildship.core.prefs text
+/gradlew text
 .gitignore text
 .gitattributes text
+.classpath text
+.project text
 
 # binary
 
