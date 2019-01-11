@@ -1,0 +1,18 @@
+package frc.robot.subsystems.pneumatics;
+
+import edu.wpi.first.wpilibj.*;
+import frc.robot.*;
+
+public class Shifter extends Subsystem implements Constants, Hardware {
+
+  public void shift(DoubleSolenoid.Value v) {
+    shifter.set(v);
+  }
+
+  @Override
+  public void initDefaultCommand() {
+    // Set the default command for a subsystem here.
+    // setDefaultCommand(new MySpecialCommand());
+  }
+  
+}

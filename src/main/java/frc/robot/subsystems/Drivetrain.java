@@ -21,7 +21,6 @@ public class Drivetrain extends Subsystem implements Constants, Hardware {
 
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new ArcadeDrive());
   }
 }

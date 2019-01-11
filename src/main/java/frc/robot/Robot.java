@@ -19,9 +19,10 @@ import frc.robot.subsystems.*;
  * creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends TimedRobot implements Hardware {
 
   public static Drivetrain dt;
+  public static Shifter sh;
   public static OI oi;
 
   /**
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     dt = new Drivetrain();
+    sh = new Shifter();
     //  OI must be at the bottom
     oi = new OI();
   }
@@ -76,6 +78,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    xbox1.check();
   }
 
   /**
