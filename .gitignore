@@ -1,4 +1,6 @@
 /bin/
+/build/
 /workspace/
+/.gradle/
 
 *.class

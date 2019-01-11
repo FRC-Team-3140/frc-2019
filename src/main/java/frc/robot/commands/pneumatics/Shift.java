@@ -7,7 +7,10 @@
 
 package frc.robot.commands.pneumatics;
 
-import edu.wpi.first.wpilib.*;
+import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class Shift extends Command implements Constants {
   private DoubleSolenoid.Value v;

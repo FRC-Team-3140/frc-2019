@@ -1,6 +1,7 @@
 package frc.robot.subsystems.pneumatics;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.*;
 
 public class Shifter extends Subsystem implements Constants, Hardware {
