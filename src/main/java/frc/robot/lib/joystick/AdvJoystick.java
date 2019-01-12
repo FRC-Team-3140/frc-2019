@@ -13,15 +13,15 @@ public class AdvJoystick extends IJoystick {
 	private Button fourButton;
 	private Button fiveButton;
 	private Button sixButton;
-	
+
 	// Internal Buttons
 	public InternalButton trigger;
 	public InternalButton thumb;
 	public InternalButton three;
 	public InternalButton four;
 	public InternalButton five;
-	public InternalButton six;	
-	
+	public InternalButton six;
+
 	public AdvJoystick(int port) {
 		super(port);
 		//Buttons
@@ -39,7 +39,7 @@ public class AdvJoystick extends IJoystick {
 		five = new InternalButton();
 		six = new InternalButton();
 	}
-	
+
 	@Override
 	public void check() {
 		if(!internalControl) {
@@ -52,7 +52,7 @@ public class AdvJoystick extends IJoystick {
 
 		}
 	}
-	
+
 	public double getMainX() {
 		return Math.sin(Math.PI/2 * super.getRawAxis(0));
 	}
@@ -62,7 +62,7 @@ public class AdvJoystick extends IJoystick {
 	}
 
 	@Override
-	public void setButtonStatus(boolean trigger, boolean thumb, boolean three, boolean four, boolean five, 
+	public void setButtonStatus(boolean trigger, boolean thumb, boolean three, boolean four, boolean five,
 								boolean six) {
 		if(internalControl) {
 			this.trigger.setPressed(trigger);
