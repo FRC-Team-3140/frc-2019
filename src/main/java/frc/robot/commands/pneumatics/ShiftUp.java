@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.*;
 
-public class ShiftUp extends CommandGroup implements Constants {
+public class ShiftUp extends CommandGroup {
 
   public ShiftUp() {
-    addSequential(new Shift(EXT));
+    addSequential(new Shift(Config.EXTEND));
     addSequential(new WaitCommand(0.3));
-    addSequential(new Shift(OFF));
+    addSequential(new Shift(Config.OFF));
   }
 }

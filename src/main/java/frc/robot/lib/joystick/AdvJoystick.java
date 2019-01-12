@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-public class AdvJoystick extends InterfaceableJoystick {
+public class AdvJoystick extends IJoystick {
 	private static boolean internalControl = false;
 	// Buttons
 	private Button triggerButton;
@@ -54,12 +54,10 @@ public class AdvJoystick extends InterfaceableJoystick {
 	}
 	
 	public double getMainX() {
-		//return Math.pow(super.getRawAxis(0), 3);
 		return Math.sin(Math.PI/2 * super.getRawAxis(0));
 	}
 
 	public double getMainY() {
-		//return Math.pow(super.getRawAxis(1), 3);
 		return Math.sin(Math.PI/2 * super.getRawAxis(1));
 	}
 

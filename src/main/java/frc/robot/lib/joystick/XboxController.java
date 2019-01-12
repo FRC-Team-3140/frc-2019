@@ -4,11 +4,9 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-public class XboxController extends InterfaceableXboxController {
+public class XboxController extends IXboxController {
 	private static boolean internalControl = false;
-	/**
-	 * Buttons
-	 */
+	// Button
 	private JoystickButton aButton;
 	private JoystickButton bButton;
 	private JoystickButton xButton;
@@ -25,9 +23,7 @@ public class XboxController extends InterfaceableXboxController {
 	private Button leftTriggerButton;
 	private Button rightTriggerButton;
 	
-	/**
-	 * Internal Buttons
-	 */
+	// Internal Buttons
 	public InternalButton a;
 	public InternalButton b;
 	public InternalButton x;
@@ -109,22 +105,18 @@ public class XboxController extends InterfaceableXboxController {
 	}
 	
 	public double getSmoothedMainX() {
-		//return Math.pow(super.getRawAxis(0), 3) * -1;
 		return -Math.sin(Math.PI/2 * super.getRawAxis(0));
 	}
 	
 	public double getSmoothedMainY() {
-		//return Math.pow(super.getRawAxis(1), 5);
 		return Math.sin(Math.PI/2 * super.getRawAxis(1));
 	}
 	
 	public double getSmoothedAltX() {
-		//return Math.pow(super.getRawAxis(4), 3) * -1;
 		return -Math.sin(Math.PI/2 * super.getRawAxis(4));
 	}
 	
 	public double getSmoothedAltY() {
-		//return Math.pow(super.getRawAxis(5), 3);
 		return Math.sin(Math.PI/2 * super.getRawAxis(5));
 	}
 	

@@ -2,8 +2,8 @@ package frc.robot.lib.joystick;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public abstract class InterfaceableJoystick extends Joystick {
-	public InterfaceableJoystick(int port) {
+public abstract class IJoystick extends Joystick {
+	public IJoystick(int port) {
 		super(port);
 	}
 	
