@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Spark;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 
@@ -11,13 +13,14 @@ public class Drivetrain extends Subsystem {
 		LEFT_DRIVE_SLAVE2 = 2,
 		RIGHT_DRIVE_MASTER = 3,
     	RIGHT_DRIVE_SLAVE1 = 4,
-    	RIGHT_DRIVE_SLAVE2 = 5;
-	private Spark leftDriveMaster = new Spark(LEFT_DRIVE_MASTER),
-		leftDriveSlave1 = new Spark(LEFT_DRIVE_SLAVE1),
-		leftDriveSlave2 = new Spark(LEFT_DRIVE_SLAVE2),
-		rightDriveMaster = new Spark(RIGHT_DRIVE_MASTER),
-		rightDriveSlave1 = new Spark(RIGHT_DRIVE_SLAVE1),
-		rightDriveSlave2 = new Spark(RIGHT_DRIVE_SLAVE2);
+		RIGHT_DRIVE_SLAVE2 = 5;
+		
+	private CANSparkMax leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
+		leftDriveSlave1 = new CANSparkMax(LEFT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
+		leftDriveSlave2 = new CANSparkMax(LEFT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless),
+		rightDriveMaster = new CANSparkMax(RIGHT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
+		rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
+		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
 		
 	public Drivetrain() {
 		setSlaves();
@@ -29,7 +32,10 @@ public class Drivetrain extends Subsystem {
 	}
 
 	public void setSlaves() {
-		// TODO set slave motors
+		leftDriveSlave1.follow(leftDriveMaster);
+		leftDriveSlave2.follow(leftDriveMaster);
+		rightDriveSlave1.follow(rightDriveMaster);
+		rightDriveSlave2.follow(rightDriveMaster);
 	}
 
 	@Override
