@@ -3,12 +3,10 @@ package frc.robot.lib.joystick;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.buttons.Button;
 
-public class AnalogButton extends Button {
+public final class AnalogButton extends Button {
 	private GenericHID joystick;
 	private int axisNumber;
 	private double threshold = 0.5;
-
-	public static double myDouble = 0.9;
 
 	/**
 	 * Create a button for triggering commands off a joystick's analog axis
@@ -50,7 +48,7 @@ public class AnalogButton extends Button {
 	 * 
 	 * @return the threshold value
 	 */
-	public double getthreshold() {
+	public double getThreshold() {
 		return threshold;
 	}
 

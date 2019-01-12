@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-public class XboxController extends Joystick {
+public final class XboxController extends Joystick {
 	private static boolean internalControl = false;
 	// Button
 	private JoystickButton aButton;
@@ -43,7 +43,7 @@ public class XboxController extends Joystick {
 	
 	public XboxController(int port) {
 		super(port);
-		//Buttons
+		// Buttons
 		aButton = new JoystickButton(this, 1);
 		bButton = new JoystickButton(this, 2);
 		xButton = new JoystickButton(this, 3);
@@ -56,7 +56,7 @@ public class XboxController extends Joystick {
 		rightJoystickPressButton = new JoystickButton(this, 10);
 		leftTriggerButton = new AnalogButton(this, 2, 0.1);
 		rightTriggerButton = new AnalogButton(this, 3, 0.1);
-		//InternalButtons
+		// InternalButtons
 		a = new InternalButton();
 		b = new InternalButton();
 		x = new InternalButton();

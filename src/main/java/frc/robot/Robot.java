@@ -21,20 +21,26 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.pneumatics.Shifter;
+import frc.robot.subsystems.pneumatics.Pneumatics;
 
-public class Robot extends TimedRobot {
+public final class Robot extends TimedRobot {
 
-	public static Hardware hardware;
-	public static Drivetrain drivetrain;
-	public static Shifter shifter;
-	public static OI oi;
+	private static Robot robot = new Robot();
+
+	public Hardware hardware;
+	public Drivetrain drivetrain;
+	public Pneumatics pneumatics;
+	public OI oi;
+
+	public static Robot getRobot() {
+		return robot;
+	}
 
 	@Override
 	public void robotInit() {
 		hardware = new Hardware();
 		drivetrain = new Drivetrain();
-		shifter = new Shifter();
+		pneumatics = new Pneumatics();
 		// OI must be at the bottom
 		oi = new OI();
 	}
@@ -57,7 +63,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		Robot.oi.getXboxController().check();
+		oi.getXboxController().check();
 	}
 
 	@Override

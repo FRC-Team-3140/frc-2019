@@ -1,10 +1,11 @@
 package frc.robot.lib.joystick;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-public class AdvJoystick extends IJoystick {
+public final class AdvJoystick extends Joystick {
 	private static boolean internalControl = false;
 	// Buttons
 	private Button triggerButton;
@@ -40,7 +41,6 @@ public class AdvJoystick extends IJoystick {
 		six = new InternalButton();
 	}
 
-	@Override
 	public void check() {
 		if(!internalControl) {
 			trigger.setPressed(triggerButton.get());
@@ -49,7 +49,6 @@ public class AdvJoystick extends IJoystick {
 			four.setPressed(fourButton.get());
 			five.setPressed(fiveButton.get());
 			six.setPressed(sixButton.get());
-
 		}
 	}
 
@@ -61,7 +60,6 @@ public class AdvJoystick extends IJoystick {
 		return Math.sin(Math.PI/2 * super.getRawAxis(1));
 	}
 
-	@Override
 	public void setButtonStatus(boolean trigger, boolean thumb, boolean three, boolean four, boolean five,
 								boolean six) {
 		if(internalControl) {
@@ -74,12 +72,10 @@ public class AdvJoystick extends IJoystick {
 		}
 	}
 
-	@Override
 	public void setInternalControl(boolean internalControl) {
 		AdvJoystick.internalControl = internalControl;
 	}
 
-	@Override
 	public boolean getInternalControl() {
 		return internalControl;
 	}

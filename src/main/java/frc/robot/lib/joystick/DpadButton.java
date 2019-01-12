@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.buttons.InternalButton;
  *
  * @author DuckDuckWhale
  */
-public class DpadButton extends InternalButton {
+public final class DpadButton extends InternalButton {
 	public static final int UP=0, DOWN=180, LEFT=270, RIGHT=90;
 	private GenericHID hid;
 	private int pov;

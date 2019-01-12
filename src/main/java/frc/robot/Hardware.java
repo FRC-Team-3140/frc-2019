@@ -2,8 +2,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.*;
 
-public class Hardware {
+public final class Hardware {
 	public final int PCM = 0;
     // PNEUMATICS
-    public Compressor comp = new Compressor(PCM);
+    public Compressor compressor = new Compressor(PCM);
 }
