@@ -5,9 +5,12 @@ import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.commands.drivetrain.ArcadeDrive;
+import frc.util.DriveHelper;
 
 public final class Drivetrain extends Subsystem {
 
+	private static final double THROTTLE_DEADBAND = 0.05;
+	private static final double HEADING_DEADBAND = 0.05;
 	// the following comments are the mechanical markers
 	private final int LEFT_DRIVE_MASTER = 2, // 6
 		LEFT_DRIVE_SLAVE1 = 3, // 5
@@ -23,11 +26,19 @@ public final class Drivetrain extends Subsystem {
 		rightDriveMaster = new CANSparkMax(RIGHT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
 		rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
 		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
+
+	private DriveHelper driveHelper = new DriveHelper(7.5, THROTTLE_DEADBAND, HEADING_DEADBAND);
 		
 	public Drivetrain() {
 		setSlaves();
 		// the robot should drive the other way
 		setInverts();
+	}
+
+	// drive for teleop
+	public void driveVelocity(double throttle, double heading) {
+		arcadeDrive(driveHelper.calculateThrottle(-throttle),
+				driveHelper.handleOverPower(driveHelper.handleDeadband(-heading, HEADING_DEADBAND)));
 	}
 
 	public void arcadeDrive(double throttle, double heading) {
