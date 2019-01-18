@@ -4,17 +4,17 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public final class ArcadeDrive extends Command {
-	private Robot robot;
+	//private Robot robot;
 
 	public ArcadeDrive() {
-		robot=Robot.getRobot();
-		requires(robot.drivetrain);
+		//robot=Robot.getRobot();
+		requires(Robot.drivetrain);
 	}
 
 	@Override
 	protected void execute() {
-		robot.drivetrain.arcadeDrive(robot.oi.getXboxController().getMainY(),
-			robot.oi.getXboxController().getAltX());
+		Robot.drivetrain.arcadeDrive(Robot.oi.getXboxController().getMainY(),
+			Robot.oi.getXboxController().getAltX());
 	}
 
 	@Override

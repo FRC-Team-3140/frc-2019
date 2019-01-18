@@ -25,20 +25,22 @@ import frc.robot.subsystems.pneumatics.Pneumatics;
 
 public final class Robot extends TimedRobot {
 
-	private static Robot robot = new Robot();
+	private static Robot robot;
 
-	public Hardware hardware;
-	public Drivetrain drivetrain;
-	public Pneumatics pneumatics;
-	public OI oi;
+	//public Hardware hardware;
+	public static Drivetrain drivetrain;
+	public static Pneumatics pneumatics;
+	public static OI oi;
 
-	public static Robot getRobot() {
-		return robot;
-	}
+	// public static Robot getRobot() {
+	// 	return robot;
+	// }
 
 	@Override
 	public void robotInit() {
-		hardware = new Hardware();
+		// robot = this;
+
+		//hardware = new Hardware();
 		drivetrain = new Drivetrain();
 		pneumatics = new Pneumatics();
 		// OI must be at the bottom

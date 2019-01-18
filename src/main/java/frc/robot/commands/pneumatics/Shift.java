@@ -8,13 +8,13 @@ public final class Shift extends Command {
 	private DoubleSolenoid.Value v;
 
 	public Shift(DoubleSolenoid.Value v) {
-		 requires(Robot.getRobot().pneumatics);
+		 requires(Robot.pneumatics);
 		 this.v = v;
 	}
 
 	@Override
 	protected void execute() {
-		Robot.getRobot().pneumatics.shift(v);
+		Robot.pneumatics.shift(v);
 	}
 
 	@Override
