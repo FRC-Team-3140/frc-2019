@@ -25,7 +25,7 @@ import frc.robot.subsystems.pneumatics.Pneumatics;
 
 public final class Robot extends TimedRobot {
 
-	private static Robot robot = new Robot();
+	private static Robot robot;
 
 	public Hardware hardware;
 	public Drivetrain drivetrain;
@@ -38,6 +38,8 @@ public final class Robot extends TimedRobot {
 
 	@Override
 	public void robotInit() {
+		robot = this;
+
 		hardware = new Hardware();
 		drivetrain = new Drivetrain();
 		pneumatics = new Pneumatics();

@@ -8,12 +8,13 @@ import frc.robot.commands.drivetrain.ArcadeDrive;
 
 public final class Drivetrain extends Subsystem {
 
-	private final int LEFT_DRIVE_MASTER = 6,
-		LEFT_DRIVE_SLAVE1 = 1,
-		LEFT_DRIVE_SLAVE2 = 2,
-		RIGHT_DRIVE_MASTER = 3,
-    	RIGHT_DRIVE_SLAVE1 = 4,
-		RIGHT_DRIVE_SLAVE2 = 5;
+	// the following comments are the mechanical markers
+	private final int LEFT_DRIVE_MASTER = 2, // 6
+		LEFT_DRIVE_SLAVE1 = 3, // 5
+		LEFT_DRIVE_SLAVE2 = 4, // 4
+		RIGHT_DRIVE_MASTER = 5, // 3
+		RIGHT_DRIVE_SLAVE1 = 6, // 2
+		RIGHT_DRIVE_SLAVE2 = 7; // 1
 		
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -25,18 +26,25 @@ public final class Drivetrain extends Subsystem {
 		
 	public Drivetrain() {
 		setSlaves();
+		// the robot should drive the other way
+		setInverts();
 	}
 
 	public void arcadeDrive(double throttle, double heading) {
-		leftDriveMaster.set(throttle + heading);
-		rightDriveMaster.set(throttle - heading);
+		leftDriveMaster.set(throttle - heading);
+		rightDriveMaster.set(throttle + heading);
 	}
 
 	public void setSlaves() {
 		leftDriveSlave1.follow(leftDriveMaster);
-		leftDriveSlave2.follow(leftDriveMaster);
+		leftDriveSlave2.follow(leftDriveMaster, true);
 		rightDriveSlave1.follow(rightDriveMaster);
-		rightDriveSlave2.follow(rightDriveMaster);
+		rightDriveSlave2.follow(rightDriveMaster, true);
+	}
+
+	private void setInverts() {
+		leftDriveMaster.setInverted(true);
+		leftDriveSlave1.setInverted(true);
 	}
 
 	@Override
