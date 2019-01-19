@@ -1,4 +1,4 @@
-package frc.robot.commands.pneumatics;
+package frc.robot.commands.pneumatics.shifter;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
