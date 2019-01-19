@@ -8,7 +8,7 @@ public final class Climb extends Command {
   private DoubleSolenoid.Value a;
   public Climb(DoubleSolenoid.Value a) {
     requires(Robot.getRobot().pneumatics);
-		 this.a = a;
+	this.a = a;
 }
 
   @Override
