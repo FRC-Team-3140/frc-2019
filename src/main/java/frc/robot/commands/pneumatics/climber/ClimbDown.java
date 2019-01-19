@@ -6,8 +6,8 @@ import frc.robot.subsystems.pneumatics.*;
 
 public class ClimbDown extends CommandGroup {
   public ClimbDown() {
-		addSequential(new Climb(Pneumatics.RETRACT));
-		addSequential(new WaitCommand(0.3));
+	addSequential(new Climb(Pneumatics.RETRACT));
+	addSequential(new WaitCommand(0.3));
     addSequential(new Climb(Pneumatics.OFF));
   }
 }
