@@ -49,12 +49,7 @@ public final class Robot extends TimedRobot {
 
 	@Override
 	public void robotPeriodic() {
-
-	}
-
-	@Override
-	public void autonomousInit() {
-
+		oi.update();
 	}
 
 	@Override
@@ -65,11 +60,6 @@ public final class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		oi.getXboxController().check();
-	}
-
-	@Override
-	public void testPeriodic() {
-
+		oi.check();
 	}
 }
