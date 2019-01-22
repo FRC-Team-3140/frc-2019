@@ -3,8 +3,8 @@ package frc.robot;
 import frc.robot.commands.pneumatics.ShiftDown;
 import frc.robot.commands.pneumatics.ShiftUp;
 import frc.robot.commands.pneumatics.puncher.PunchHatch;
-import frc.robot.commands.pneumatics.tilter.ArmClose;
-import frc.robot.commands.pneumatics.tilter.ArmOpen;
+import frc.robot.commands.pneumatics.arm.ArmClose;
+import frc.robot.commands.pneumatics.arm.ArmOpen;
 import frc.robot.lib.joystick.XboxController;
 
 public final class OI {

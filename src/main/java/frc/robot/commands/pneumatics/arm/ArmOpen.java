@@ -1,4 +1,4 @@
-package frc.robot.commands.pneumatics.tilter;
+package frc.robot.commands.pneumatics.arm;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
