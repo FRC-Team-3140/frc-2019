@@ -1,7 +1,8 @@
 package frc.robot;
 
-import frc.robot.commands.pneumatics.ShiftDown;
-import frc.robot.commands.pneumatics.ShiftUp;
+import frc.robot.commands.pneumatics.climber.*;
+import frc.robot.commands.pneumatics.shifter.*;
+
 import frc.robot.lib.joystick.XboxController;
 
 public final class OI {
@@ -12,6 +13,8 @@ public final class OI {
 	public OI() {
 		xbox1.leftBumper.whenPressed(new ShiftUp());
 		xbox1.leftBumper.whenReleased(new ShiftDown());
+		xbox1.rightBumper.whenPressed(new ClimbUp());
+		xbox1.rightBumper.whenReleased(new ClimbDown());
 	}
 
 	public void check() {
