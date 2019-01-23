@@ -38,8 +38,8 @@ public final class Drivetrain extends Subsystem {
 
 	// drive for teleop
 	public void drive(double throttle, double heading) {
-		arcadeDrive(driveHelper.calculateThrottle(-throttle),
-				driveHelper.handleOverPower(driveHelper.handleDeadband(-heading, headingDeadband)));
+		arcadeDrive(driveHelper.calculateThrottle(throttle),
+				driveHelper.handleOverPower(driveHelper.handleDeadband(heading, headingDeadband)));
 	}
 
 	public void arcadeDrive(double throttle, double heading) {
