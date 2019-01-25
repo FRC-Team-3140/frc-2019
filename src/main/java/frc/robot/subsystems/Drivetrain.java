@@ -17,7 +17,7 @@ public final class Drivetrain extends Subsystem {
 		RIGHT_DRIVE_SLAVE1 = 6, // 2
 		RIGHT_DRIVE_SLAVE2 = 7; // 1
 	
-	private double throttleDeadband = 0.07;
+	private double throttleDeadband = 0.08;
 	private double headingDeadband = 0.07;
 	
 	private CANSparkMax
