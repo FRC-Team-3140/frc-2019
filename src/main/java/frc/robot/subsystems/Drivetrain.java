@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel; 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -21,10 +22,13 @@ public final class Drivetrain extends Subsystem implements Constants{
 	
 	private double throttleDeadband = 0.08;
 	private double headingDeadband = 0.07;
-
-	private final double HIGH_GEAR_RATIO = 6.73;
-	private final double LOW_GEAR_RATIO = 13.85;
-	private final double WHEEL_CIRCUM_IN = 6 * Math.PI;
+	public double 
+		kPLeft = 0,
+		kILeft = 0,
+		kDLeft = 0,
+		kPRight = 0,
+		kIRight = 0,
+		kDRight = 0;
 	
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -35,17 +39,23 @@ public final class Drivetrain extends Subsystem implements Constants{
 		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
 
 	private CANEncoder 
-		leftEncoder = new CANEncoder(leftDriveMaster),
-		rightEncoder = new CANEncoder(rightDriveMaster);
+		leftEncoder = leftDriveMaster.getEncoder(),
+		rightEncoder = rightDriveMaster.getEncoder();
+
+	private CANPIDController 
+		leftPIDController = leftDriveMaster.getPIDController(),
+		rightPIDController = rightDriveMaster.getPIDController();
 
 	private DriveHelper driveHelper = new DriveHelper(7.5, throttleDeadband, headingDeadband);
 		
 	public Drivetrain() {
 		setSlaves();
-		// the robot should drive the other way
 		setInverts();
 	}
 
+	/*****************
+	 * DRIVE METHODS *
+	 *****************/
 	// drive for teleop
 	public void drive(double throttle, double heading) {
 		arcadeDrive(driveHelper.calculateThrottle(throttle),
@@ -57,6 +67,9 @@ public final class Drivetrain extends Subsystem implements Constants{
 		rightDriveMaster.set(throttle + heading);
 	}
 
+	/******************
+	 * CONFIG METHODS *
+	 ******************/
 	public void setSlaves() {
 		leftDriveSlave1.follow(leftDriveMaster);
 		leftDriveSlave2.follow(leftDriveMaster, true);
@@ -77,6 +90,18 @@ public final class Drivetrain extends Subsystem implements Constants{
 		driveHelper.setDeadbands(throttle, heading);
 	}
 
+	public void updatePIDValues(double kPL, double kIL, double kDL, double kPR, double kIR, double kDR) {
+		kPLeft = kPL;
+		kILeft = kIL;
+		kDLeft = kDL;
+		kPRight = kPR;
+		kIRight = kIR;
+		kDRight = kDR;
+	}
+
+	/***************
+	 * GET METHODS *
+	 ***************/
 	public double getLeftInches() {
 		return EncoderHelper.revsToInches(leftEncoder.getPosition(), WHEEL_CIRCUM_IN) / LOW_GEAR_RATIO;
 	}

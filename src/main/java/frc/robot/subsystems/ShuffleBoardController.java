@@ -15,8 +15,13 @@ public final class ShuffleBoardController {
 		headingDeadbandEntry = settingsTab.add("Heading Deadband", robot.drivetrain.getHeadingDeadband()).getEntry(),
 		testEntry = testTab.add("Stunt Double", 0).getEntry(),
 		dtLeftEncoderEntry = testTab.add("Drivetrain Left Inches", robot.drivetrain.getLeftInches()).getEntry(),
-		dtRightEncoderEntry = testTab.add("Drivetrain Right Inches", robot.drivetrain.getRightInches()).getEntry();
-
+		dtRightEncoderEntry = testTab.add("Drivetrain Right Inches", robot.drivetrain.getRightInches()).getEntry(),
+		dtLeftKP = settingsTab.add("DT Left kP", robot.drivetrain.kPLeft).getEntry(),
+		dtLeftKI = settingsTab.add("DT Left kI", robot.drivetrain.kILeft).getEntry(),
+		dtLeftKD = settingsTab.add("DT Left kD", robot.drivetrain.kDLeft).getEntry(),
+		dtRightKP = settingsTab.add("DT Right kP", robot.drivetrain.kPRight).getEntry(),
+		dtRightKI = settingsTab.add("DT Right kI", robot.drivetrain.kILeft).getEntry(),
+		dtRightKD = settingsTab.add("DT Right kD", robot.drivetrain.kDLeft).getEntry();
 
 	/**
 	 * Updates the necessary values from ShuffleBoard.
@@ -39,6 +44,10 @@ public final class ShuffleBoardController {
 
 		dtLeftEncoderEntry.setDouble(robot.drivetrain.getLeftInches());
 		dtRightEncoderEntry.setDouble(robot.drivetrain.getRightInches());
+
+		robot.drivetrain.updatePIDValues(dtLeftKP.getDouble(robot.drivetrain.kPLeft), dtLeftKI.getDouble(robot.drivetrain.kILeft),
+			dtLeftKD.getDouble(robot.drivetrain.kDLeft), dtRightKP.getDouble(robot.drivetrain.kPRight), 
+			dtRightKI.getDouble(robot.drivetrain.kIRight), dtRightKD.getDouble(robot.drivetrain.kDRight));
 
 		if (throttle != drive_throttle || heading != drive_heading) {
 			robot.drivetrain.setDeadbands(throttle, heading);
