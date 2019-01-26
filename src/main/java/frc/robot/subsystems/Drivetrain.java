@@ -1,13 +1,15 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
-
+import com.revrobotics.CANSparkMaxLowLevel; 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.commands.drivetrain.Drive;
 import frc.util.DriveHelper;
+import frc.util.EncoderHelper;
 
-public final class Drivetrain extends Subsystem {
+public final class Drivetrain extends Subsystem implements Constants{
 
 	// the following comments are the mechanical markers
 	private final int LEFT_DRIVE_MASTER = 2, // 6
@@ -19,6 +21,10 @@ public final class Drivetrain extends Subsystem {
 	
 	private double throttleDeadband = 0.08;
 	private double headingDeadband = 0.07;
+
+	private final double HIGH_GEAR_RATIO = 6.73;
+	private final double LOW_GEAR_RATIO = 13.85;
+	private final double WHEEL_CIRCUM_IN = 6 * Math.PI;
 	
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -27,6 +33,10 @@ public final class Drivetrain extends Subsystem {
 		rightDriveMaster = new CANSparkMax(RIGHT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
 		rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
 		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
+
+	private CANEncoder 
+		leftEncoder = new CANEncoder(leftDriveMaster),
+		rightEncoder = new CANEncoder(rightDriveMaster);
 
 	private DriveHelper driveHelper = new DriveHelper(7.5, throttleDeadband, headingDeadband);
 		
@@ -59,11 +69,6 @@ public final class Drivetrain extends Subsystem {
 		leftDriveSlave1.setInverted(true);
 	}
 
-	@Override
-	public void initDefaultCommand() {
-		setDefaultCommand(new Drive());
-	}
-
 	public void setDeadbands(double throttle, double heading) {
 		if (!(Double.isFinite(throttle) && Double.isFinite(heading))) throw new IllegalArgumentException("Deadbands must be finite!");
 
@@ -72,11 +77,24 @@ public final class Drivetrain extends Subsystem {
 		driveHelper.setDeadbands(throttle, heading);
 	}
 
+	public double getLeftInches() {
+		return EncoderHelper.revsToInches(leftEncoder.getPosition(), WHEEL_CIRCUM_IN) / LOW_GEAR_RATIO;
+	}
+
+	public double getRightInches() {
+		return EncoderHelper.revsToInches(rightEncoder.getPosition(), WHEEL_CIRCUM_IN) / LOW_GEAR_RATIO;
+	}
+
 	public double getThrottleDeadband() {
 		return throttleDeadband;
 	}
 
 	public double getHeadingDeadband() {
 		return headingDeadband;
+	}
+
+	@Override
+	public void initDefaultCommand() {
+		setDefaultCommand(new Drive());
 	}
 }

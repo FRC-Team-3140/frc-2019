@@ -1,4 +1,4 @@
-package frc.robot.oi;
+package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -13,7 +13,10 @@ public final class ShuffleBoardController {
 	private NetworkTableEntry
 		throttleDeadbandEntry = settingsTab.add("Throttle Deadband", robot.drivetrain.getThrottleDeadband()).getEntry(),
 		headingDeadbandEntry = settingsTab.add("Heading Deadband", robot.drivetrain.getHeadingDeadband()).getEntry(),
-		testEntry = testTab.add("Stunt Double", 0).getEntry();
+		testEntry = testTab.add("Stunt Double", 0).getEntry(),
+		dtLeftEncoderEntry = testTab.add("Drivetrain Left Inches", robot.drivetrain.getLeftInches()).getEntry(),
+		dtRightEncoderEntry = testTab.add("Drivetrain Right Inches", robot.drivetrain.getRightInches()).getEntry();
+
 
 	/**
 	 * Updates the necessary values from ShuffleBoard.
@@ -33,6 +36,9 @@ public final class ShuffleBoardController {
 			drive_heading = robot.drivetrain.getHeadingDeadband(),
 			throttle = throttleDeadbandEntry.getDouble(drive_throttle),
 			heading = headingDeadbandEntry.getDouble(drive_heading);
+
+		dtLeftEncoderEntry.setDouble(robot.drivetrain.getLeftInches());
+		dtRightEncoderEntry.setDouble(robot.drivetrain.getRightInches());
 
 		if (throttle != drive_throttle || heading != drive_heading) {
 			robot.drivetrain.setDeadbands(throttle, heading);
