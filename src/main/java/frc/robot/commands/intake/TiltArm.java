@@ -11,7 +11,7 @@ public class TiltArm extends Command {
   @Override
   protected void execute() {
     //TODO change to xbox 2
-    Robot.getRobot().intake.tiltArm(Robot.getRobot().oi.getXboxController().getSmoothedAltY());
+    Robot.getRobot().intake.tiltArm(Robot.getRobot().oi.getXboxController2().getSmoothedAltY());
   }
 
   @Override

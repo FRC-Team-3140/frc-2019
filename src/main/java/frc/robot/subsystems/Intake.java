@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.intake.TiltArm;
 
 public class Intake extends Subsystem {
 
@@ -30,10 +31,8 @@ public class Intake extends Subsystem {
      tiltMotor.set(throttle);
    }
 
-
   @Override
   public void initDefaultCommand() {
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new TiltArm());
   }
 }
