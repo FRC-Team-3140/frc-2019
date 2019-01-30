@@ -30,6 +30,7 @@ public final class Robot extends TimedRobot {
 	public Hardware hardware;
 	public Drivetrain drivetrain;
 	public Pneumatics pneumatics;
+	public Elevator elevator;
 	public OI oi;
 
 	public static Robot getRobot() {
@@ -43,6 +44,7 @@ public final class Robot extends TimedRobot {
 		hardware = new Hardware();
 		drivetrain = new Drivetrain();
 		pneumatics = new Pneumatics();
+		elevator = new Elevator();
 		// OI must be at the bottom
 		oi = new OI();
 	}
