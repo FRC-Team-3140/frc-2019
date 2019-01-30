@@ -1,7 +1,5 @@
 package frc.robot;
 
-import frc.robot.commands.pneumatics.ShiftDown;
-import frc.robot.commands.pneumatics.ShiftUp;
 import frc.robot.commands.pneumatics.puncher.PunchHatch;
 import frc.robot.commands.pneumatics.arm.ArmClose;
 import frc.robot.commands.pneumatics.arm.ArmOpen;
