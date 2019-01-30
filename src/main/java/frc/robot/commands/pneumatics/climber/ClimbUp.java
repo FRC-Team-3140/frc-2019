@@ -2,7 +2,7 @@ package frc.robot.commands.pneumatics.climber;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
-import frc.robot.subsystems.pneumatics.*;
+import frc.robot.subsystems.*;
 
 public class ClimbUp extends CommandGroup {
   

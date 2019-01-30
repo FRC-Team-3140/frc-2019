@@ -21,7 +21,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.pneumatics.Pneumatics;
+import frc.robot.subsystems.Pneumatics;
 
 public final class Robot extends TimedRobot {
 
@@ -31,6 +31,7 @@ public final class Robot extends TimedRobot {
 	public Drivetrain drivetrain;
 	public Pneumatics pneumatics;
 	public Elevator elevator;
+	public Intake intake;
 	public OI oi;
 
 	public static Robot getRobot() {
@@ -45,6 +46,7 @@ public final class Robot extends TimedRobot {
 		drivetrain = new Drivetrain();
 		pneumatics = new Pneumatics();
 		elevator = new Elevator();
+		intake = new Intake();
 		// OI must be at the bottom
 		oi = new OI();
 	}

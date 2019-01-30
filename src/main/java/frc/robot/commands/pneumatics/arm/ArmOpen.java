@@ -2,7 +2,7 @@ package frc.robot.commands.pneumatics.arm;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.subsystems.pneumatics.*;
+import frc.robot.subsystems.*;
 
 public final class ArmOpen extends CommandGroup {
 
