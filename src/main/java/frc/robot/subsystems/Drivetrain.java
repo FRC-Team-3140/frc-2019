@@ -4,6 +4,8 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.ControlType;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
@@ -25,12 +27,10 @@ public final class Drivetrain extends Subsystem implements Constants{
 	private double throttleDeadband = 0.08;
 	private double headingDeadband = 0.07;
 	public double 
-		kPLeft = 0,
-		kILeft = 0,
-		kDLeft = 0,
-		kPRight = 0,
-		kIRight = 0,
-		kDRight = 0;
+		kPLeft = 5e-5, kILeft = 1e-6, kDLeft = 0,
+		kPRight = 0, kIRight = 0, kDRight = 0,
+		kMaxOutput = 1, kMinOutput = -1,
+		maxRPM = 5700; // TODO methods to change these from shuffleboard
 	
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -56,11 +56,20 @@ public final class Drivetrain extends Subsystem implements Constants{
 		setSlaves();
 		setInverts();
 		pushToShuffleboard();
+		setPIDDefaults();
 	}
 
 	/*****************
 	 * DRIVE METHODS *
 	 *****************/
+	public void driveVelocityPID(double throttle, double heading) {
+		double velo = throttle * maxRPM;
+		double turn = heading * maxRPM;
+		leftPIDController.setReference(velo - turn, ControlType.kVelocity);
+		rightPIDController.setReference(velo + turn, ControlType.kVelocity);
+		//TODO:  push setpoint + velocity to shuffleboard
+	}
+
 	// drive for teleop
 	public void drive(double throttle, double heading) {
 		arcadeDrive(driveHelper.calculateThrottle(throttle),
@@ -87,6 +96,21 @@ public final class Drivetrain extends Subsystem implements Constants{
 		leftDriveSlave1.setInverted(true);
 	}
 
+	private void setPIDDefaults() {
+		leftPIDController.setP(kPLeft);
+		leftPIDController.setI(kILeft);
+		leftPIDController.setD(kDLeft);
+		rightPIDController.setP(kPRight);
+		rightPIDController.setI(kIRight);
+		rightPIDController.setD(kDRight);
+
+		leftPIDController.setOutputRange(kMinOutput, kMaxOutput);
+		rightPIDController.setOutputRange(kMinOutput, kMaxOutput);
+	}
+
+	/****************
+	 * SHUFFLEBOARD *
+	 ***************/
 	public void pushToShuffleboard() {
 		SmartDashboard.putNumber("Throttle deadband", throttleDeadband);
 		SmartDashboard.putNumber("Heading deadband", headingDeadband);
@@ -108,15 +132,6 @@ public final class Drivetrain extends Subsystem implements Constants{
 		kIRight = SmartDashboard.getNumber("Right DT kI", kIRight);
 		kDRight = SmartDashboard.getNumber("Right DT kD", kDRight);
 		SmartDashboard.putBoolean("Switch", getSwitchValue());
-	}
-
-	public void updatePIDValues(double kPL, double kIL, double kDL, double kPR, double kIR, double kDR) {
-		kPLeft = kPL;
-		kILeft = kIL;
-		kDLeft = kDL;
-		kPRight = kPR;
-		kIRight = kIR;
-		kDRight = kDR;
 	}
 
 	/***************
