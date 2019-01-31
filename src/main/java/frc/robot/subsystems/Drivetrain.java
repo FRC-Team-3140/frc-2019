@@ -5,7 +5,6 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.ControlType;
-
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
@@ -26,11 +25,11 @@ public final class Drivetrain extends Subsystem implements Constants{
 	
 	private double throttleDeadband = 0.08;
 	private double headingDeadband = 0.07;
-	public double 
+	public double
 		kPLeft = 5e-5, kILeft = 1e-6, kDLeft = 0,
 		kPRight = 5e-5, kIRight = 1e-6, kDRight = 0,
 		kMaxOutput = 1, kMinOutput = -1,
-		maxRPM = 5700; 
+		maxRPM = 5700;
 	
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -63,9 +62,14 @@ public final class Drivetrain extends Subsystem implements Constants{
 	 * DRIVE METHODS *
 	 *****************/
 	public void driveVelocityPID(double throttle, double heading) {
-		//TODO add deadbands
 		double velo = throttle * maxRPM;
 		double turn = heading * maxRPM;
+
+		if (Math.abs(throttle) < throttleDeadband)
+			velo = 0;
+		if(Math.abs(heading) < headingDeadband)
+			turn = 0;
+
 		leftPIDController.setReference(velo - turn, ControlType.kVelocity);
 		rightPIDController.setReference(velo + turn, ControlType.kVelocity);
 		
