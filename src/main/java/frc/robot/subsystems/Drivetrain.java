@@ -28,9 +28,9 @@ public final class Drivetrain extends Subsystem implements Constants{
 	private double headingDeadband = 0.07;
 	public double 
 		kPLeft = 5e-5, kILeft = 1e-6, kDLeft = 0,
-		kPRight = 0, kIRight = 0, kDRight = 0,
+		kPRight = 5e-5, kIRight = 1e-6, kDRight = 0,
 		kMaxOutput = 1, kMinOutput = -1,
-		maxRPM = 5700; // TODO methods to change these from shuffleboard
+		maxRPM = 5700; 
 	
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -63,11 +63,16 @@ public final class Drivetrain extends Subsystem implements Constants{
 	 * DRIVE METHODS *
 	 *****************/
 	public void driveVelocityPID(double throttle, double heading) {
+		//TODO add deadbands
 		double velo = throttle * maxRPM;
 		double turn = heading * maxRPM;
 		leftPIDController.setReference(velo - turn, ControlType.kVelocity);
 		rightPIDController.setReference(velo + turn, ControlType.kVelocity);
-		//TODO:  push setpoint + velocity to shuffleboard
+		
+		double[] leftData = {velo-turn, leftEncoder.getVelocity()};
+		double[] rightData = {velo+turn, rightEncoder.getVelocity()};
+		SmartDashboard.putNumberArray("Left Velo Control", leftData);
+		SmartDashboard.putNumberArray("Right Velo Control", rightData);
 	}
 
 	// drive for teleop
@@ -125,12 +130,23 @@ public final class Drivetrain extends Subsystem implements Constants{
 	public void updateShuffleboard() {
 		throttleDeadband = SmartDashboard.getNumber("Throttle deadband", throttleDeadband);
 		headingDeadband = SmartDashboard.getNumber("Heading deadband", headingDeadband);
-		kPLeft = SmartDashboard.getNumber("Left DT kP", kPLeft);
-		kILeft = SmartDashboard.getNumber("Left DT kI", kILeft);
-		kDLeft = SmartDashboard.getNumber("Left DT kD", kDLeft);
-		kPRight = SmartDashboard.getNumber("Right DT kP", kPRight);
-		kIRight = SmartDashboard.getNumber("Right DT kI", kIRight);
-		kDRight = SmartDashboard.getNumber("Right DT kD", kDRight);
+
+		double kPL = SmartDashboard.getNumber("Left DT kP", kPLeft);
+		double kIL = SmartDashboard.getNumber("Left DT kI", kILeft);
+		double kDL = SmartDashboard.getNumber("Left DT kD", kDLeft);
+		double kPR = SmartDashboard.getNumber("Right DT kP", kPRight);
+		double kIR = SmartDashboard.getNumber("Right DT kI", kIRight);
+		double kDR = SmartDashboard.getNumber("Right DT kD", kDRight);
+		if(kPL != kPLeft ||kIL != kILeft || kDL != kDLeft || kPR != kPRight || kIR != kIRight || kDR != kDRight) {
+			kPLeft = kPL;
+			kILeft = kIL;
+			kDLeft = kDL;
+			kPRight = kPR;
+			kIRight = kIR;
+			kDRight = kDR;
+			setPIDDefaults();
+		}
+
 		SmartDashboard.putBoolean("Switch", getSwitchValue());
 	}
 
