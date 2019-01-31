@@ -3,7 +3,8 @@ package frc.robot.subsystems;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel; 
+import com.revrobotics.CANSparkMaxLowLevel;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,6 +39,8 @@ public final class Drivetrain extends Subsystem implements Constants{
 		rightDriveMaster = new CANSparkMax(RIGHT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
 		rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
 		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
+
+	private DigitalInput testSwitch = new DigitalInput(0);
 
 	private CANEncoder 
 		leftEncoder = leftDriveMaster.getEncoder(),
@@ -104,15 +107,8 @@ public final class Drivetrain extends Subsystem implements Constants{
 		kPRight = SmartDashboard.getNumber("Right DT kP", kPRight);
 		kIRight = SmartDashboard.getNumber("Right DT kI", kIRight);
 		kDRight = SmartDashboard.getNumber("Right DT kD", kDRight);
+		SmartDashboard.putBoolean("Switch", getSwitchValue());
 	}
-
-	/*public void setDeadbands(double throttle, double heading) {
-		if (!(Double.isFinite(throttle) && Double.isFinite(heading))) throw new IllegalArgumentException("Deadbands must be finite!");
-
-		throttleDeadband=throttle;
-		headingDeadband=heading;
-		driveHelper.setDeadbands(throttle, heading);
-	}*/
 
 	public void updatePIDValues(double kPL, double kIL, double kDL, double kPR, double kIR, double kDR) {
 		kPLeft = kPL;
@@ -140,6 +136,10 @@ public final class Drivetrain extends Subsystem implements Constants{
 
 	public double getHeadingDeadband() {
 		return headingDeadband;
+	}
+
+	public boolean getSwitchValue() {
+		return !testSwitch.get();
 	}
 
 	@Override
