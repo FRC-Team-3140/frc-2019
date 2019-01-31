@@ -18,6 +18,9 @@ public final class Pneumatics extends Subsystem {
 	public static final int PUNCHER = 2;
 	public static final int CLIMBER_EXTEND = 1;
 	public static final int CLIMBER_RETRACT = 6;
+	public static final int
+	FORKLIFT_EXTEND = 1,
+	FORKLIFT_RETRACT = 7;
 	public static final int PCM = 1; // Pneumatics control module
 
 	@SuppressWarnings("unused")
@@ -26,6 +29,7 @@ public final class Pneumatics extends Subsystem {
 	private DoubleSolenoid arm = new DoubleSolenoid(PCM, ARM_EXTEND, ARM_RETRACT);
 	private Solenoid puncher = new Solenoid(PCM, PUNCHER);
 	private DoubleSolenoid climber = new DoubleSolenoid(PCM, CLIMBER_EXTEND, CLIMBER_RETRACT);
+	private DoubleSolenoid forklift = new DoubleSolenoid(PCM, FORKLIFT_EXTEND, FORKLIFT_RETRACT);
 
 	public void shift(DoubleSolenoid.Value v) {
 		shifter.set(v);
@@ -39,8 +43,12 @@ public final class Pneumatics extends Subsystem {
 		puncher.set(on);
 	}
 
-  public void climb(DoubleSolenoid.Value a){
+	public void climb(DoubleSolenoid.Value a){
 		climber.set(a);
+	}
+
+	public void forklift(DoubleSolenoid.Value value) {
+		forklift.set(value);
 	}
 
 	@Override
