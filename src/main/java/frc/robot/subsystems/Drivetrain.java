@@ -5,6 +5,8 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.ControlType;
+
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
@@ -40,6 +42,7 @@ public final class Drivetrain extends Subsystem implements Constants{
 		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
 
 	private DigitalInput testSwitch = new DigitalInput(0);
+	private AnalogInput lineSensor = new AnalogInput(0);
 
 	private CANEncoder 
 		leftEncoder = leftDriveMaster.getEncoder(),
@@ -152,6 +155,7 @@ public final class Drivetrain extends Subsystem implements Constants{
 		}
 
 		SmartDashboard.putBoolean("Switch", getSwitchValue());
+		SmartDashboard.putNumber("Line sensor", lineSensor.getValue());
 	}
 
 	/***************
