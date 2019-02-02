@@ -42,7 +42,9 @@ public final class Drivetrain extends Subsystem implements Constants{
 		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
 
 	private DigitalInput testSwitch = new DigitalInput(0);
+	private DigitalInput physicalSwitch = new DigitalInput(1); //TODO test this
 	private AnalogInput lineSensor = new AnalogInput(0);
+	private AnalogInput lineSensor2 = new AnalogInput(1);
 
 	private CANEncoder 
 		leftEncoder = leftDriveMaster.getEncoder(),
@@ -156,6 +158,8 @@ public final class Drivetrain extends Subsystem implements Constants{
 
 		SmartDashboard.putBoolean("Switch", getSwitchValue());
 		SmartDashboard.putNumber("Line sensor", lineSensor.getValue());
+		SmartDashboard.putNumber("Line sensor 2", lineSensor2.getValue());
+		SmartDashboard.putBoolean("Physical switch", getPhysicalSwitchValue());
 	}
 
 	/***************
@@ -175,6 +179,10 @@ public final class Drivetrain extends Subsystem implements Constants{
 
 	public double getHeadingDeadband() {
 		return headingDeadband;
+	}
+
+	public boolean getPhysicalSwitchValue() {
+		return !physicalSwitch.get();
 	}
 
 	public boolean getSwitchValue() {
