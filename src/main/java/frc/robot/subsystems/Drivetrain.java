@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel; 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.drivetrain.Drive;
 import frc.util.DriveHelper;
 import frc.util.EncoderHelper;
@@ -51,6 +52,7 @@ public final class Drivetrain extends Subsystem implements Constants{
 	public Drivetrain() {
 		setSlaves();
 		setInverts();
+		pushToShuffleboard();
 	}
 
 	/*****************
@@ -82,13 +84,35 @@ public final class Drivetrain extends Subsystem implements Constants{
 		leftDriveSlave1.setInverted(true);
 	}
 
-	public void setDeadbands(double throttle, double heading) {
+	public void pushToShuffleboard() {
+		SmartDashboard.putNumber("Throttle deadband", throttleDeadband);
+		SmartDashboard.putNumber("Heading deadband", headingDeadband);
+		SmartDashboard.putNumber("Left DT kP", kPLeft);
+		SmartDashboard.putNumber("Left DT kI", kILeft);
+		SmartDashboard.putNumber("Left DT kD", kDLeft);
+		SmartDashboard.putNumber("Right DT kP", kPRight);
+		SmartDashboard.putNumber("Right DT kI", kIRight);
+		SmartDashboard.putNumber("Right DT kD", kDRight);
+	}
+
+	public void updateShuffleboard() {
+		throttleDeadband = SmartDashboard.getNumber("Throttle deadband", throttleDeadband);
+		headingDeadband = SmartDashboard.getNumber("Heading deadband", headingDeadband);
+		kPLeft = SmartDashboard.getNumber("Left DT kP", kPLeft);
+		kILeft = SmartDashboard.getNumber("Left DT kI", kILeft);
+		kDLeft = SmartDashboard.getNumber("Left DT kD", kDLeft);
+		kPRight = SmartDashboard.getNumber("Right DT kP", kPRight);
+		kIRight = SmartDashboard.getNumber("Right DT kI", kIRight);
+		kDRight = SmartDashboard.getNumber("Right DT kD", kDRight);
+	}
+
+	/*public void setDeadbands(double throttle, double heading) {
 		if (!(Double.isFinite(throttle) && Double.isFinite(heading))) throw new IllegalArgumentException("Deadbands must be finite!");
 
 		throttleDeadband=throttle;
 		headingDeadband=heading;
 		driveHelper.setDeadbands(throttle, heading);
-	}
+	}*/
 
 	public void updatePIDValues(double kPL, double kIL, double kDL, double kPR, double kIR, double kDR) {
 		kPLeft = kPL;

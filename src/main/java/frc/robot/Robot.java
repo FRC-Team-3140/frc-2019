@@ -30,7 +30,6 @@ public final class Robot extends TimedRobot {
 	public Hardware hardware;
 	public Drivetrain drivetrain;
 	public Pneumatics pneumatics;
-	private ShuffleBoardController shuffleboard;
 	public OI oi;
 
 
@@ -45,14 +44,13 @@ public final class Robot extends TimedRobot {
 		hardware = new Hardware();
 		drivetrain = new Drivetrain();
 		pneumatics = new Pneumatics();
-		shuffleboard = new ShuffleBoardController();
 		// OI must be at the bottom
 		oi = new OI();
 	}
 
 	@Override
 	public void robotPeriodic() {
-		shuffleboard.update();
+		drivetrain.updateShuffleboard();
 	}
 
 	@Override
