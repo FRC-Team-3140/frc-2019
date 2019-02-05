@@ -5,7 +5,6 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.ControlType;
-
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -15,15 +14,7 @@ import frc.robot.commands.drivetrain.Drive;
 import frc.util.DriveHelper;
 import frc.util.EncoderHelper;
 
-public final class Drivetrain extends Subsystem implements Constants{
-
-	// the following comments are the mechanical markers
-	private final int LEFT_DRIVE_MASTER = 2, // 6
-		LEFT_DRIVE_SLAVE1 = 3, // 5
-		LEFT_DRIVE_SLAVE2 = 4, // 4
-		RIGHT_DRIVE_MASTER = 5, // 3
-		RIGHT_DRIVE_SLAVE1 = 6, // 2
-		RIGHT_DRIVE_SLAVE2 = 7; // 1
+public final class Drivetrain extends Subsystem implements Constants {
 	
 	private double throttleDeadband = 0.08;
 	private double headingDeadband = 0.07;
@@ -31,7 +22,7 @@ public final class Drivetrain extends Subsystem implements Constants{
 		kPLeft = 5e-5, kILeft = 1e-6, kDLeft = 0,
 		kPRight = 5e-5, kIRight = 1e-6, kDRight = 0,
 		kMaxOutput = 1, kMinOutput = -1,
-		maxRPM = 5700;
+		maxRPM = 5700, rampRate = 1.5; // ramp rate is the min # of secs the robot can go from 0 to full throttle
 	
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -120,25 +111,29 @@ public final class Drivetrain extends Subsystem implements Constants{
 
 		leftPIDController.setOutputRange(kMinOutput, kMaxOutput);
 		rightPIDController.setOutputRange(kMinOutput, kMaxOutput);
+
+		leftDriveMaster.setRampRate(rampRate);
+		rightDriveMaster.setRampRate(rampRate);
 	}
 
 	/****************
 	 * SHUFFLEBOARD *
 	 ***************/
 	public void pushToShuffleboard() {
-		SmartDashboard.putNumber("Throttle deadband", throttleDeadband);
-		SmartDashboard.putNumber("Heading deadband", headingDeadband);
+		SmartDashboard.putNumber("DT Throttle deadband", throttleDeadband);
+		SmartDashboard.putNumber("DT Heading deadband", headingDeadband);
 		SmartDashboard.putNumber("Left DT kP", kPLeft);
 		SmartDashboard.putNumber("Left DT kI", kILeft);
 		SmartDashboard.putNumber("Left DT kD", kDLeft);
 		SmartDashboard.putNumber("Right DT kP", kPRight);
 		SmartDashboard.putNumber("Right DT kI", kIRight);
 		SmartDashboard.putNumber("Right DT kD", kDRight);
+		SmartDashboard.putNumber("DT Ramp Rate", rampRate);
 	}
 
 	public void updateShuffleboard() {
-		throttleDeadband = SmartDashboard.getNumber("Throttle deadband", throttleDeadband);
-		headingDeadband = SmartDashboard.getNumber("Heading deadband", headingDeadband);
+		throttleDeadband = SmartDashboard.getNumber("DT Throttle deadband", throttleDeadband);
+		headingDeadband = SmartDashboard.getNumber("DT Heading deadband", headingDeadband);
 
 		double kPL = SmartDashboard.getNumber("Left DT kP", kPLeft);
 		double kIL = SmartDashboard.getNumber("Left DT kI", kILeft);
@@ -146,13 +141,15 @@ public final class Drivetrain extends Subsystem implements Constants{
 		double kPR = SmartDashboard.getNumber("Right DT kP", kPRight);
 		double kIR = SmartDashboard.getNumber("Right DT kI", kIRight);
 		double kDR = SmartDashboard.getNumber("Right DT kD", kDRight);
-		if(kPL != kPLeft ||kIL != kILeft || kDL != kDLeft || kPR != kPRight || kIR != kIRight || kDR != kDRight) {
+		double ramp = SmartDashboard.getNumber("DT Ramp Rate", rampRate);
+		if(kPL != kPLeft ||kIL != kILeft || kDL != kDLeft || kPR != kPRight || kIR != kIRight || kDR != kDRight || ramp != rampRate) {
 			kPLeft = kPL;
 			kILeft = kIL;
 			kDLeft = kDL;
 			kPRight = kPR;
 			kIRight = kIR;
 			kDRight = kDR;
+			rampRate = ramp;
 			setPIDDefaults();
 		}
 
