@@ -3,25 +3,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 
-public final class Pneumatics extends Subsystem {
+public final class Pneumatics extends Subsystem implements Constants {
 
 	public static final DoubleSolenoid.Value EXTEND = Value.kForward;
 	public static final DoubleSolenoid.Value RETRACT = Value.kReverse;
 	public static final DoubleSolenoid.Value OFF = Value.kOff;
-
-	// 0 and 7 are the current ports on chassis bot
-	public static final int SHIFTER_EXTEND = 1;
-	public static final int SHIFTER_RETRACT = 6;
-	public static final int ARM_EXTEND = 1;
-	public static final int ARM_RETRACT = 6;	
-	public static final int PUNCHER = 2;
-	public static final int CLIMBER_EXTEND = 1;
-	public static final int CLIMBER_RETRACT = 6;
-	public static final int
-	FORKLIFT_EXTEND = 1,
-	FORKLIFT_RETRACT = 7;
-	public static final int PCM = 1; // Pneumatics control module
 
 	@SuppressWarnings("unused")
 	private Compressor compressor = new Compressor(PCM);

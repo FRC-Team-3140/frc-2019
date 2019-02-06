@@ -4,20 +4,14 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Constants;
 import frc.robot.commands.drivetrain.ArcadeDrive;
 import frc.util.DriveHelper;
 
-public final class Drivetrain extends Subsystem {
+public final class Drivetrain extends Subsystem implements Constants {
 
 	private static final double THROTTLE_DEADBAND = 0.05;
 	private static final double HEADING_DEADBAND = 0.05;
-	// the following comments are the mechanical markers
-	private final int LEFT_DRIVE_MASTER = 2, // 6
-		LEFT_DRIVE_SLAVE1 = 3, // 5
-		LEFT_DRIVE_SLAVE2 = 4, // 4
-		RIGHT_DRIVE_MASTER = 5, // 3
-		RIGHT_DRIVE_SLAVE1 = 6, // 2
-		RIGHT_DRIVE_SLAVE2 = 7; // 1
 		
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),

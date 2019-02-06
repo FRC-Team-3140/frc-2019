@@ -1,4 +1,4 @@
-package frc.robot.commands.pneumatics;
+package frc.robot.commands.pneumatics.forklift;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
