@@ -23,6 +23,11 @@ public final class Drivetrain extends Subsystem implements Constants {
 		kPRight = 5e-5, kIRight = 1e-6, kDRight = 0,
 		kMaxOutput = 1, kMinOutput = -1,
 		maxRPM = 5700, rampRate = 1.5; // ramp rate is the min # of secs the robot can go from 0 to full throttle
+
+	public int lineTarget1 = 2427; // right
+	public int lineTarget2 = 3247; // left
+	public int lineTolerance = 20;
+	public double leftLineFactor = 0.25/250, rightLineFactor = 0.25/700;
 	
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -32,10 +37,12 @@ public final class Drivetrain extends Subsystem implements Constants {
 		rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
 		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-	private DigitalInput testSwitch = new DigitalInput(0);
-	private DigitalInput physicalSwitch = new DigitalInput(1); //TODO test this
-	private AnalogInput lineSensor = new AnalogInput(0);
-	private AnalogInput lineSensor2 = new AnalogInput(1);
+	// Temporarily disabled because unplugged :c
+	//private DigitalInput testSwitch = new DigitalInput(0);
+	//private DigitalInput physicalSwitch = new DigitalInput(1); //TODO test this
+	
+	private AnalogInput lineSensor = new AnalogInput(0); // right
+	private AnalogInput lineSensor2 = new AnalogInput(1); // left
 
 	private CANEncoder 
 		leftEncoder = leftDriveMaster.getEncoder(),
@@ -86,6 +93,23 @@ public final class Drivetrain extends Subsystem implements Constants {
 		rightDriveMaster.set(throttle + heading);
 	}
 
+	public void tankDrive(double right, double left) {
+		leftDriveMaster.set(left);
+		rightDriveMaster.set(right);
+	}
+
+	public void driveAlongLine() {
+		// TODO figure out + and - headings here... 		
+		double rightCorrection = rightLineFactor * (lineTarget1- lineSensor.getValue());
+		double leftCorrection = leftLineFactor * (lineTarget2- lineSensor2.getValue());
+		double heading = leftCorrection - rightCorrection;
+		System.out.println(heading);
+
+		double[] push = {leftCorrection, rightCorrection, heading};
+		SmartDashboard.putNumberArray("Drive Along line: ", push);
+		driveVelocityPID(0.2, heading);
+	}
+
 	/******************
 	 * CONFIG METHODS *
 	 ******************/
@@ -97,8 +121,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 	}
 
 	private void setInverts() {
-		leftDriveMaster.setInverted(true);
-		leftDriveSlave1.setInverted(true);
+		rightDriveMaster.setInverted(true);
+		rightDriveSlave1.setInverted(true);
 	}
 
 	private void setPIDDefaults() {
@@ -179,11 +203,18 @@ public final class Drivetrain extends Subsystem implements Constants {
 	}
 
 	public boolean getPhysicalSwitchValue() {
-		return !physicalSwitch.get();
+		//return !physicalSwitch.get();
+
+		return false;
 	}
 
 	public boolean getSwitchValue() {
-		return !testSwitch.get();
+		//return !testSwitch.get();
+		return false;
+	}
+
+	public int getLineDiff() {
+		return lineSensor2.getValue() - lineSensor.getValue(); // left - right
 	}
 
 	@Override

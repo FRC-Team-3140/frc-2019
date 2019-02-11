@@ -30,7 +30,7 @@ public final class Robot extends TimedRobot {
 	public Hardware hardware;
 	public Drivetrain drivetrain;
 	public Pneumatics pneumatics;
-	public static DriverCamera camera;
+	//public static DriverCamera camera; // disabled because it is missing
 	public OI oi;
 
 
@@ -45,7 +45,7 @@ public final class Robot extends TimedRobot {
 		hardware = new Hardware();
 		drivetrain = new Drivetrain();
 		pneumatics = new Pneumatics();
-		camera = new DriverCamera();
+		//camera = new DriverCamera();
 
 		// OI must be at the bottom
 		oi = new OI();

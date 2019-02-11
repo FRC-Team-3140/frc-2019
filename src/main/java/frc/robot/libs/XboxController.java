@@ -89,19 +89,19 @@ public final class XboxController extends Joystick {
 	}
 	
 	public double getMainX(){
-		return super.getRawAxis(0);
+		return -1 * super.getRawAxis(0);
 	}
 	
 	public double getMainY(){
-		return super.getRawAxis(1);
+		return -1 * super.getRawAxis(1);
 	}
 	
 	public double getAltX(){
-		return super.getRawAxis(4);
+		return -1 * super.getRawAxis(4);
 	}
 	
 	public double getAltY(){
-		return super.getRawAxis(5);
+		return -1 * super.getRawAxis(5);
 	}
 	
 	public double getSmoothedMainX() {

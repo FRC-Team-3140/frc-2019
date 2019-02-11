@@ -1,5 +1,6 @@
 package frc.robot;
 
+import frc.robot.commands.drivetrain.DriveAlongLine;
 import frc.robot.commands.pneumatics.ShiftDown;
 import frc.robot.commands.pneumatics.ShiftUp;
 import frc.robot.libs.XboxController;
@@ -13,6 +14,7 @@ public final class OI {
 	public OI() {
 		xbox1.leftBumper.whenPressed(new ShiftUp());
 		xbox1.leftBumper.whenReleased(new ShiftDown());
+		xbox1.rightBumper.whileHeld(new DriveAlongLine());
 	}
 
 	public void check() {
