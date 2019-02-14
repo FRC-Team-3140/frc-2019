@@ -13,7 +13,7 @@ public final class Drive extends Command {
 
 	@Override
 	protected void execute() {
-		robot.drivetrain.drive(robot.oi.getXboxController().getMainY(),
+		robot.drivetrain.driveVelocityJoystick(robot.oi.getXboxController().getMainY(),
 			robot.oi.getXboxController().getAltX());
 	}
 

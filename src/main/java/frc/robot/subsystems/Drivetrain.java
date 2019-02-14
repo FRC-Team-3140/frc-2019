@@ -24,10 +24,10 @@ public final class Drivetrain extends Subsystem implements Constants {
 		kMaxOutput = 1, kMinOutput = -1,
 		maxRPM = 5700, rampRate = 1.5; // ramp rate is the min # of secs the robot can go from 0 to full throttle
 
-	public int lineTarget1 = 2427; // right
-	public int lineTarget2 = 3247; // left
+	public int lineTarget1 = 3500; // right
+	public int lineTarget2 = 3050; // left
 	public int lineTolerance = 20;
-	public double leftLineFactor = 0.25/250, rightLineFactor = 0.25/700;
+	public double leftLineFactor = 0.1/500, rightLineFactor = 0.1/100;
 	
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -59,20 +59,26 @@ public final class Drivetrain extends Subsystem implements Constants {
 		setInverts();
 		pushToShuffleboard();
 		setPIDDefaults();
+		setBreakMode();
 	}
 
 	/*****************
 	 * DRIVE METHODS *
 	 *****************/
+	public void driveVelocityJoystick(double throttle, double heading) {
+		if (Math.abs(throttle) < throttleDeadband)
+			throttle = 0;
+		if(Math.abs(heading) < headingDeadband)
+			heading = 0;
+
+		driveVelocityPID(throttle, heading);
+	}
+
 	public void driveVelocityPID(double throttle, double heading) {
 		double velo = throttle * maxRPM;
-		double turn = heading * maxRPM;
+		double turn = heading * maxRPM * .75;
 
-		if (Math.abs(throttle) < throttleDeadband)
-			velo = 0;
-		if(Math.abs(heading) < headingDeadband)
-			turn = 0;
-
+		//System.out.println(velo);
 		leftPIDController.setReference(velo - turn, ControlType.kVelocity);
 		rightPIDController.setReference(velo + turn, ControlType.kVelocity);
 		
@@ -102,12 +108,17 @@ public final class Drivetrain extends Subsystem implements Constants {
 		// TODO figure out + and - headings here... 		
 		double rightCorrection = rightLineFactor * (lineTarget1- lineSensor.getValue());
 		double leftCorrection = leftLineFactor * (lineTarget2- lineSensor2.getValue());
+		if(Math.abs(lineTarget1 - lineSensor.getValue()) < lineTolerance) rightCorrection = 0;
+		if(Math.abs(lineTarget2 - lineSensor2.getValue()) < lineTolerance) leftCorrection = 0;
+
 		double heading = leftCorrection - rightCorrection;
+		if(heading > 0.2) heading = 0.2;
+		else if(heading < -0.2) heading = -0.2;
 		System.out.println(heading);
 
 		double[] push = {leftCorrection, rightCorrection, heading};
 		SmartDashboard.putNumberArray("Drive Along line: ", push);
-		driveVelocityPID(0.2, heading);
+		driveVelocityPID(0.15, heading);
 	}
 
 	/******************
@@ -125,6 +136,15 @@ public final class Drivetrain extends Subsystem implements Constants {
 		rightDriveSlave1.setInverted(true);
 	}
 
+	private void setBreakMode() {
+		leftDriveMaster.setIdleMode(CANSparkMax.IdleMode.kBrake);
+		leftDriveSlave1.setIdleMode(CANSparkMax.IdleMode.kBrake);
+		leftDriveSlave2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+		rightDriveMaster.setIdleMode(CANSparkMax.IdleMode.kBrake);
+		rightDriveSlave1.setIdleMode(CANSparkMax.IdleMode.kBrake);
+		rightDriveSlave2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+	}
+
 	private void setPIDDefaults() {
 		leftPIDController.setP(kPLeft);
 		leftPIDController.setI(kILeft);
@@ -136,8 +156,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		leftPIDController.setOutputRange(kMinOutput, kMaxOutput);
 		rightPIDController.setOutputRange(kMinOutput, kMaxOutput);
 
-		leftDriveMaster.setRampRate(rampRate);
-		rightDriveMaster.setRampRate(rampRate);
+		// leftDriveMaster.setRampRate(rampRate);
+		// rightDriveMaster.setRampRate(rampRate);
 	}
 
 	/****************
@@ -181,6 +201,13 @@ public final class Drivetrain extends Subsystem implements Constants {
 		SmartDashboard.putNumber("Line sensor", lineSensor.getValue());
 		SmartDashboard.putNumber("Line sensor 2", lineSensor2.getValue());
 		SmartDashboard.putBoolean("Physical switch", getPhysicalSwitchValue());
+
+		double[] rightVolts = {rightDriveMaster.getAppliedOutput(), rightDriveSlave1.getAppliedOutput(), rightDriveSlave2.getAppliedOutput()};
+		double[] leftVolts = {leftDriveMaster.getAppliedOutput(), leftDriveSlave1.getAppliedOutput(), leftDriveSlave2.getAppliedOutput()};
+
+		SmartDashboard.putNumberArray("DT Right", rightVolts);
+		SmartDashboard.putNumberArray("DT Left", leftVolts);
+
 	}
 
 	/***************
