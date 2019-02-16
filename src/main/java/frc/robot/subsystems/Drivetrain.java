@@ -47,8 +47,6 @@ public final class Drivetrain extends Subsystem implements Constants {
 	private AnalogInput lineSensor2 = new AnalogInput(1); // left
 	private Encoder enc = new Encoder(3, 4); // 256 pulses per revolution
 	private Ultrasonic sonar = new Ultrasonic(0, 1);
-	// private DigitalInput encoderB = new DigitalInput(3);
-	// private DigitalInput encoderA = new DigitalInput(4);
 
 	private CANEncoder 
 		leftEncoder = leftDriveMaster.getEncoder(),
@@ -66,6 +64,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 		pushToShuffleboard();
 		setPIDDefaults();
 		setBreakMode();
+		sonar.setAutomaticMode(true);
 	}
 
 	/*****************
@@ -84,7 +83,6 @@ public final class Drivetrain extends Subsystem implements Constants {
 		double velo = throttle * maxRPM;
 		double turn = heading * maxRPM * .75;
 
-		//System.out.println(velo);
 		leftPIDController.setReference(velo - turn, ControlType.kVelocity);
 		rightPIDController.setReference(velo + turn, ControlType.kVelocity);
 		
@@ -162,8 +160,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		leftPIDController.setOutputRange(kMinOutput, kMaxOutput);
 		rightPIDController.setOutputRange(kMinOutput, kMaxOutput);
 
-		// leftDriveMaster.setRampRate(rampRate);
-		// rightDriveMaster.setRampRate(rampRate);
+		leftDriveMaster.setRampRate(rampRate);
+		rightDriveMaster.setRampRate(rampRate);
 	}
 
 	/****************
@@ -209,14 +207,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 		SmartDashboard.putBoolean("Physical switch", getPhysicalSwitchValue());
 		SmartDashboard.putNumber("Quad. Encoder Distance", enc.getDistance());
 		SmartDashboard.putNumber("Quad. Encoder Scaled", enc.get());
-		SmartDashboard.putNumber("Ultrasonic", sonar.getRangeInches())
-;
-		// Encoder DIO Ports
-		/*int a = 0, b = 0;
-		if(encoderA.get()) a = 1;
-		if(encoderB.get()) b = 1;
-		double[] encoder = {a,b};
-		SmartDashboard.putNumberArray("Encoder DIO Ports", encoder);*/
+		SmartDashboard.putNumber("Ultrasonic", sonar.getRangeInches());
 
 		double[] rightVolts = {rightDriveMaster.getAppliedOutput(), rightDriveSlave1.getAppliedOutput(), rightDriveSlave2.getAppliedOutput()};
 		double[] leftVolts = {leftDriveMaster.getAppliedOutput(), leftDriveSlave1.getAppliedOutput(), leftDriveSlave2.getAppliedOutput()};
