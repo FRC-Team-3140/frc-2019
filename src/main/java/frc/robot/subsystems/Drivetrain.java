@@ -7,6 +7,8 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.ControlType;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -43,6 +45,10 @@ public final class Drivetrain extends Subsystem implements Constants {
 	
 	private AnalogInput lineSensor = new AnalogInput(0); // right
 	private AnalogInput lineSensor2 = new AnalogInput(1); // left
+	private Encoder enc = new Encoder(3, 4); // 256 pulses per revolution
+	private Ultrasonic sonar = new Ultrasonic(0, 1);
+	// private DigitalInput encoderB = new DigitalInput(3);
+	// private DigitalInput encoderA = new DigitalInput(4);
 
 	private CANEncoder 
 		leftEncoder = leftDriveMaster.getEncoder(),
@@ -201,6 +207,16 @@ public final class Drivetrain extends Subsystem implements Constants {
 		SmartDashboard.putNumber("Line sensor", lineSensor.getValue());
 		SmartDashboard.putNumber("Line sensor 2", lineSensor2.getValue());
 		SmartDashboard.putBoolean("Physical switch", getPhysicalSwitchValue());
+		SmartDashboard.putNumber("Quad. Encoder Distance", enc.getDistance());
+		SmartDashboard.putNumber("Quad. Encoder Scaled", enc.get());
+		SmartDashboard.putNumber("Ultrasonic", sonar.getRangeInches())
+;
+		// Encoder DIO Ports
+		/*int a = 0, b = 0;
+		if(encoderA.get()) a = 1;
+		if(encoderB.get()) b = 1;
+		double[] encoder = {a,b};
+		SmartDashboard.putNumberArray("Encoder DIO Ports", encoder);*/
 
 		double[] rightVolts = {rightDriveMaster.getAppliedOutput(), rightDriveSlave1.getAppliedOutput(), rightDriveSlave2.getAppliedOutput()};
 		double[] leftVolts = {leftDriveMaster.getAppliedOutput(), leftDriveSlave1.getAppliedOutput(), leftDriveSlave2.getAppliedOutput()};
