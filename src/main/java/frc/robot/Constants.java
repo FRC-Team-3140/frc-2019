@@ -15,11 +15,15 @@ public interface Constants {
 
     // PNEUMATICS
     // 0 and 7 are the current ports on chassis bot
-    public static final int SHIFTER_EXTEND = 1, SHIFTER_RETRACT = 6,
-	    ARM_EXTEND = 1, ARM_RETRACT = 6,	
+    public static final int SHIFTER_EXTEND = 1, 
+        SHIFTER_RETRACT = 6,
+        ARM_EXTEND = 1, 
+        ARM_RETRACT = 6,	
 	    PUNCHER = 2,
-	    CLIMBER_EXTEND = 1, CLIMBER_RETRACT = 6,
-	    FORKLIFT_EXTEND = 1,   FORKLIFT_RETRACT = 7;
+        CLIMBER_EXTEND = 1, 
+        CLIMBER_RETRACT = 6,
+        FORKLIFT_EXTEND = 1,   
+        FORKLIFT_RETRACT = 7;
     public static final int PCM = 1,
         PCM2 = 2; 
 

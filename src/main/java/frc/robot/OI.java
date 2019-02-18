@@ -5,6 +5,7 @@ import frc.robot.commands.pneumatics.arm.ArmClose;
 import frc.robot.commands.pneumatics.arm.ArmOpen;
 import frc.robot.commands.pneumatics.climber.*;
 import frc.robot.commands.pneumatics.shifter.*;
+import frc.robot.commands.pneumatics.forklift.*;
 import frc.robot.lib.joystick.XboxController;
 
 public final class OI {
@@ -17,11 +18,14 @@ public final class OI {
 	public OI() {
 		xbox1.leftBumper.whenPressed(new ShiftUp());
 		xbox1.leftBumper.whenReleased(new ShiftDown());
-		xbox1.a.whenPressed(new PunchHatch());
-		xbox1.b.whenPressed(new ArmOpen());
-		xbox1.b.whenReleased(new ArmClose());
-		xbox1.rightBumper.whenPressed(new ClimbUp());
-		xbox1.rightBumper.whenReleased(new ClimbDown());
+		xbox2.a.whenPressed(new PunchHatch());
+		xbox2.b.whenPressed(new ArmOpen());
+		xbox2.b.whenReleased(new ArmClose());
+		xbox2.rightBumper.whenPressed(new ClimbUp());
+		xbox2.rightBumper.whenReleased(new ClimbDown());
+		xbox2.x.whenPressed(new ReleaseForklift());
+		xbox2.x.whenReleased(new HoldForklift());
+
 	}
 
 	public void check() {
