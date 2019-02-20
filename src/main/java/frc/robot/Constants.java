@@ -1,17 +1,16 @@
 package frc.robot;
 
 public interface Constants {
-
     /****
      * SUBSYSTEMS
      */
     // DRIVETRAIN
-    public final int LEFT_DRIVE_MASTER = 2, // 6
-    LEFT_DRIVE_SLAVE1 = 3, // 5
-    LEFT_DRIVE_SLAVE2 = 4, // 4
-    RIGHT_DRIVE_MASTER = 5, // 3
-    RIGHT_DRIVE_SLAVE1 = 6, // 2
-    RIGHT_DRIVE_SLAVE2 = 7; // 1
+    public final int LEFT_DRIVE_MASTER = 3, // 6
+    LEFT_DRIVE_SLAVE1 = 4, // 5
+    LEFT_DRIVE_SLAVE2 = 5, // 4
+    RIGHT_DRIVE_MASTER = 6, // 3
+    RIGHT_DRIVE_SLAVE1 = 7, // 2
+    RIGHT_DRIVE_SLAVE2 = 8; // 1
 
     // PNEUMATICS
     // 0 and 7 are the current ports on chassis bot
@@ -29,10 +28,21 @@ public interface Constants {
 
     // INTAKE
     public final static int 
-        INTAKE_MOTOR = 8,
+        INTAKE_MOTOR = 10,
         TILT_MOTOR = 9;
 
     // ELEVATOR 
-    public final int ELEVATOR_MASTER = 8, // 6
-        ELEVATOR_SLAVE = 9;
+    public final int ELEVATOR_MASTER = 11, // el 1 (right)
+        ELEVATOR_SLAVE = 12; // el 2
+    
+    /*
+     * SENSORS
+     */
+    // ENCODER
+    public static final int COUNTS_PER_REV = 42;
+
+    // DRIVETRAIN
+    public final double HIGH_GEAR_RATIO = 6.73;
+	public final double LOW_GEAR_RATIO = 13.85;
+	public final double WHEEL_CIRCUM_IN = 6 * Math.PI;
 }

@@ -8,8 +8,7 @@ import frc.robot.commands.intake.TiltArm;
 
 public class Intake extends Subsystem implements Constants {
 
-  public static final WPI_TalonSRX
-    intakeMotor = new WPI_TalonSRX(INTAKE_MOTOR),
+  public static final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(INTAKE_MOTOR),
     tiltMotor = new WPI_TalonSRX(TILT_MOTOR);
 
   public void spinIn(){

@@ -88,4 +88,11 @@ public class DriveHelper {
 		else
 			return throttle;
 	}
+
+	public void setDeadbands(double throttle, double heading) {
+		if (!(Double.isFinite(throttle) && Double.isFinite(heading))) throw new IllegalArgumentException("Deadbands must be finite!");
+
+		throttleDeadband=throttle;
+		headingDeadband=heading;
+	}
 }

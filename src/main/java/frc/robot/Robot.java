@@ -31,7 +31,9 @@ public final class Robot extends TimedRobot {
 	public Pneumatics pneumatics;
 	public Elevator elevator;
 	public Intake intake;
+	//public static DriverCamera camera; // disabled because it is missing
 	public OI oi;
+
 
 	public static Robot getRobot() {
 		return robot;
@@ -46,18 +48,14 @@ public final class Robot extends TimedRobot {
 		pneumatics = new Pneumatics();
 		elevator = new Elevator();
 		intake = new Intake();
+		//camera = new DriverCamera();
 		// OI must be at the bottom
 		oi = new OI();
 	}
 
 	@Override
 	public void robotPeriodic() {
-
-	}
-
-	@Override
-	public void autonomousInit() {
-
+		drivetrain.updateShuffleboard();
 	}
 
 	@Override
@@ -68,11 +66,6 @@ public final class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		oi.getXboxController().check();
-	}
-
-	@Override
-	public void testPeriodic() {
-
+		oi.check();
 	}
 }

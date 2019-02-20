@@ -6,9 +6,11 @@ import frc.robot.commands.pneumatics.arm.ArmOpen;
 import frc.robot.commands.pneumatics.climber.*;
 import frc.robot.commands.pneumatics.shifter.*;
 import frc.robot.commands.pneumatics.forklift.*;
-import frc.robot.lib.joystick.XboxController;
+import frc.robot.commands.drivetrain.DriveAlongLine;
+import frc.robot.libs.XboxController;
 
 public final class OI {
+
 	private static final int XBOX_PORT_1 = 0;
 	private static final int XBOX_PORT_2 = 1;
 
@@ -18,6 +20,7 @@ public final class OI {
 	public OI() {
 		xbox1.leftBumper.whenPressed(new ShiftUp());
 		xbox1.leftBumper.whenReleased(new ShiftDown());
+
 		xbox2.a.whenPressed(new PunchHatch());
 		xbox2.b.whenPressed(new ArmOpen());
 		xbox2.b.whenReleased(new ArmClose());
@@ -26,6 +29,7 @@ public final class OI {
 		xbox2.x.whenPressed(new ReleaseForklift());
 		xbox2.x.whenReleased(new HoldForklift());
 
+		//xbox1.rightBumper.whileHeld(new DriveAlongLine());
 	}
 
 	public void check() {
