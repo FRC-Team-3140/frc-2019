@@ -1,6 +1,5 @@
 package frc.robot;
 
-import frc.robot.commands.pneumatics.puncher.PunchHatch;
 import frc.robot.commands.pneumatics.arm.ArmClose;
 import frc.robot.commands.pneumatics.arm.ArmOpen;
 import frc.robot.commands.pneumatics.climber.*;
@@ -21,7 +20,6 @@ public final class OI {
 		xbox1.leftBumper.whenPressed(new ShiftUp());
 		xbox1.leftBumper.whenReleased(new ShiftDown());
 
-		xbox2.a.whenPressed(new PunchHatch());
 		xbox2.b.whenPressed(new ArmOpen());
 		xbox2.b.whenReleased(new ArmClose());
 		xbox2.rightBumper.whenPressed(new ClimbUp());
