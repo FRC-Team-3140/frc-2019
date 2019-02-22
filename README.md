@@ -4,8 +4,8 @@ Robot code for the 2019 FRC game season.
 
 ## How To Use
 In order to use and deploy this code, you will need a FRC robot wired up with the following motor controllers and solenoids:
--One double solenoid
--Six SparkMAX motor controllers
+- One double solenoid
+- Six SparkMAX motor controllers
 
 Then, you will need to set up the robot by using the following steps:
 
