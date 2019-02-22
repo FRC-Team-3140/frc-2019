@@ -27,7 +27,7 @@ The SparkMAX controller is not imaged through the Pheonix Tuner. Instead, connec
 
 
 ### Configuring the radio
-Open an application called "Radio Config Util", which is part of the FRC Toolsuite. Plug in an ethernet cable from your computer to the port on the radio specified in the instructions on the Radio Config Util. Keep following those instructions to set your team number, radio name, firmware, etc. 
+Open an application called "Radio Config Util", which can be found here: https://wpilib.screenstepslive.com/s/currentCS/m/getting_started/l/144986-programming-your-radio. Plug in an ethernet cable from your computer to the port on the radio specified in the instructions on the Radio Config Util. Keep following those instructions to set your team number, radio name, firmware, etc. If there is an issue when performing these tasks, plug the ethernet cable into the other ethernet port on the radio and try again.
 
 
 ## Troubleshooting
