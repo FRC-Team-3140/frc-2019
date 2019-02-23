@@ -83,6 +83,10 @@ public final class Elevator extends Subsystem implements Constants {
     }
   }
 
+  public void check() {
+    if(Hardware.isElDown()) Hardware.elEncoder.reset();
+  }
+
   public void setSlaves(){
     elevatorSlave.follow(elevatorMaster);
   }

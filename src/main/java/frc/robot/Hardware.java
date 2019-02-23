@@ -22,4 +22,8 @@ public final class Hardware {
     public static final DigitalInput ballSwitch = new DigitalInput(5);
     public static final DigitalInput hatchSwitch = new DigitalInput(6);
 
+    public static boolean isElDown() {
+        return elBotSwitch.get();
+    }
+
 }
