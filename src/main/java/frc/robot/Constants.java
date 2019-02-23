@@ -43,5 +43,16 @@ public interface Constants {
     // DRIVETRAIN
     public final double HIGH_GEAR_RATIO = 6.73;
 	public final double LOW_GEAR_RATIO = 13.85;
-	public final double WHEEL_CIRCUM_IN = 6 * Math.PI;
+    public final double WHEEL_CIRCUM_IN = 6 * Math.PI;
+    
+    // ELEVATOR
+    // Note: We will use the unit 'johns' to measure el height
+    public final double LOW_HATCH = 0; // TODO these numbers
+    public final double MID_HATCH = 0;
+    public final double TOP_HATCH = 0;
+    public final double LOW_BALL = 0;
+    public final double MID_BALL = 0;
+    public final double TOP_BALL = 0;
+
+
 }

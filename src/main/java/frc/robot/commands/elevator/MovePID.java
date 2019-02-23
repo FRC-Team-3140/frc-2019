@@ -5,29 +5,41 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.drivetrain;
+package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class DriveVoltage extends Command {
-  Robot robot;
-  public DriveVoltage() {
-    robot = Robot.getRobot();
-    requires(robot.drivetrain);
+public class MovePID extends Command {
+  // TODO this
+  public MovePID() {
+    requires(Robot.getRobot().elevator);
+  }
+
+  // Called just before this Command runs the first time
+  @Override
+  protected void initialize() {
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.getRobot().drivetrain.drive(robot.oi.getXboxController().getMainY(),
-          robot.oi.getXboxController().getAltX());
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return true;
+    return false;
   }
 
+  // Called once after isFinished returns true
+  @Override
+  protected void end() {
+  }
+
+  // Called when another command which requires one or more of the same
+  // subsystems is scheduled to run
+  @Override
+  protected void interrupted() {
+  }
 }
