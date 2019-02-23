@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.drivetrain.Drive;
+import frc.robot.commands.drivetrain.DrivePID;
 import frc.util.DriveHelper;
 import frc.util.EncoderHelper;
 
@@ -28,6 +28,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 	public int lineTarget2 = 3050; // left
 	public int lineTolerance = 20;
 	public double leftLineFactor = 0.1/500, rightLineFactor = 0.1/100;
+
+	private boolean pid = true;
 	
 	private CANSparkMax
 		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
@@ -73,6 +75,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 	}
 
 	public void driveVelocityPID(double throttle, double heading) {
+		pid = true;
 		double velo = throttle * maxRPM;
 		double turn = heading * maxRPM * .75;
 
@@ -87,6 +90,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 
 	// drive for teleop
 	public void drive(double throttle, double heading) {
+		pid = false;
 		arcadeDrive(driveHelper.calculateThrottle(throttle),
 				driveHelper.handleOverPower(driveHelper.handleDeadband(heading, headingDeadband)));
 	}
@@ -209,6 +213,10 @@ public final class Drivetrain extends Subsystem implements Constants {
 	/***************
 	 * GET METHODS *
 	 ***************/
+	public boolean getIsPID() {
+		return pid;
+	}
+
 	public double getLeftInches() {
 		return EncoderHelper.revsToInches(leftEncoder.getPosition(), WHEEL_CIRCUM_IN) / LOW_GEAR_RATIO;
 	}
@@ -225,12 +233,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		return headingDeadband;
 	}
 
-	public int getLineDiff() {
-		return lineSensor2.getValue() - lineSensor.getValue(); // left - right
-	}
-
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new Drive());
+		setDefaultCommand(new DrivePID());
 	}
 }
