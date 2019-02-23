@@ -5,10 +5,9 @@ import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.ControlType;
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
+import frc.robot.Hardware;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.drivetrain.DrivePID;
 import frc.util.DriveHelper;
@@ -38,10 +37,6 @@ public final class Drivetrain extends Subsystem implements Constants {
 		rightDriveMaster = new CANSparkMax(RIGHT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
 		rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
 		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
-	
-	private AnalogInput lineSensor = new AnalogInput(0); // right
-	private AnalogInput lineSensor2 = new AnalogInput(1); // left
-	private Ultrasonic sonar = new Ultrasonic(0, 1);
 
 	private CANEncoder 
 		leftEncoder = leftDriveMaster.getEncoder(),
@@ -59,7 +54,6 @@ public final class Drivetrain extends Subsystem implements Constants {
 		pushToShuffleboard();
 		setPIDDefaults();
 		setBreakMode();
-		sonar.setAutomaticMode(true);
 	}
 
 	/*****************
@@ -107,10 +101,10 @@ public final class Drivetrain extends Subsystem implements Constants {
 
 	public void driveAlongLine() {
 		// TODO figure out + and - headings here... 		
-		double rightCorrection = rightLineFactor * (lineTarget1- lineSensor.getValue());
-		double leftCorrection = leftLineFactor * (lineTarget2- lineSensor2.getValue());
-		if(Math.abs(lineTarget1 - lineSensor.getValue()) < lineTolerance) rightCorrection = 0;
-		if(Math.abs(lineTarget2 - lineSensor2.getValue()) < lineTolerance) leftCorrection = 0;
+		double rightCorrection = rightLineFactor * (lineTarget1- Hardware.rightLineSensor.getValue());
+		double leftCorrection = leftLineFactor * (lineTarget2- Hardware.leftLineSensor.getValue());
+		if(Math.abs(lineTarget1 - Hardware.rightLineSensor.getValue()) < lineTolerance) rightCorrection = 0;
+		if(Math.abs(lineTarget2 - Hardware.leftLineSensor.getValue()) < lineTolerance) leftCorrection = 0;
 
 		double heading = leftCorrection - rightCorrection;
 		if(heading > 0.2) heading = 0.2;
@@ -198,9 +192,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 			setPIDDefaults();
 		}
 
-		SmartDashboard.putNumber("Line sensor", lineSensor.getValue());
-		SmartDashboard.putNumber("Line sensor 2", lineSensor2.getValue());
-		SmartDashboard.putNumber("Ultrasonic", sonar.getRangeInches());
+		SmartDashboard.putNumber("Line sensor R", Hardware.rightLineSensor.getValue());
+		SmartDashboard.putNumber("Line sensor L", Hardware.leftLineSensor.getValue());
 
 		double[] rightVolts = {rightDriveMaster.getAppliedOutput(), rightDriveSlave1.getAppliedOutput(), rightDriveSlave2.getAppliedOutput()};
 		double[] leftVolts = {leftDriveMaster.getAppliedOutput(), leftDriveSlave1.getAppliedOutput(), leftDriveSlave2.getAppliedOutput()};

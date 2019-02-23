@@ -53,6 +53,7 @@ public interface Constants {
     public final double LOW_BALL = 0;
     public final double MID_BALL = 0;
     public final double TOP_BALL = 0;
+    public final double EL_TOL = 2;
 
 
 }

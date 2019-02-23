@@ -65,6 +65,10 @@ public final class Elevator extends Subsystem implements Constants {
     errorSum = 0;
   }
 
+  public boolean isElAtDitance(double johns) {
+    return Math.abs(Hardware.elEncoder.getDistance() - johns) < EL_TOL;
+  }
+
   public void updateShuffleboard() {
     SmartDashboard.putNumber("El encoder", Hardware.elEncoder.getDistance());
 
