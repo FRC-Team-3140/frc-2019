@@ -26,7 +26,6 @@ public final class Robot extends TimedRobot {
 
 	private static Robot robot;
 
-	public Hardware hardware;
 	public Drivetrain drivetrain;
 	public Pneumatics pneumatics;
 	public Elevator elevator;
@@ -44,7 +43,6 @@ public final class Robot extends TimedRobot {
 	public void robotInit() {
 		robot = this;
 
-		hardware = new Hardware();
 		drivetrain = new Drivetrain();
 		pneumatics = new Pneumatics();
 		elevator = new Elevator();
@@ -58,6 +56,8 @@ public final class Robot extends TimedRobot {
 	@Override
 	public void robotPeriodic() {
 		drivetrain.updateShuffleboard();
+		elevator.updateShuffleboard();
+		elevator.check();
 	}
 
 	@Override
