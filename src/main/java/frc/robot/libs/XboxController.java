@@ -103,6 +103,14 @@ public final class XboxController extends Joystick {
 	public double getAltY(){
 		return -super.getRawAxis(5);
 	}
+
+	public double getLeftTrigger() {
+		return super.getRawAxis(2);
+	}
+
+	public double getRightTrigger() {
+		return super.getRawAxis(3);
+	}
 	
 	public double getSmoothedMainX() {
 		return -Math.sin(Math.PI/2 * super.getRawAxis(0));
