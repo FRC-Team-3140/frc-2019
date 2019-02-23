@@ -24,8 +24,8 @@ public final class OI {
 		xbox1.leftBumper.whenReleased(new ShiftDown());
 		xbox1.start.whenPressed(new SwitchDrive(new DriveVoltage(), new DrivePID()));
 
-		xbox2.b.whenPressed(new ArmOpen());
-		xbox2.b.whenReleased(new ArmClose());
+		xbox2.leftBumper.whenPressed(new ArmOpen());
+		xbox2.rightBumper.whenReleased(new ArmClose());
 		/*xbox2.rightBumper.whenPressed(new ClimbUp());
 		xbox2.rightBumper.whenReleased(new ClimbDown());
 		xbox2.x.whenPressed(new ReleaseForklift());

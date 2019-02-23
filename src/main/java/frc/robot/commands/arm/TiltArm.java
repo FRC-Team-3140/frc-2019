@@ -1,17 +1,16 @@
-package frc.robot.commands.intake;
+package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public class TiltArm extends Command {
   public TiltArm() {
-    requires(Robot.getRobot().intake);
+    requires(Robot.getRobot().arm);
   }
 
   @Override
   protected void execute() {
-    //TODO change to xbox 2
-    Robot.getRobot().intake.tiltArm(Robot.getRobot().oi.getXboxController2().getSmoothedAltY());
+    Robot.getRobot().arm.tiltArm(Robot.getRobot().oi.getXboxController2().getSmoothedMainY());
   }
 
   @Override

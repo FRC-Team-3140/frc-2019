@@ -13,7 +13,7 @@ public class MoveWithJoystick extends Command {
 
   @Override
   protected void execute() {
-    robot.elevator.elevatorMove(robot.oi.getXboxController2().getMainY());
+    robot.elevator.elevatorMove(robot.oi.getXboxController2().getSmoothedAltY());
   }
 
   @Override

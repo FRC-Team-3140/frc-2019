@@ -31,6 +31,7 @@ public final class Robot extends TimedRobot {
 	public Pneumatics pneumatics;
 	public Elevator elevator;
 	public Intake intake;
+	public Arm arm;
 	//public static DriverCamera camera; // disabled because it is missing
 	public OI oi;
 
@@ -48,6 +49,7 @@ public final class Robot extends TimedRobot {
 		pneumatics = new Pneumatics();
 		elevator = new Elevator();
 		intake = new Intake();
+		arm = new Arm();
 		//camera = new DriverCamera();
 		// OI must be at the bottom
 		oi = new OI();
