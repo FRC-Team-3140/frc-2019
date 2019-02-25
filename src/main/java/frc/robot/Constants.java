@@ -58,6 +58,7 @@ public interface Constants {
 
     // ARM
     public final double ARM_BOT_POS = 0; // TODO this one too
+    public final double ARM_TOL_AI = 0;
 
 
 }

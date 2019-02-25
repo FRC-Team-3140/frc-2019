@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -32,13 +33,13 @@ public class Arm extends Subsystem implements Constants {
     tiltMotor.set(throttle);
   }
 
-  // Future use
-  public void tiltToTop() {
-    
+  // Future use + TODO: add limit switch checking
+  public void tiltDistance(int aidens) {
+    tiltMotor.set(ControlMode.Position, aidens);
   }
 
-  public void tiltToBot() {
-
+  public boolean isArmAt(int aidens) {
+    return Math.abs(aidens - tiltMotor.getSelectedSensorPosition()) < ARM_TOL_AI;
   }
 
   /*
