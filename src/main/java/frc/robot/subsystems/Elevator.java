@@ -13,8 +13,7 @@ import frc.util.DriveHelper;
 
 
 public final class Elevator extends Subsystem implements Constants {
-  private static final double THROTTLE_DEADBAND = 0.05;
-  private static final double HEADING_DEADBAND = 0.05;
+  private static double deadband = 0.05;
 
   private double prevError = 0, errorSum = 0, lastTime = 0;
 
@@ -26,15 +25,18 @@ public final class Elevator extends Subsystem implements Constants {
 		elevatorMaster = new CANSparkMax(ELEVATOR_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
     elevatorSlave = new CANSparkMax(ELEVATOR_SLAVE, CANSparkMaxLowLevel.MotorType.kBrushless);
     
-  private DriveHelper driveHelper = new DriveHelper(7.5, THROTTLE_DEADBAND, HEADING_DEADBAND);
   private Timer timer = new Timer();
 
   public Elevator () {
     setSlaves();
   }
 
+  /**********
+   * MOVING *
+   **********/
   public void elevatorMove(double throttle) {
-    elevatorMaster.set(driveHelper.calculateThrottle(throttle));
+    if(Math.abs(throttle) < deadband) throttle = 0;
+    elevatorMaster.set(throttle);
   }
 
   public void moveDistancePID(double johns) {
@@ -53,6 +55,9 @@ public final class Elevator extends Subsystem implements Constants {
     lastTime = t;
   }
 
+  /***************
+   * PID SUPPORT *
+   ***************/
   public void startPID() {
     timer.start();
   }
@@ -67,6 +72,13 @@ public final class Elevator extends Subsystem implements Constants {
 
   public boolean isElAtDitance(double johns) {
     return Math.abs(Hardware.elEncoder.getDistance() - johns) < EL_TOL;
+  }
+
+  /**********
+   * CONFIG *
+   **********/
+  public void setSlaves(){
+    elevatorSlave.follow(elevatorMaster);
   }
 
   public void updateShuffleboard() {
@@ -84,11 +96,7 @@ public final class Elevator extends Subsystem implements Constants {
   }
 
   public void check() {
-    if(Hardware.isElDown()) Hardware.elEncoder.reset();
-  }
-
-  public void setSlaves(){
-    elevatorSlave.follow(elevatorMaster);
+    if(Hardware.isElDown() && Hardware.elSwitchWorking) Hardware.elEncoder.reset();
   }
 
   @Override
