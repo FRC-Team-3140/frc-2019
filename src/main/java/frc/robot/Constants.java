@@ -38,7 +38,7 @@ public interface Constants {
     /*
      * SENSORS
      */
-    // ENCODER
+    // DT ENCODER
     public static final int COUNTS_PER_REV = 42;
 
     // DRIVETRAIN
@@ -55,6 +55,9 @@ public interface Constants {
     public final double MID_BALL = 0;
     public final double TOP_BALL = 0;
     public final double EL_TOL = 2;
+
+    // ARM
+    public final double ARM_BOT_POS = 0; // TODO this one too
 
 
 }
