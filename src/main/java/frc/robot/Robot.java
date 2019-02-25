@@ -60,6 +60,7 @@ public final class Robot extends TimedRobot {
 		elevator.check();
 		arm.check();
 		arm.updateShuffleboard();
+		intake.updateShuffleboard();
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.commands.intake.SpinWithTrigger;
 
@@ -30,6 +31,14 @@ public class Intake extends Subsystem implements Constants {
 
     if(Math.abs(throttle) < deadband) throttle = 0;
     intakeMotor.set(throttle);
+  }
+
+  public void updateShuffleboard() {
+    double band = SmartDashboard.getNumber("Intake Deadband", deadband);
+
+    if(band != deadband) {
+      deadband = band;
+    }
   }
 
   @Override

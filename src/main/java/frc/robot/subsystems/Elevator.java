@@ -87,11 +87,13 @@ public final class Elevator extends Subsystem implements Constants {
     double newKP = SmartDashboard.getNumber("El kP", kP);
     double newKI = SmartDashboard.getNumber("El kI", kI);
     double newKD = SmartDashboard.getNumber("El kD", kD);
+    double band = SmartDashboard.getNumber("Elevator Deadband", deadband);
 
-    if(newKP != kP || newKI != kI || newKD != kD) {
+    if(newKP != kP || newKI != kI || newKD != kD || band != deadband) {
       kP = newKP;
       kI = newKI;
       kD = newKD;
+      deadband = band;
     }
   }
 
