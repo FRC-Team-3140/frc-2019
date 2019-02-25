@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.Hardware;
 import frc.robot.commands.elevator.MoveWithJoystick;
-import frc.util.DriveHelper;
-
 
 public final class Elevator extends Subsystem implements Constants {
   private static double deadband = 0.05;
