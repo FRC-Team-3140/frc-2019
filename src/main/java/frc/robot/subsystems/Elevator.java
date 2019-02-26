@@ -38,6 +38,7 @@ public final class Elevator extends Subsystem implements Constants {
   }
 
   public void moveDistancePID(double johns) {
+
     double error = johns - Hardware.elEncoder.getDistance();
     double t = timer.get();
     double dt = lastTime - t;
