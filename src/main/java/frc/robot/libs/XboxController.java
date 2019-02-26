@@ -1,4 +1,4 @@
-package frc.robot.oi;
+package frc.robot.libs;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -89,19 +89,27 @@ public final class XboxController extends Joystick {
 	}
 	
 	public double getMainX(){
-		return super.getRawAxis(0);
+		return -super.getRawAxis(0);
 	}
 	
 	public double getMainY(){
-		return super.getRawAxis(1);
+		return -super.getRawAxis(1);
 	}
 	
 	public double getAltX(){
-		return super.getRawAxis(4);
+		return -super.getRawAxis(4);
 	}
 	
 	public double getAltY(){
-		return super.getRawAxis(5);
+		return -super.getRawAxis(5);
+	}
+
+	public double getLeftTrigger() {
+		return super.getRawAxis(2);
+	}
+
+	public double getRightTrigger() {
+		return super.getRawAxis(3);
 	}
 	
 	public double getSmoothedMainX() {
@@ -109,7 +117,7 @@ public final class XboxController extends Joystick {
 	}
 	
 	public double getSmoothedMainY() {
-		return Math.sin(Math.PI/2 * super.getRawAxis(1));
+		return -Math.sin(Math.PI/2 * super.getRawAxis(1));
 	}
 	
 	public double getSmoothedAltX() {
@@ -117,7 +125,7 @@ public final class XboxController extends Joystick {
 	}
 	
 	public double getSmoothedAltY() {
-		return Math.sin(Math.PI/2 * super.getRawAxis(5));
+		return -Math.sin(Math.PI/2 * super.getRawAxis(5));
 	}
 	
 	public void setButtonStatus(boolean a, boolean b, boolean x, boolean y, boolean leftBumper, boolean rightBumper,

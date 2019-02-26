@@ -21,16 +21,19 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.subsystems.*;
-import frc.robot.subsystems.pneumatics.Pneumatics;
 
 public final class Robot extends TimedRobot {
 
 	private static Robot robot;
 
-	public Hardware hardware;
 	public Drivetrain drivetrain;
 	public Pneumatics pneumatics;
+	public Elevator elevator;
+	public Intake intake;
+	public Arm arm;
+	public static DriverCamera camera; // disabled because it is missing
 	public OI oi;
+
 
 	public static Robot getRobot() {
 		return robot;
@@ -40,16 +43,24 @@ public final class Robot extends TimedRobot {
 	public void robotInit() {
 		robot = this;
 
-		hardware = new Hardware();
 		drivetrain = new Drivetrain();
 		pneumatics = new Pneumatics();
+		elevator = new Elevator();
+		intake = new Intake();
+		arm = new Arm();
+		camera = new DriverCamera();
 		// OI must be at the bottom
 		oi = new OI();
 	}
 
 	@Override
 	public void robotPeriodic() {
-		oi.update();
+		drivetrain.updateShuffleboard();
+		elevator.updateShuffleboard();
+		elevator.check();
+		arm.check();
+		arm.updateShuffleboard();
+		intake.updateShuffleboard();
 	}
 
 	@Override
