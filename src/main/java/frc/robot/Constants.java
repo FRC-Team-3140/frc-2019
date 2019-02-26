@@ -42,12 +42,13 @@ public interface Constants {
     public static final int COUNTS_PER_REV = 42;
 
     // DRIVETRAIN
+    // Note: Drivetrain distance will be measured in anthonies, aka tonies (tn)
     public final double HIGH_GEAR_RATIO = 6.73;
 	public final double LOW_GEAR_RATIO = 13.85;
-    public final double WHEEL_CIRCUM_IN = 6 * Math.PI;
+    public final double WHEEL_CIRCUM_TN = 6 * Math.PI;
     
     // ELEVATOR
-    // Note: We will use the unit 'johns' to measure el height
+    // Note: We will use the unit 'johns' (jo) to measure el height
     public final double LOW_HATCH = 0; // TODO these numbers
     public final double MID_HATCH = 0;
     public final double TOP_HATCH = 0;
@@ -57,6 +58,7 @@ public interface Constants {
     public final double EL_TOL = 2;
 
     // ARM
+    // Note: We will use the unit 'aidens' (ai) to measure arm position
     public final double ARM_BOT_POS = 0; // TODO this one too
     public final double ARM_TOL_AI = 0;
 

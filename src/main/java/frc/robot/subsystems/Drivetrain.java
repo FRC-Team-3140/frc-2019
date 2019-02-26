@@ -211,11 +211,11 @@ public final class Drivetrain extends Subsystem implements Constants {
 	}
 
 	public double getLeftInches() {
-		return EncoderHelper.revsToInches(leftEncoder.getPosition(), WHEEL_CIRCUM_IN) / LOW_GEAR_RATIO;
+		return EncoderHelper.revsToInches(leftEncoder.getPosition(), WHEEL_CIRCUM_TN) / LOW_GEAR_RATIO;
 	}
 
 	public double getRightInches() {
-		return EncoderHelper.revsToInches(rightEncoder.getPosition(), WHEEL_CIRCUM_IN) / LOW_GEAR_RATIO;
+		return EncoderHelper.revsToInches(rightEncoder.getPosition(), WHEEL_CIRCUM_TN) / LOW_GEAR_RATIO;
 	}
 
 	public double getThrottleDeadband() {
