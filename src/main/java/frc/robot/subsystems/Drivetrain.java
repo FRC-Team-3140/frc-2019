@@ -10,6 +10,7 @@ import frc.robot.Constants;
 import frc.robot.Hardware;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.drivetrain.DrivePID;
+import frc.robot.commands.drivetrain.DriveVoltage;
 import frc.util.DriveHelper;
 import frc.util.EncoderHelper;
 
@@ -228,6 +229,6 @@ public final class Drivetrain extends Subsystem implements Constants {
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new DrivePID());
+		setDefaultCommand(new DriveVoltage());
 	}
 }
