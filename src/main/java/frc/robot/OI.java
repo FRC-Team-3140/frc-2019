@@ -27,9 +27,9 @@ public final class OI {
 
 		xbox2.leftBumper.whenPressed(new ArmOpen());
 		xbox2.rightBumper.whenReleased(new ArmClose());
-		xbox2.a.whenPressed(new MoveLevel1());
-		xbox2.b.whenPressed(new MoveLevel2());
-		xbox2.y.whenPressed(new MoveLevel3());
+		xbox2.a.whileHeld(new MoveLevel1());
+		xbox2.b.whileHeld(new MoveLevel2());
+		xbox2.y.whileHeld(new MoveLevel3());
 		xbox2.x.whenPressed(new MoveToBottom());
 
 		/*xbox2.rightBumper.whenPressed(new ClimbUp());

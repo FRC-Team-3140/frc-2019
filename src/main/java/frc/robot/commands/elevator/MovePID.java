@@ -32,7 +32,7 @@ public class MovePID extends TimedCommand {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return robot.elevator.isElAtDitance(johns) || aboveTarget;
+    return true; //robot.elevator.isElAtDitance(johns) || aboveTarget;
   }
 
   // Called once after isFinished returns true
