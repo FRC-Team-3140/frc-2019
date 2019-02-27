@@ -11,6 +11,8 @@ public final class Pneumatics extends Subsystem implements Constants {
 	public static final DoubleSolenoid.Value RETRACT = Value.kReverse;
 	public static final DoubleSolenoid.Value OFF = Value.kOff;
 
+	public boolean intakeOpen = false;
+
 	@SuppressWarnings("unused")
 	private Compressor compressor = new Compressor(PCM);
 
@@ -26,6 +28,8 @@ public final class Pneumatics extends Subsystem implements Constants {
 	}
 
 	public void toggleArm(DoubleSolenoid.Value b){
+		if(b == EXTEND) intakeOpen = true;
+		else if(b == RETRACT) intakeOpen = false;
 		arm.set(b);
 	}
 

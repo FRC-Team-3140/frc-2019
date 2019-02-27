@@ -1,7 +1,6 @@
 package frc.robot;
 
-import frc.robot.commands.pneumatics.arm.ArmClose;
-import frc.robot.commands.pneumatics.arm.ArmOpen;
+import frc.robot.commands.pneumatics.arm.*;
 import frc.robot.commands.pneumatics.climber.*;
 import frc.robot.commands.pneumatics.shifter.*;
 import frc.robot.commands.pneumatics.forklift.*;
@@ -25,9 +24,11 @@ public final class OI {
 		xbox1.leftBumper.whenReleased(new ShiftDown());
 		//xbox1.start.whenPressed(new SwitchDrive(new DriveVoltage(), new DrivePID()));
 
-		xbox2.leftBumper.whenPressed(new ArmOpen());
-		xbox2.rightBumper.whenReleased(new ArmClose());
-		xbox2.a.whileHeld(new MoveLevel1());
+		// xbox2.leftBumper.whenPressed(new ArmOpen());
+		// xbox2.rightBumper.whenReleased(new ArmClose());
+		xbox2.leftBumper.whenPressed(new SwitchArm(new ArmClose(), new ArmOpen()));
+		
+		/*xbox2.a.whileHeld(new MoveLevel1());
 		xbox2.b.whileHeld(new MoveLevel2());
 		xbox2.y.whileHeld(new MoveLevel3());
 		xbox2.x.whenPressed(new MoveToBottom());
