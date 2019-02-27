@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Robot;
 
 /**
- * Add your docs here.
+ * Future use to control subsystem interactions (like the cheesy poofs c:)
  */
 public class Superstructure extends Subsystem {
 
