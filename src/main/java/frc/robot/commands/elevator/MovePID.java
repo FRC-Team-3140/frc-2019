@@ -1,11 +1,13 @@
 package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.TimedCommand;
+import frc.robot.Hardware;
 import frc.robot.Robot;
 
 public class MovePID extends TimedCommand {
   Robot robot;
   double johns;
+  boolean aboveTarget = false;
 
   public MovePID(double johns, double time) {
     super(time);
@@ -18,6 +20,7 @@ public class MovePID extends TimedCommand {
   @Override
   protected void initialize() {
     robot.elevator.startPID();
+    if(Hardware.elEncoder.getDistance() > johns) aboveTarget = true;
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -29,7 +32,7 @@ public class MovePID extends TimedCommand {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return robot.elevator.isElAtDitance(johns);
+    return true; //robot.elevator.isElAtDitance(johns) || aboveTarget;
   }
 
   // Called once after isFinished returns true

@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,19 +37,23 @@ public final class Elevator extends Subsystem implements Constants {
   }
 
   public void moveDistancePID(double johns) {
-    double error = johns - Hardware.elEncoder.getDistance();
-    double t = timer.get();
-    double dt = lastTime - t;
+    if(johns > Hardware.elEncoder.getDistance()) {
+      double error = johns - Hardware.elEncoder.getDistance();
+      double t = timer.get();
+      double dt = lastTime - t;
     
-    errorSum += error * dt;
-    double p = kP * error;
-    double i = kI * (errorSum);
-    double d = kD * (error - prevError)/dt;
-    double throttle = p + i + d;
-    elevatorMaster.set(throttle);
+      errorSum += error * dt;
+      double p = kP * error;
+      double i = kI * (errorSum);
+      double d = kD * (error - prevError)/dt;
+      double throttle = p + i + d;
+      elevatorMaster.set(throttle);
     
-    prevError = error;
-    lastTime = t;
+      prevError = error;
+      lastTime = t;
+    }
+    else  
+      System.out.println("ERROR: CANNOT MOVE TO A LOWER HEIGHT");
   }
 
   /***************

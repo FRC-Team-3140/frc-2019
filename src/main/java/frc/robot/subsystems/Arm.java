@@ -76,8 +76,8 @@ public class Arm extends Subsystem implements Constants {
   public void updateShuffleboard() {
     double band = SmartDashboard.getNumber("Intake Deadband", deadband);
     double p = SmartDashboard.getNumber("Arm kP", kP);
-    double i = SmartDashboard.getNumber("Arm kI", kP);
-    double d = SmartDashboard.getNumber("Arm kD", kP);
+    double i = SmartDashboard.getNumber("Arm kI", kI);
+    double d = SmartDashboard.getNumber("Arm kD", kD);
 
     if(band != deadband || p != kP || i != kI || d != kD) {
       deadband = band;
