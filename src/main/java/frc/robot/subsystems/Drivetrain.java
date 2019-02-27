@@ -1,10 +1,13 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.Hardware;
@@ -47,6 +50,9 @@ public final class Drivetrain extends Subsystem implements Constants {
 		leftPIDController = leftDriveMaster.getPIDController(),
 		rightPIDController = rightDriveMaster.getPIDController();
 
+	private CANSparkMax[] motors = {leftDriveMaster, leftDriveSlave1, leftDriveSlave2, rightDriveMaster, 
+			rightDriveSlave1, rightDriveSlave2};
+
 	private DriveHelper driveHelper = new DriveHelper(7.5, throttleDeadband, headingDeadband);
 		
 	public Drivetrain() {
@@ -54,7 +60,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 		setInverts();
 		pushToShuffleboard();
 		setPIDDefaults();
-		setBreakMode();
+		setNeutralMode(IdleMode.kCoast);
 	}
 
 	/*****************
@@ -132,13 +138,12 @@ public final class Drivetrain extends Subsystem implements Constants {
 		rightDriveSlave1.setInverted(true);
 	}
 
-	private void setBreakMode() {
-		leftDriveMaster.setIdleMode(CANSparkMax.IdleMode.kBrake);
-		leftDriveSlave1.setIdleMode(CANSparkMax.IdleMode.kBrake);
-		leftDriveSlave2.setIdleMode(CANSparkMax.IdleMode.kBrake);
-		rightDriveMaster.setIdleMode(CANSparkMax.IdleMode.kBrake);
-		rightDriveSlave1.setIdleMode(CANSparkMax.IdleMode.kBrake);
-		rightDriveSlave2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+	private void setNeutralMode(IdleMode mode) {
+		for(CANSparkMax motor : motors) motor.setIdleMode(mode);
+	}
+
+	private void setLimits() {
+		// find appropriate ramp rate + current limits
 	}
 
 	private void setPIDDefaults() {
