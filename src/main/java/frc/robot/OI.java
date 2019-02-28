@@ -4,7 +4,7 @@ import frc.robot.commands.pneumatics.arm.*;
 import frc.robot.commands.pneumatics.climber.*;
 import frc.robot.commands.pneumatics.shifter.*;
 import frc.robot.commands.pneumatics.forklift.*;
-import frc.robot.commands.drivetrain.SwitchDrive;
+import frc.robot.commands.drivetrain.*;
 import frc.robot.commands.elevator.*;
 import frc.robot.commands.drivetrain.DriveAlongLine;
 import frc.robot.commands.drivetrain.DrivePID;
@@ -20,9 +20,10 @@ public final class OI {
 	private XboxController xbox2 = new XboxController(XBOX_PORT_2);
 
 	public OI() {
-		xbox1.leftBumper.whenPressed(new ShiftUp());
-		xbox1.leftBumper.whenReleased(new ShiftDown());
+		xbox1.leftJoystickPress.whenPressed(new ShiftUp());
+		xbox1.leftJoystickPress.whenReleased(new ShiftDown());
 		xbox1.start.whenPressed(new SwitchDrive(new DriveVoltage(), new DrivePID()));
+		xbox1.leftBumper.whileHeld(new StopDrive());
 
 		// xbox2.leftBumper.whenPressed(new ArmOpen());
 		// xbox2.rightBumper.whenReleased(new ArmClose());

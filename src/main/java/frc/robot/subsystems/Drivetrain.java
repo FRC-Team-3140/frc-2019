@@ -60,7 +60,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 		setInverts();
 		pushToShuffleboard();
 		setPIDDefaults();
-		setNeutralMode(IdleMode.kCoast);
+		setNeutralMode(IdleMode.kBrake);
 	}
 
 	/*****************
@@ -87,6 +87,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		double[] rightData = {velo+turn, rightEncoder.getVelocity()};
 		SmartDashboard.putNumberArray("Left Velo Control", leftData);
 		SmartDashboard.putNumberArray("Right Velo Control", rightData);
+
+		System.out.println("pid");
 	}
 
 	// drive for teleop
@@ -94,6 +96,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		pid = false;
 		arcadeDrive(driveHelper.calculateThrottle(throttle),
 				driveHelper.handleOverPower(driveHelper.handleDeadband(heading, headingDeadband)));
+
+		System.out.println("voltage");
 	}
 
 	public void arcadeDrive(double throttle, double heading) {
@@ -156,8 +160,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		leftPIDController.setOutputRange(kMinOutput, kMaxOutput);
 		rightPIDController.setOutputRange(kMinOutput, kMaxOutput);
 
-		leftDriveMaster.setRampRate(rampRate);
-		rightDriveMaster.setRampRate(rampRate);
+		// leftDriveMaster.setRampRate(rampRate);
+		// rightDriveMaster.setRampRate(rampRate);
 
 	}
 
@@ -174,6 +178,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 		SmartDashboard.putNumber("Right DT kI", kIRight);
 		SmartDashboard.putNumber("Right DT kD", kDRight);
 		SmartDashboard.putNumber("DT Ramp Rate", rampRate);
+		SmartDashboard.putString("Drive Mode:", "PID");
 	}
 
 	public void updateShuffleboard() {
@@ -205,9 +210,6 @@ public final class Drivetrain extends Subsystem implements Constants {
 		double[] leftVolts = {leftDriveMaster.getAppliedOutput(), leftDriveSlave1.getAppliedOutput(), leftDriveSlave2.getAppliedOutput()};
 		SmartDashboard.putNumberArray("DT Right", rightVolts);
 		SmartDashboard.putNumberArray("DT Left", leftVolts);
-
-		String cmd = (pid) ? "Velocity PID" : "Voltage";
-		SmartDashboard.putString("Drive Mode:", cmd);
 	}
 
 	/***************

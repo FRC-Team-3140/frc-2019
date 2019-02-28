@@ -1,6 +1,7 @@
 package frc.robot.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class SwitchDrive extends Command {
@@ -13,8 +14,15 @@ public class SwitchDrive extends Command {
   }
 
   protected void initialize() {
-    if(source()) Robot.getRobot().drivetrain.setDefaultCommand(trueC);
-    else Robot.getRobot().drivetrain.setDefaultCommand(falseC);
+    if(source()) {
+      Robot.getRobot().drivetrain.setDefaultCommand(trueC);
+      SmartDashboard.putString("Drive Mode:", "Voltage");
+
+    }
+    else {
+      Robot.getRobot().drivetrain.setDefaultCommand(falseC);
+      SmartDashboard.putString("Drive Mode:", "PID");
+    }
   }
 
   public boolean source() {
