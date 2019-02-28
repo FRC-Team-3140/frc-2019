@@ -12,7 +12,7 @@ public final class Hardware {
     public static final boolean lineSensorsWorking = false;
 
     // ELEVATOR
-    public static final Encoder elEncoder = new Encoder(0, 1);
+    //public static final Encoder elEncoder = new Encoder(0, 1);
     public static final DigitalInput elBotSwitch = new DigitalInput(4);
     public static final boolean elEncoderWorking = false; // heights tested + set?
     public static final boolean elSwitchWorking = false;

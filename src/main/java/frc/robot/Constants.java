@@ -7,11 +7,11 @@ public interface Constants {
      */
     // DRIVETRAIN
     public final int LEFT_DRIVE_MASTER = 3, // 6
-    LEFT_DRIVE_SLAVE1 = 4, // 5
-    LEFT_DRIVE_SLAVE2 = 5, // 4
-    RIGHT_DRIVE_MASTER = 6, // 3
-    RIGHT_DRIVE_SLAVE1 = 7, // 2
-    RIGHT_DRIVE_SLAVE2 = 8; // 1
+    LEFT_DRIVE_SLAVE1 = 5, // 5
+    LEFT_DRIVE_SLAVE2 = 4, // 4
+    RIGHT_DRIVE_MASTER = 7, // 2
+    RIGHT_DRIVE_SLAVE1 = 8, // 3
+    RIGHT_DRIVE_SLAVE2 = 6; // 1
 
     // PNEUMATICS
     // 0 and 7 are the current ports on chassis bot

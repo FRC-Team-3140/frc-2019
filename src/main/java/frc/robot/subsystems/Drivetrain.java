@@ -129,13 +129,12 @@ public final class Drivetrain extends Subsystem implements Constants {
 	public void setSlaves() {
 		leftDriveSlave1.follow(leftDriveMaster);
 		leftDriveSlave2.follow(leftDriveMaster, true);
-		rightDriveSlave1.follow(rightDriveMaster);
+		rightDriveSlave1.follow(rightDriveMaster, true);
 		rightDriveSlave2.follow(rightDriveMaster, true);
 	}
 
 	private void setInverts() {
-		rightDriveMaster.setInverted(true);
-		rightDriveSlave1.setInverted(true);
+		//rightDriveSlave1.setInverted(true);
 	}
 
 	private void setNeutralMode(IdleMode mode) {
@@ -159,6 +158,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 
 		leftDriveMaster.setRampRate(rampRate);
 		rightDriveMaster.setRampRate(rampRate);
+
 	}
 
 	/****************
@@ -203,10 +203,11 @@ public final class Drivetrain extends Subsystem implements Constants {
 
 		double[] rightVolts = {rightDriveMaster.getAppliedOutput(), rightDriveSlave1.getAppliedOutput(), rightDriveSlave2.getAppliedOutput()};
 		double[] leftVolts = {leftDriveMaster.getAppliedOutput(), leftDriveSlave1.getAppliedOutput(), leftDriveSlave2.getAppliedOutput()};
-
 		SmartDashboard.putNumberArray("DT Right", rightVolts);
 		SmartDashboard.putNumberArray("DT Left", leftVolts);
 
+		String cmd = (pid) ? "Velocity PID" : "Voltage";
+		SmartDashboard.putString("Drive Mode:", cmd);
 	}
 
 	/***************
@@ -234,6 +235,6 @@ public final class Drivetrain extends Subsystem implements Constants {
 
 	@Override
 	public void initDefaultCommand() {
-		setDefaultCommand(new DriveVoltage());
+		setDefaultCommand(new DrivePID());
 	}
 }

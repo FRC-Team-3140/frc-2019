@@ -10,18 +10,22 @@ import frc.robot.commands.intake.SpinWithTrigger;
 public class Intake extends Subsystem implements Constants {
   private double deadband = 0.08;
 
-  public static final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(INTAKE_MOTOR);
+  //public static final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(INTAKE_MOTOR);
+
+  public void spin(double throttle) {
+    //intakeMotor.set(throttle);
+  }
   
   public void spinIn(){
-    intakeMotor.set(-1.0);
+    spin(1.0);
   }
 
   public void spinOut(){
-    intakeMotor.set(1.0);
+    spin(-1.0);
   }
 
   public void spinOff(){
-    intakeMotor.set(0.0);
+    spin(0);
   }
 
   public void spinWithTriggers(double forward, double backward) {
@@ -30,7 +34,7 @@ public class Intake extends Subsystem implements Constants {
     else throttle = -backward;
 
     if(Math.abs(throttle) < deadband) throttle = 0;
-    intakeMotor.set(throttle);
+    spin(throttle);
   }
 
   public void updateShuffleboard() {
