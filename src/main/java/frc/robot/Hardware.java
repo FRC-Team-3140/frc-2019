@@ -13,14 +13,13 @@ public final class Hardware {
 
     // ELEVATOR
     //public static final Encoder elEncoder = new Encoder(0, 1);
-    public static final DigitalInput elBotSwitch = new DigitalInput(4);
-    public static final boolean elEncoderWorking = false; // heights tested + set?
-    public static final boolean elSwitchWorking = false;
+    public static final DigitalInput elBotSwitch = new DigitalInput(0);
+    public static final boolean elSwitchWorking = true;
 
     // ARM
     public static final DigitalInput armTopSwitch = new DigitalInput(2);
-    public static final DigitalInput armBotSwitch = new DigitalInput(3);
-    public static final boolean armSwitchesWorking = false;
+    public static final DigitalInput armBotSwitch = new DigitalInput(1);
+    public static final boolean armSwitchesWorking = true;
 
     // INTAKE
     public static final DigitalInput ballSwitch = new DigitalInput(5);

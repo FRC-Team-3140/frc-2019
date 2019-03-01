@@ -7,13 +7,11 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.Hardware;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.drivetrain.DrivePID;
-import frc.robot.commands.drivetrain.DriveVoltage;
 import frc.util.DriveHelper;
 import frc.util.EncoderHelper;
 
