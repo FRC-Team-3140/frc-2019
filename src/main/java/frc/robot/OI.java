@@ -20,8 +20,8 @@ public final class OI {
 	private XboxController xbox2 = new XboxController(XBOX_PORT_2);
 
 	public OI() {
-		xbox1.leftJoystickPress.whenPressed(new ShiftUp());
-		xbox1.leftJoystickPress.whenReleased(new ShiftDown());
+		xbox1.leftJoystickPress.whenPressed(new ShiftDown());
+		xbox1.leftJoystickPress.whenReleased(new ShiftUp());
 		xbox1.start.whenPressed(new SwitchDrive(new DriveVoltage(), new DrivePID()));
 		xbox1.leftBumper.whileHeld(new StopDrive());
 

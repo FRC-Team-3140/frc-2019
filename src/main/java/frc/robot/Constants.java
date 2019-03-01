@@ -6,6 +6,7 @@ public interface Constants {
      * SUBSYSTEMS
      */
     // DRIVETRAIN
+    // Comments are mechanical markers of the competition bot
     public final int LEFT_DRIVE_MASTER = 3, // 6
     LEFT_DRIVE_SLAVE1 = 5, // 5
     LEFT_DRIVE_SLAVE2 = 4, // 4
@@ -14,17 +15,18 @@ public interface Constants {
     RIGHT_DRIVE_SLAVE2 = 6; // 1
 
     // PNEUMATICS
-    // 0 and 7 are the current ports on chassis bot
+    // Only shiter and arm are the correct ports on the competition bot
     public static final int 
         SHIFTER_EXTEND = 1, 
         SHIFTER_RETRACT = 6,
         ARM_EXTEND = 0, 
         ARM_RETRACT = 7,	
+
         CLIMBER_EXTEND = 1, 
         CLIMBER_RETRACT = 6,
         FORKLIFT_EXTEND = 1,   
         FORKLIFT_RETRACT = 7;
-    public static final int PCM = 1; 
+    public static final int PCM = 1, PCM2 = 2;
 
     // INTAKE
     public final static int 

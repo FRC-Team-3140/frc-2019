@@ -15,7 +15,7 @@ import frc.robot.Hardware;
 import frc.robot.commands.elevator.MoveWithJoystick;
 
 public final class Elevator extends Subsystem implements Constants {
-  private static double deadband = 0.05;
+  private static double deadband = 0.08;
 
   private double prevError = 0, errorSum = 0, lastTime = 0;
 
@@ -42,7 +42,7 @@ public final class Elevator extends Subsystem implements Constants {
    * MOVING *
    **********/
   public void elevatorMove(double throttle) {
-    if(Hardware.isElDown() && throttle < 0) throttle = 0;
+   // if(Hardware.isElDown() && throttle < 0) throttle = 0;
 
     if(Math.abs(throttle) < deadband) throttle = 0;
     elevatorMaster.set(-throttle);

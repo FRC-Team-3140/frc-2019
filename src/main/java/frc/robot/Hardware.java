@@ -28,7 +28,7 @@ public final class Hardware {
                                 hatchSwitchWorking = false;
 
     public static boolean isElDown() {
-        return elBotSwitch.get();
+        return !elBotSwitch.get();
     }
 
     public static boolean isArmTop() {

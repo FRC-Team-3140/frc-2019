@@ -24,13 +24,10 @@ public class Arm extends Subsystem implements Constants {
 
   public void tiltArm(double throttle){
     if(Math.abs(throttle) < deadband) throttle = 0;
+    if(Hardware.isArmTop() && throttle > 0) throttle = 0;
+    else if(Hardware.isArmBot() && throttle < 0) throttle = 0;
 
-    /*if(Hardware.armSwitchesWorking) {
-      if(Hardware.isArmTop() && throttle < 0) throttle = 0;
-      else if(Hardware.isArmBot() && throttle > 0) throttle = 0;
-    }*/
-
-    tiltMotor.set(-throttle);
+    tiltMotor.set(throttle);
   }
 
   // Future use + TODO: add limit switch checking
@@ -56,6 +53,7 @@ public class Arm extends Subsystem implements Constants {
   public void configDefaults() {
     // tiltMotor.configFactoryDefault();
     // future inverts and stuff go here
+    tiltMotor.setInverted(true);
   }
 
   public void configSensors() {
@@ -69,7 +67,7 @@ public class Arm extends Subsystem implements Constants {
 
   public void check() {
     if(Hardware.armSwitchesWorking && Hardware.isArmTop()) {
-      resetEncoder();
+     // resetEncoder();
     }
   }
 
@@ -84,8 +82,7 @@ public class Arm extends Subsystem implements Constants {
       kP = p;
       kI = i;
       kD = d;
-      if(Hardware.armSwitchesWorking)
-       configPID();
+     // configPID();
     }
 
   }
