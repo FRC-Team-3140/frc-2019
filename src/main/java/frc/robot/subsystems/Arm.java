@@ -30,7 +30,7 @@ public class Arm extends Subsystem implements Constants {
       else if(Hardware.isArmBot() && throttle > 0) throttle = 0;
     }*/
 
-    tiltMotor.set(throttle);
+    tiltMotor.set(-throttle);
   }
 
   // Future use + TODO: add limit switch checking

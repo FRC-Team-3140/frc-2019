@@ -19,7 +19,10 @@ along with this program.	If not, see <https://www.gnu.org/licenses/>.
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import frc.robot.commands.pneumatics.arm.ArmOpen;
+import frc.robot.commands.pneumatics.shifter.ShiftUp;
 import frc.robot.subsystems.*;
 
 public final class Robot extends TimedRobot {
@@ -61,6 +64,15 @@ public final class Robot extends TimedRobot {
 		arm.check();
 		arm.updateShuffleboard();
 		intake.updateShuffleboard();
+	}
+
+	//@Override
+	public void autonomousInit() {
+		/*Command shiftUp = new ShiftUp(),
+			armOut = new ArmOpen();
+
+		shiftUp.start();
+		armOut.start();*/
 	}
 
 	@Override

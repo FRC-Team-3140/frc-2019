@@ -25,9 +25,7 @@ public final class OI {
 		xbox1.start.whenPressed(new SwitchDrive(new DriveVoltage(), new DrivePID()));
 		xbox1.leftBumper.whileHeld(new StopDrive());
 
-		// xbox2.leftBumper.whenPressed(new ArmOpen());
-		// xbox2.rightBumper.whenReleased(new ArmClose());
-		//xbox2.leftBumper.whenPressed(new SwitchArm(new ArmClose(), new ArmOpen()));
+		xbox2.leftBumper.whenPressed(new SwitchArm(new ArmClose(), new ArmOpen()));
 		
 		/*xbox2.a.whileHeld(new MoveLevel1());
 		xbox2.b.whileHeld(new MoveLevel2());
@@ -38,8 +36,6 @@ public final class OI {
 		xbox2.rightBumper.whenReleased(new ClimbDown());
 		xbox2.x.whenPressed(new ReleaseForklift());
 		xbox2.x.whenReleased(new HoldForklift());*/
-
-		//xbox1.rightBumper.whileHeld(new DriveAlongLine());
 	}
 
 	public void check() {

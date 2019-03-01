@@ -18,8 +18,8 @@ public interface Constants {
     public static final int 
         SHIFTER_EXTEND = 1, 
         SHIFTER_RETRACT = 6,
-        ARM_EXTEND = 1, 
-        ARM_RETRACT = 6,	
+        ARM_EXTEND = 0, 
+        ARM_RETRACT = 7,	
         CLIMBER_EXTEND = 1, 
         CLIMBER_RETRACT = 6,
         FORKLIFT_EXTEND = 1,   

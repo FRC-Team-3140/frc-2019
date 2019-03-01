@@ -34,7 +34,7 @@ public final class Elevator extends Subsystem implements Constants {
 
   public Elevator () {
     setSlaves();
-    configPID();
+    //configPID();
     setNeutralMode(IdleMode.kBrake);
   }
 
@@ -42,7 +42,7 @@ public final class Elevator extends Subsystem implements Constants {
    * MOVING *
    **********/
   public void elevatorMove(double throttle) {
-    if(Hardware.isElDown() && throttle > 0) throttle = 0;
+    if(Hardware.isElDown() && throttle < 0) throttle = 0;
 
     if(Math.abs(throttle) < deadband) throttle = 0;
     elevatorMaster.set(-throttle);
