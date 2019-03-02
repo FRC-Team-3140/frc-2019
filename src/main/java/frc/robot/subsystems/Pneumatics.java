@@ -18,8 +18,7 @@ public final class Pneumatics extends Subsystem implements Constants {
 	@SuppressWarnings("unused")
 	private Compressor compressor2 = new Compressor(PCM2);
 
-
-	private DoubleSolenoid shifter = new DoubleSolenoid(PCM, SHIFTER_EXTEND, SHIFTER_RETRACT);
+	private DoubleSolenoid shifter = new DoubleSolenoid(PCM2, SHIFTER_EXTEND, SHIFTER_RETRACT);
 	private DoubleSolenoid arm = new DoubleSolenoid(PCM2, ARM_EXTEND, ARM_RETRACT);
 
 	// Disabled climber and forklift for the upcoming practice robot
@@ -27,7 +26,7 @@ public final class Pneumatics extends Subsystem implements Constants {
 	// private DoubleSolenoid forklift = new DoubleSolenoid(PCM, FORKLIFT_EXTEND, FORKLIFT_RETRACT);
 
 	public Pneumatics() {
-		shifter.set(EXTEND);
+		shifter.set(RETRACT);
 		shifter.set(OFF);
 		arm.set(RETRACT);
 		arm.set(OFF);

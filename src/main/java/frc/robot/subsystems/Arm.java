@@ -24,10 +24,10 @@ public class Arm extends Subsystem implements Constants {
 
   public void tiltArm(double throttle){
     if(Math.abs(throttle) < deadband) throttle = 0;
-    if(Hardware.isArmTop() && throttle > 0) throttle = 0;
-    else if(Hardware.isArmBot() && throttle < 0) throttle = 0;
+    // if(Hardware.isArmTop() && throttle > 0) throttle = 0;
+    // else if(Hardware.isArmBot() && throttle < 0) throttle = 0;
 
-    tiltMotor.set(throttle);
+    tiltMotor.set(throttle); 
   }
 
   // Future use + TODO: add limit switch checking

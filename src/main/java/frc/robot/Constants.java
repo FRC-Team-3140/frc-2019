@@ -17,9 +17,9 @@ public interface Constants {
     // PNEUMATICS
     // Only shiter and arm are the correct ports on the competition bot
     public static final int 
-        SHIFTER_EXTEND = 1, 
-        SHIFTER_RETRACT = 6,
-        ARM_EXTEND = 0, 
+        SHIFTER_EXTEND = 2, // 1 6
+        SHIFTER_RETRACT = 5,
+        ARM_EXTEND = 0, // 07
         ARM_RETRACT = 7,	
 
         CLIMBER_EXTEND = 1, 
