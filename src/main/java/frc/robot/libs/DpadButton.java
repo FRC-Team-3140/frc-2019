@@ -5,12 +5,13 @@ import edu.wpi.first.wpilibj.buttons.InternalButton;
 
 /**
  * A D-pad button that gets its state from a GenericHID.
+ * <br>
  * Created on 2018/2/4 15:45
  *
  * @author DuckDuckWhale
  */
 public final class DpadButton extends InternalButton {
-	public static final int UP=0, DOWN=180, LEFT=270, RIGHT=90;
+	public static final int UP = 0, DOWN = 180, LEFT = 270, RIGHT = 90;
 	private GenericHID hid;
 	private int pov;
 

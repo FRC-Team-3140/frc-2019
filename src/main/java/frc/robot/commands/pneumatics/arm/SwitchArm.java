@@ -6,12 +6,12 @@ import frc.robot.libs.SwitchCommandGroup;
 
 public class SwitchArm extends SwitchCommandGroup {
 
-    public SwitchArm(CommandGroup trueC, CommandGroup falseC) {
-        super(trueC, falseC);
-    }
+	public SwitchArm(CommandGroup trueC, CommandGroup falseC) {
+		super(trueC, falseC);
+	}
 
-    @Override
-    public boolean source() {
-        return Robot.getRobot().pneumatics.intakeOpen;
-    }
+	@Override
+	public boolean source() {
+		return Robot.getRobot().pneumatics.intakeOpen;
+	}
 }

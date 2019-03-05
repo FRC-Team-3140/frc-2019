@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.subsystems.*;
 
 public class ClimbUp extends CommandGroup {
-  
-  public ClimbUp() {
-      addSequential(new Climb(Pneumatics.EXTEND));
-      addSequential(new WaitCommand(0.3));
-      addSequential(new Climb(Pneumatics.OFF));
-  }
+
+	public ClimbUp() {
+		addSequential(new Climb(Pneumatics.EXTEND));
+		addSequential(new WaitCommand(0.3));
+		addSequential(new Climb(Pneumatics.OFF));
+	}
 }

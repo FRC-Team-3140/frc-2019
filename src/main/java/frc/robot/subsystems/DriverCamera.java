@@ -13,5 +13,4 @@ public class DriverCamera {
 		cam.setFPS(30);
 		cam.setResolution(320, 240);
 	}
-
 }

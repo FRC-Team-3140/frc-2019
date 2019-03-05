@@ -27,13 +27,15 @@ public final class Pneumatics extends Subsystem implements Constants {
 		shifter.set(v);
 	}
 
-	public void toggleArm(DoubleSolenoid.Value b){
-		if(b == EXTEND) intakeOpen = true;
-		else if(b == RETRACT) intakeOpen = false;
+	public void toggleArm(DoubleSolenoid.Value b) {
+		if (b == EXTEND)
+			intakeOpen = true;
+		else if (b == RETRACT)
+			intakeOpen = false;
 		arm.set(b);
 	}
 
-	public void climb(DoubleSolenoid.Value a){
+	public void climb(DoubleSolenoid.Value a) {
 		// climber.set(a);
 	}
 

@@ -5,15 +5,15 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class MoveLevel3 extends CommandGroup implements Constants {
-  Robot bot = Robot.getRobot();
-  double height;
+	Robot bot = Robot.getRobot();
+	double height;
 
-  public MoveLevel3() {
-    if(bot.oi.getXboxController2().rightBumper.get()) 
-      height = TOP_HATCH;
-    else height = TOP_BALL;
+	public MoveLevel3() {
+		if (bot.oi.getXboxController2().rightBumper.get())
+			height = TOP_HATCH;
+		else
+			height = TOP_BALL;
 
-    addSequential(new MovePID(height, 6));
-  }
+		addSequential(new MovePID(height, 6));
+	}
 }
-

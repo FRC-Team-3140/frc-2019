@@ -8,17 +8,17 @@ import frc.robot.Robot;
  */
 public class Superstructure extends Subsystem {
 
-  private Robot robot;
+	private Robot robot;
 
-  public Superstructure() {
-    robot = Robot.getRobot();
-  }
-  
-  public void updateShuffleboard() {
+	public Superstructure() {
+		robot = Robot.getRobot();
+	}
 
-  }
+	public void updateShuffleboard() {
 
-  @Override
-  public void initDefaultCommand() {
-  }
+	}
+
+	@Override
+	public void initDefaultCommand() {
+	}
 }

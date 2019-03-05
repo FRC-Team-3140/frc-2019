@@ -34,7 +34,6 @@ public final class Robot extends TimedRobot {
 	public static DriverCamera camera; // disabled because it is missing
 	public OI oi;
 
-
 	public static Robot getRobot() {
 		return robot;
 	}

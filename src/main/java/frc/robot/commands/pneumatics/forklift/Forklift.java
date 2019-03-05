@@ -9,7 +9,7 @@ public final class Forklift extends Command {
 
 	public Forklift(DoubleSolenoid.Value value) {
 		requires(Robot.getRobot().pneumatics);
-		this.value=value;
+		this.value = value;
 	}
 
 	@Override

@@ -5,20 +5,20 @@ import frc.robot.Hardware;
 import frc.robot.Robot;
 
 public class TiltTop extends Command {
-  public TiltTop() {
-    requires(Robot.getRobot().arm);
-  }
+	public TiltTop() {
+		requires(Robot.getRobot().arm);
+	}
 
-  // Called repeatedly when this Command is scheduled to run
-  @Override
-  protected void execute() {
-      Robot.getRobot().arm.tiltArm(-0.7);
-  }
+	// Called repeatedly when this Command is scheduled to run
+	@Override
+	protected void execute() {
+		Robot.getRobot().arm.tiltArm(-0.7);
+	}
 
-  // Make this return true when this Command no longer needs to run execute()
-  @Override
-  protected boolean isFinished() {
-    return Hardware.isArmTop();
-  }
+	// Make this return true when this Command no longer needs to run execute()
+	@Override
+	protected boolean isFinished() {
+		return Hardware.isArmTop();
+	}
 
 }
