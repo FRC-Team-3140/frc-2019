@@ -1,14 +1,7 @@
 package frc.robot;
 
 import frc.robot.commands.pneumatics.arm.*;
-import frc.robot.commands.pneumatics.climber.*;
 import frc.robot.commands.pneumatics.shifter.*;
-import frc.robot.commands.pneumatics.forklift.*;
-import frc.robot.commands.drivetrain.SwitchDrive;
-import frc.robot.commands.elevator.*;
-import frc.robot.commands.drivetrain.DriveAlongLine;
-import frc.robot.commands.drivetrain.DrivePID;
-import frc.robot.commands.drivetrain.DriveVoltage;
 import frc.robot.libs.XboxController;
 
 public final class OI {
