@@ -30,11 +30,10 @@ public final class OI {
 		/*xbox2.a.whileHeld(new MoveLevel1());
 		xbox2.b.whileHeld(new MoveLevel2());
 		xbox2.y.whileHeld(new MoveLevel3());
-		xbox2.x.whenPressed(new MoveToBottom());
+		xbox2.x.whenPressed(new MoveToBottom());*/
 
-		/*xbox2.rightBumper.whenPressed(new ClimbUp());
-		xbox2.rightBumper.whenReleased(new ClimbDown());
-		xbox2.x.whenPressed(new ReleaseForklift());
+		xbox1.a.whenPressed(new SwitchClimb(new ClimbUp() , new ClimbDown()));
+		/*xbox2.x.whenPressed(new ReleaseForklift());
 		xbox2.x.whenReleased(new HoldForklift());*/
 	}
 

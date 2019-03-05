@@ -15,15 +15,15 @@ public interface Constants {
     RIGHT_DRIVE_SLAVE2 = 6; // 1
 
     // PNEUMATICS
-    // Only shiter and arm are the correct ports on the competition bot
+    // Only shiter, climber, and arm are the correct ports on the competition bot
     public static final int 
-        SHIFTER_EXTEND = 2, // 1 6
+        SHIFTER_EXTEND = 2,
         SHIFTER_RETRACT = 5,
-        ARM_EXTEND = 0, // 07
+        ARM_EXTEND = 0,
         ARM_RETRACT = 7,	
-
         CLIMBER_EXTEND = 1, 
         CLIMBER_RETRACT = 6,
+
         FORKLIFT_EXTEND = 1,   
         FORKLIFT_RETRACT = 7;
     public static final int PCM = 1, PCM2 = 2;
