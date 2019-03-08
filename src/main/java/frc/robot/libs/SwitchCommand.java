@@ -3,8 +3,8 @@ package frc.robot.libs;
 import edu.wpi.first.wpilibj.command.Command;
 
 public abstract class SwitchCommand extends Command {
-	Command trueCommand;
-	Command falseCommand;
+	private Command trueCommand;
+	private Command falseCommand;
 
 	public SwitchCommand(Command trueCommand, Command falseCommand) {
 		this.trueCommand = trueCommand;

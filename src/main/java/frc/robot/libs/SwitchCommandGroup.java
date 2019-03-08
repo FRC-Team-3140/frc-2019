@@ -3,8 +3,8 @@ package frc.robot.libs;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public abstract class SwitchCommandGroup extends CommandGroup {
-	CommandGroup trueCommand;
-	CommandGroup falseCommand;
+	private CommandGroup trueCommand;
+	private CommandGroup falseCommand;
 
 	public SwitchCommandGroup(CommandGroup trueCommand, CommandGroup falseCommand) {
 		this.trueCommand = trueCommand;

@@ -3,7 +3,7 @@ package frc.util;
 /**
  * @author Joseph Grube
  */
-public class DriveHelper {
+public final class DriveHelper {
 	private double negInertiaScalar, negInertiaAccumulator, oldTurn, wheelNonLinearity, throttleDeadband,
 			headingDeadband;
 

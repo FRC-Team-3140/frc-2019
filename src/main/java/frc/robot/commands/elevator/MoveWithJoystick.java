@@ -3,7 +3,7 @@ package frc.robot.commands.elevator;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class MoveWithJoystick extends Command {
+public final class MoveWithJoystick extends Command {
 	private Robot robot;
 
 	public MoveWithJoystick() {

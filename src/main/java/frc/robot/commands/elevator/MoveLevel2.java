@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class MoveLevel2 extends CommandGroup implements Constants {
-	Robot bot = Robot.getRobot();
-	double height;
+public final class MoveLevel2 extends CommandGroup implements Constants {
+	private Robot bot = Robot.getRobot();
+	private double height;
 
 	public MoveLevel2() {
 		if (bot.oi.getXboxController2().rightBumper.get())

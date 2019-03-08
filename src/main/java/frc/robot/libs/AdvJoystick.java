@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public final class AdvJoystick extends Joystick {
 	private static boolean internalControl = false;
+
 	// Buttons
 	private Button triggerButton;
 	private Button thumbButton;

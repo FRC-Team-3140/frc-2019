@@ -9,9 +9,11 @@ import frc.robot.Constants;
 import frc.robot.Hardware;
 import frc.robot.commands.arm.TiltArm;
 
-public class Arm extends Subsystem implements Constants {
+public final class Arm extends Subsystem implements Constants {
 
-	private double kP = 1, kI = 0, kD = 0;
+	private double kP = 1;
+	private double kI = 0;
+	private double kD = 0;
 	private double deadband = 0.08;
 
 	public static final WPI_TalonSRX tiltMotor = new WPI_TalonSRX(TILT_MOTOR);
@@ -43,9 +45,8 @@ public class Arm extends Subsystem implements Constants {
 		return Math.abs(aidens - tiltMotor.getSelectedSensorPosition()) < ARM_TOL_AI;
 	}
 
-	/*
-	 * SETTINGS
-	 */
+	// SETTINGS
+
 	public void configPID() {
 		tiltMotor.config_kP(0, kP);
 		tiltMotor.config_kI(0, kI);
@@ -88,7 +89,6 @@ public class Arm extends Subsystem implements Constants {
 			if (Hardware.armSwitchesWorking)
 				configPID();
 		}
-
 	}
 
 	@Override

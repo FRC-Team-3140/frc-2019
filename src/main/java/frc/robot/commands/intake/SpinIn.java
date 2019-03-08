@@ -3,7 +3,7 @@ package frc.robot.commands.intake;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SpinIn extends Command {
+public final class SpinIn extends Command {
 	public SpinIn() {
 		requires(Robot.getRobot().intake);
 	}

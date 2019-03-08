@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Hardware;
 import frc.robot.Robot;
 
-public class TiltBot extends Command {
+public final class TiltBot extends Command {
 	public TiltBot() {
 		requires(Robot.getRobot().arm);
 	}

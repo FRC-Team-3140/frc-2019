@@ -3,9 +3,9 @@ package frc.robot.subsystems;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 
-public class DriverCamera {
-	CameraServer camServer;
-	UsbCamera cam;
+public final class DriverCamera {
+	private CameraServer camServer;
+	private UsbCamera cam;
 
 	public DriverCamera() {
 		camServer = CameraServer.getInstance();

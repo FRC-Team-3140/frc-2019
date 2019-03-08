@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.libs.SwitchCommandGroup;
 
-public class SwitchArm extends SwitchCommandGroup {
+public final class SwitchArm extends SwitchCommandGroup {
 
-	public SwitchArm(CommandGroup trueC, CommandGroup falseC) {
-		super(trueC, falseC);
+	public SwitchArm(CommandGroup trueCommand, CommandGroup falseCommand) {
+		super(trueCommand, falseCommand);
 	}
 
 	@Override

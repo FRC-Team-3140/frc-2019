@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public final class XboxController extends Joystick {
 	private static boolean internalControl = false;
+
 	// Button
 	private JoystickButton aButton;
 	private JoystickButton bButton;

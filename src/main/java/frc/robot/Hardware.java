@@ -25,7 +25,8 @@ public final class Hardware {
 	// INTAKE
 	public static final DigitalInput ballSwitch = new DigitalInput(5);
 	public static final DigitalInput hatchSwitch = new DigitalInput(6);
-	public static final boolean ballSwitchWorking = false, hatchSwitchWorking = false;
+	public static final boolean ballSwitchWorking = false;
+	public static final boolean hatchSwitchWorking = false;
 
 	public static boolean isElDown() {
 		return elBotSwitch.get();
@@ -38,5 +39,4 @@ public final class Hardware {
 	public static boolean isArmBot() {
 		return armBotSwitch.get();
 	}
-
 }

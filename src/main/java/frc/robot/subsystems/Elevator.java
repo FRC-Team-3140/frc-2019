@@ -10,13 +10,14 @@ import frc.robot.Hardware;
 import frc.robot.commands.elevator.MoveWithJoystick;
 
 public final class Elevator extends Subsystem implements Constants {
-	private static double deadband = 0.05;
 
-	private double prevError = 0, errorSum = 0, lastTime = 0;
-
+	private double prevError = 0;
+	private double errorSum = 0;
+	private double lastTime = 0;
 	private double kP = 1;
 	private double kI = 0;
 	private double kD = 0;
+	private double deadband = 0.05;
 
 	private CANSparkMax elevatorMaster = new CANSparkMax(ELEVATOR_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless);
 	private CANSparkMax elevatorSlave = new CANSparkMax(ELEVATOR_SLAVE, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -27,9 +28,8 @@ public final class Elevator extends Subsystem implements Constants {
 		setSlaves();
 	}
 
-	/**********
-	 * MOVING *
-	 **********/
+	// MOVING
+
 	public void elevatorMove(double throttle) {
 		if (Math.abs(throttle) < deadband)
 			throttle = 0;
@@ -55,9 +55,8 @@ public final class Elevator extends Subsystem implements Constants {
 			System.out.println("ERROR: CANNOT MOVE TO A LOWER HEIGHT");
 	}
 
-	/***************
-	 * PID SUPPORT *
-	 ***************/
+	// PID SUPPORT
+
 	public void startPID() {
 		timer.start();
 	}
@@ -74,9 +73,8 @@ public final class Elevator extends Subsystem implements Constants {
 		return Math.abs(Hardware.elEncoder.getDistance() - johns) < EL_TOL;
 	}
 
-	/**********
-	 * CONFIG *
-	 **********/
+	// CONFIG
+
 	public void setSlaves() {
 		elevatorSlave.follow(elevatorMaster);
 	}

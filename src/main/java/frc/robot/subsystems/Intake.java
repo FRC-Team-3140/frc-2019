@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.commands.intake.SpinWithTrigger;
 
-public class Intake extends Subsystem implements Constants {
-	private double deadband = 0.08;
+public final class Intake extends Subsystem implements Constants {
+	private final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(INTAKE_MOTOR);
 
-	public static final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(INTAKE_MOTOR);
+	private double deadband = 0.08;
 
 	public void spinIn() {
 		intakeMotor.set(-1.0);

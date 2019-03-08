@@ -17,6 +17,12 @@ import frc.util.EncoderHelper;
 
 public final class Drivetrain extends Subsystem implements Constants {
 
+	private static final int lineTargetRight = 3500;
+	private static final int lineTargetLeft = 3050;
+	private static final int lineTolerance = 20;
+	private static final double leftLineFactor = 0.1 / 500;
+	private static final double rightLineFactor = 0.1 / 100;
+
 	public double kPLeft = 5e-5;
 	public double kILeft = 1e-6;
 	public double kDLeft = 0;
@@ -31,23 +37,17 @@ public final class Drivetrain extends Subsystem implements Constants {
 	 */
 	public double rampRate = 1.5;
 
-	public int lineTargetRight = 3500;
-	public int lineTargetLeft = 3050;
-	public int lineTolerance = 20;
-	public double leftLineFactor = 0.1 / 500;
-	public double rightLineFactor = 0.1 / 100;
-
 	private boolean pid = true;
 
 	private double throttleDeadband = 0.08;
 	private double headingDeadband = 0.07;
 
-	private CANSparkMax leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
-			leftDriveSlave1 = new CANSparkMax(LEFT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
-			leftDriveSlave2 = new CANSparkMax(LEFT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless),
-			rightDriveMaster = new CANSparkMax(RIGHT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
-			rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
-			rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax leftDriveSlave1 = new CANSparkMax(LEFT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax leftDriveSlave2 = new CANSparkMax(LEFT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax rightDriveMaster = new CANSparkMax(RIGHT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
 
 	private CANEncoder leftEncoder = leftDriveMaster.getEncoder();
 	private CANEncoder rightEncoder = rightDriveMaster.getEncoder();

@@ -6,7 +6,7 @@ import frc.robot.Robot;
 /**
  * Future use to control subsystem interactions (like the cheesy poofs c:)
  */
-public class Superstructure extends Subsystem {
+public final class Superstructure extends Subsystem {
 
 	private Robot robot;
 
