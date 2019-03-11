@@ -72,6 +72,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 		pushToShuffleboard();
 		setPIDDefaults();
 		setNeutralMode(IdleMode.kCoast);
+		setLimits();
 	}
 
 	// DRIVE METHODS

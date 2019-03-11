@@ -1,13 +1,11 @@
 package frc.robot.commands.elevator;
 
 import edu.wpi.first.wpilibj.command.TimedCommand;
-import frc.robot.Hardware;
 import frc.robot.Robot;
 
 public final class MovePID extends TimedCommand {
 	private Robot robot;
 	private double johns;
-	private boolean aboveTarget = false;
 
 	public MovePID(double johns, double time) {
 		super(time);
@@ -19,8 +17,6 @@ public final class MovePID extends TimedCommand {
 	@Override
 	protected void initialize() {
 		robot.elevator.startPID();
-		if (Hardware.elEncoder.getDistance() > johns)
-			aboveTarget = true;
 	}
 
 	@Override
