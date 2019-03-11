@@ -1,15 +1,16 @@
 package frc.robot.subsystems;
 
+import static frc.robot.Constants.*;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
 import frc.robot.Hardware;
 import frc.robot.commands.arm.TiltArm;
 
-public final class Arm extends Subsystem implements Constants {
+public final class Arm extends Subsystem {
 
 	private double kP = 1;
 	private double kI = 0;

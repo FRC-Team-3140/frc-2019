@@ -1,6 +1,6 @@
 package frc.robot;
 
-public interface Constants {
+public final class Constants {
 
 	// SUBSYSTEMS
 

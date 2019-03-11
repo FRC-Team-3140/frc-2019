@@ -1,15 +1,16 @@
 package frc.robot.subsystems;
 
+import static frc.robot.Constants.*;
+
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
 import frc.robot.Hardware;
 import frc.robot.commands.elevator.MoveWithJoystick;
 
-public final class Elevator extends Subsystem implements Constants {
+public final class Elevator extends Subsystem {
 
 	private double prevError = 0;
 	private double errorSum = 0;

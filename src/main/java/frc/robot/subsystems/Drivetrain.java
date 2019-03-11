@@ -7,15 +7,16 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 
+import static frc.robot.Constants.*;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Constants;
 import frc.robot.Hardware;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.drivetrain.DriveVoltage;
 import frc.util.DriveHelper;
 import frc.util.EncoderHelper;
 
-public final class Drivetrain extends Subsystem implements Constants {
+public final class Drivetrain extends Subsystem {
 
 	private static final int lineTargetRight = 3500;
 	private static final int lineTargetLeft = 3050;

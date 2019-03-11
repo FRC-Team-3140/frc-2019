@@ -1,10 +1,11 @@
 package frc.robot.commands.elevator;
 
+import static frc.robot.Constants.*;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.Constants;
 import frc.robot.Robot;
 
-public final class MoveLevel1 extends CommandGroup implements Constants {
+public final class MoveLevel1 extends CommandGroup {
 	private Robot bot = Robot.getRobot();
 	private double height;
 

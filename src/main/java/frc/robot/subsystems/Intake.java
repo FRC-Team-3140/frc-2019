@@ -1,13 +1,13 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import static frc.robot.Constants.*;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
 import frc.robot.commands.intake.SpinWithTrigger;
 
-public final class Intake extends Subsystem implements Constants {
+public final class Intake extends Subsystem {
 	private final WPI_TalonSRX intakeMotor = new WPI_TalonSRX(INTAKE_MOTOR);
 
 	private double deadband = 0.08;
