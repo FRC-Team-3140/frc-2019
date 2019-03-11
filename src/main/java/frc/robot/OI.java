@@ -2,7 +2,7 @@ package frc.robot;
 
 import frc.robot.commands.pneumatics.arm.*;
 import frc.robot.commands.pneumatics.shifter.*;
-import frc.robot.libs.XboxController;
+import frc.robot.controller.XboxController;
 
 public final class OI {
 
