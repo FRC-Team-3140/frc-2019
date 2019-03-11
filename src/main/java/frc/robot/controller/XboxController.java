@@ -1,4 +1,4 @@
-package frc.robot.libs;
+package frc.robot.controller;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public final class XboxController extends Joystick {
 	private static boolean internalControl = false;
+
 	// Button
 	private JoystickButton aButton;
 	private JoystickButton bButton;
@@ -23,7 +24,7 @@ public final class XboxController extends Joystick {
 	// Triggers
 	private Button leftTriggerButton;
 	private Button rightTriggerButton;
-	
+
 	// Internal Buttons
 	public InternalButton a;
 	public InternalButton b;
@@ -40,7 +41,7 @@ public final class XboxController extends Joystick {
 	// Triggers
 	public InternalButton leftTrigger;
 	public InternalButton rightTrigger;
-	
+
 	public XboxController(int port) {
 		super(port);
 		// Buttons
@@ -70,9 +71,9 @@ public final class XboxController extends Joystick {
 		leftTrigger = new InternalButton();
 		rightTrigger = new InternalButton();
 	}
-	
+
 	public void check() {
-		if(!internalControl) {
+		if (!internalControl) {
 			a.setPressed(aButton.get());
 			b.setPressed(bButton.get());
 			x.setPressed(xButton.get());
@@ -87,20 +88,20 @@ public final class XboxController extends Joystick {
 			rightTrigger.setPressed(rightTriggerButton.get());
 		}
 	}
-	
-	public double getMainX(){
+
+	public double getMainX() {
 		return -super.getRawAxis(0);
 	}
-	
-	public double getMainY(){
+
+	public double getMainY() {
 		return -super.getRawAxis(1);
 	}
-	
-	public double getAltX(){
+
+	public double getAltX() {
 		return -super.getRawAxis(4);
 	}
-	
-	public double getAltY(){
+
+	public double getAltY() {
 		return -super.getRawAxis(5);
 	}
 
@@ -111,27 +112,27 @@ public final class XboxController extends Joystick {
 	public double getRightTrigger() {
 		return super.getRawAxis(3);
 	}
-	
+
 	public double getSmoothedMainX() {
-		return -Math.sin(Math.PI/2 * super.getRawAxis(0));
+		return -Math.sin(Math.PI / 2 * super.getRawAxis(0));
 	}
-	
+
 	public double getSmoothedMainY() {
-		return -Math.sin(Math.PI/2 * super.getRawAxis(1));
+		return -Math.sin(Math.PI / 2 * super.getRawAxis(1));
 	}
-	
+
 	public double getSmoothedAltX() {
-		return -Math.sin(Math.PI/2 * super.getRawAxis(4));
+		return -Math.sin(Math.PI / 2 * super.getRawAxis(4));
 	}
-	
+
 	public double getSmoothedAltY() {
-		return -Math.sin(Math.PI/2 * super.getRawAxis(5));
+		return -Math.sin(Math.PI / 2 * super.getRawAxis(5));
 	}
-	
+
 	public void setButtonStatus(boolean a, boolean b, boolean x, boolean y, boolean leftBumper, boolean rightBumper,
-								boolean select, boolean start, boolean leftJoystickPress, boolean rightJoystickPress,
-								boolean leftTrigger, boolean rightTrigger) {
-		if(internalControl) {
+			boolean select, boolean start, boolean leftJoystickPress, boolean rightJoystickPress, boolean leftTrigger,
+			boolean rightTrigger) {
+		if (internalControl) {
 			this.a.setPressed(a);
 			this.b.setPressed(b);
 			this.x.setPressed(x);
@@ -146,9 +147,9 @@ public final class XboxController extends Joystick {
 			this.rightTrigger.setPressed(rightTrigger);
 		}
 	}
-	
+
 	public void setInternalControl(boolean internalControl) {
-		XboxController.internalControl = internalControl;		
+		XboxController.internalControl = internalControl;
 	}
 
 	public boolean getInternalControl() {

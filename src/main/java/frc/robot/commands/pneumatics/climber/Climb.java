@@ -5,19 +5,20 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 public final class Climb extends Command {
-  private DoubleSolenoid.Value a;
-  public Climb(DoubleSolenoid.Value a) {
-    requires(Robot.getRobot().pneumatics);
-	this.a = a;
-}
+	private DoubleSolenoid.Value a;
 
-  @Override
-  protected void execute() {
-    Robot.getRobot().pneumatics.climb(a);
-  }
+	public Climb(DoubleSolenoid.Value a) {
+		requires(Robot.getRobot().pneumatics);
+		this.a = a;
+	}
 
-  @Override
-  protected boolean isFinished() {
-    return true;
-  }
+	@Override
+	protected void execute() {
+		Robot.getRobot().pneumatics.climb(a);
+	}
+
+	@Override
+	protected boolean isFinished() {
+		return true;
+	}
 }

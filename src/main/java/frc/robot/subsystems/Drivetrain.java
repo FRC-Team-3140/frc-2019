@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
@@ -8,68 +7,81 @@ import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 
+import static frc.robot.Constants.*;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Constants;
 import frc.robot.Hardware;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.drivetrain.DrivePID;
 import frc.robot.commands.drivetrain.DriveVoltage;
 import frc.util.DriveHelper;
 import frc.util.EncoderHelper;
 
-public final class Drivetrain extends Subsystem implements Constants {
-		
-	private double throttleDeadband = 0.08;
-	private double headingDeadband = 0.07;
-	public double
-		kPLeft = 5e-5, kILeft = 1e-6, kDLeft = 0,
-		kPRight = 5e-5, kIRight = 1e-6, kDRight = 0,
-		kMaxOutput = 1, kMinOutput = -1,
-		maxRPM = 5700, rampRate = 1.5; // ramp rate is the min # of secs the robot can go from 0 to full throttle
+public final class Drivetrain extends Subsystem {
 
-	public int lineTarget1 = 3500; // right
-	public int lineTarget2 = 3050; // left
-	public int lineTolerance = 20;
-	public double leftLineFactor = 0.1/500, rightLineFactor = 0.1/100;
+	private static final int lineTargetRight = 3500;
+	private static final int lineTargetLeft = 3050;
+	private static final int lineTolerance = 20;
+	private static final double leftLineFactor = 0.1 / 500;
+	private static final double rightLineFactor = 0.1 / 100;
+
+	public double kPLeft = 5e-5;
+	public double kILeft = 1e-6;
+	public double kDLeft = 0;
+	public double kPRight = 5e-5;
+	public double kIRight = 1e-6;
+	public double kDRight = 0;
+	public double kMaxOutput = 1;
+	public double kMinOutput = -1;
+	public double maxRPM = 5700;
+	/**
+	 * the minimum number of seconds the robot can go from zero to full throttle
+	 */
+	public double rampRate = 1.5;
 
 	private boolean pid = true;
-	
-	private CANSparkMax
-		leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
-		leftDriveSlave1 = new CANSparkMax(LEFT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
-		leftDriveSlave2 = new CANSparkMax(LEFT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless),
-		rightDriveMaster = new CANSparkMax(RIGHT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless),
-		rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless),
-		rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-	private CANEncoder 
-		leftEncoder = leftDriveMaster.getEncoder(),
-		rightEncoder = rightDriveMaster.getEncoder();
+	private double throttleDeadband = 0.08;
+	private double headingDeadband = 0.07;
 
-	private CANPIDController 
-		leftPIDController = leftDriveMaster.getPIDController(),
-		rightPIDController = rightDriveMaster.getPIDController();
+	private CANSparkMax leftDriveMaster = new CANSparkMax(LEFT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax leftDriveSlave1 = new CANSparkMax(LEFT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax leftDriveSlave2 = new CANSparkMax(LEFT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax rightDriveMaster = new CANSparkMax(RIGHT_DRIVE_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax rightDriveSlave1 = new CANSparkMax(RIGHT_DRIVE_SLAVE1, CANSparkMaxLowLevel.MotorType.kBrushless);
+	private CANSparkMax rightDriveSlave2 = new CANSparkMax(RIGHT_DRIVE_SLAVE2, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-	private CANSparkMax[] motors = {leftDriveMaster, leftDriveSlave1, leftDriveSlave2, rightDriveMaster, 
-			rightDriveSlave1, rightDriveSlave2};
+	private CANEncoder leftEncoder = leftDriveMaster.getEncoder();
+	private CANEncoder rightEncoder = rightDriveMaster.getEncoder();
+
+	private CANPIDController leftPIDController = leftDriveMaster.getPIDController();
+	private CANPIDController rightPIDController = rightDriveMaster.getPIDController();
+
+	private CANSparkMax[] motors = {
+		leftDriveMaster,
+		leftDriveSlave1,
+		leftDriveSlave2,
+		rightDriveMaster,
+		rightDriveSlave1,
+		rightDriveSlave2
+	};
 
 	private DriveHelper driveHelper = new DriveHelper(7.5, throttleDeadband, headingDeadband);
-		
+
 	public Drivetrain() {
 		setSlaves();
 		setInverts();
 		pushToShuffleboard();
 		setPIDDefaults();
 		setNeutralMode(IdleMode.kCoast);
+		setLimits();
 	}
 
-	/*****************
-	 * DRIVE METHODS *
-	 *****************/
+	// DRIVE METHODS
+
 	public void driveVelocityJoystick(double throttle, double heading) {
 		if (Math.abs(throttle) < throttleDeadband)
 			throttle = 0;
-		if(Math.abs(heading) < headingDeadband)
+		if (Math.abs(heading) < headingDeadband)
 			heading = 0;
 
 		driveVelocityPID(throttle, heading);
@@ -82,9 +94,9 @@ public final class Drivetrain extends Subsystem implements Constants {
 
 		leftPIDController.setReference(velo - turn, ControlType.kVelocity);
 		rightPIDController.setReference(velo + turn, ControlType.kVelocity);
-		
-		double[] leftData = {velo-turn, leftEncoder.getVelocity()};
-		double[] rightData = {velo+turn, rightEncoder.getVelocity()};
+
+		double[] leftData = {velo - turn, leftEncoder.getVelocity()};
+		double[] rightData = {velo + turn, rightEncoder.getVelocity()};
 		SmartDashboard.putNumberArray("Left Velo Control", leftData);
 		SmartDashboard.putNumberArray("Right Velo Control", rightData);
 	}
@@ -107,15 +119,19 @@ public final class Drivetrain extends Subsystem implements Constants {
 	}
 
 	public void driveAlongLine() {
-		// TODO figure out + and - headings here... 		
-		double rightCorrection = rightLineFactor * (lineTarget1- Hardware.rightLineSensor.getValue());
-		double leftCorrection = leftLineFactor * (lineTarget2- Hardware.leftLineSensor.getValue());
-		if(Math.abs(lineTarget1 - Hardware.rightLineSensor.getValue()) < lineTolerance) rightCorrection = 0;
-		if(Math.abs(lineTarget2 - Hardware.leftLineSensor.getValue()) < lineTolerance) leftCorrection = 0;
+		// TODO figure out + and - headings here...
+		double rightCorrection = rightLineFactor * (lineTargetRight - Hardware.rightLineSensor.getValue());
+		double leftCorrection = leftLineFactor * (lineTargetLeft - Hardware.leftLineSensor.getValue());
+		if (Math.abs(lineTargetRight - Hardware.rightLineSensor.getValue()) < lineTolerance)
+			rightCorrection = 0;
+		if (Math.abs(lineTargetLeft - Hardware.leftLineSensor.getValue()) < lineTolerance)
+			leftCorrection = 0;
 
 		double heading = leftCorrection - rightCorrection;
-		if(heading > 0.2) heading = 0.2;
-		else if(heading < -0.2) heading = -0.2;
+		if (heading > 0.2)
+			heading = 0.2;
+		else if (heading < -0.2)
+			heading = -0.2;
 		System.out.println(heading);
 
 		double[] push = {leftCorrection, rightCorrection, heading};
@@ -123,9 +139,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		driveVelocityPID(0.15, heading);
 	}
 
-	/******************
-	 * CONFIG METHODS *
-	 ******************/
+	// CONFIG METHODS
+
 	public void setSlaves() {
 		leftDriveSlave1.follow(leftDriveMaster);
 		leftDriveSlave2.follow(leftDriveMaster, true);
@@ -139,7 +154,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 	}
 
 	private void setNeutralMode(IdleMode mode) {
-		for(CANSparkMax motor : motors) motor.setIdleMode(mode);
+		for (CANSparkMax motor : motors)
+			motor.setIdleMode(mode);
 	}
 
 	private void setLimits() {
@@ -161,9 +177,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		rightDriveMaster.setRampRate(rampRate);
 	}
 
-	/****************
-	 * SHUFFLEBOARD *
-	 ***************/
+	// SHUFFLEBOARD
+
 	public void pushToShuffleboard() {
 		SmartDashboard.putNumber("DT Throttle deadband", throttleDeadband);
 		SmartDashboard.putNumber("DT Heading deadband", headingDeadband);
@@ -187,7 +202,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		double kIR = SmartDashboard.getNumber("Right DT kI", kIRight);
 		double kDR = SmartDashboard.getNumber("Right DT kD", kDRight);
 		double ramp = SmartDashboard.getNumber("DT Ramp Rate", rampRate);
-		if(kPL != kPLeft ||kIL != kILeft || kDL != kDLeft || kPR != kPRight || kIR != kIRight || kDR != kDRight || ramp != rampRate) {
+		if (kPL != kPLeft || kIL != kILeft || kDL != kDLeft || kPR != kPRight || kIR != kIRight || kDR != kDRight
+				|| ramp != rampRate) {
 			kPLeft = kPL;
 			kILeft = kIL;
 			kDLeft = kDL;
@@ -201,17 +217,18 @@ public final class Drivetrain extends Subsystem implements Constants {
 		SmartDashboard.putNumber("Line sensor R", Hardware.rightLineSensor.getValue());
 		SmartDashboard.putNumber("Line sensor L", Hardware.leftLineSensor.getValue());
 
-		double[] rightVolts = {rightDriveMaster.getAppliedOutput(), rightDriveSlave1.getAppliedOutput(), rightDriveSlave2.getAppliedOutput()};
-		double[] leftVolts = {leftDriveMaster.getAppliedOutput(), leftDriveSlave1.getAppliedOutput(), leftDriveSlave2.getAppliedOutput()};
+		double[] rightVolts = {rightDriveMaster.getAppliedOutput(), rightDriveSlave1.getAppliedOutput(),
+				rightDriveSlave2.getAppliedOutput()};
+		double[] leftVolts = {leftDriveMaster.getAppliedOutput(), leftDriveSlave1.getAppliedOutput(),
+				leftDriveSlave2.getAppliedOutput()};
 
 		SmartDashboard.putNumberArray("DT Right", rightVolts);
 		SmartDashboard.putNumberArray("DT Left", leftVolts);
 
 	}
 
-	/***************
-	 * GET METHODS *
-	 ***************/
+	// GET METHODS
+
 	public boolean getIsPID() {
 		return pid;
 	}

@@ -1,11 +1,12 @@
 package frc.robot.subsystems;
 
+import static frc.robot.Constants.*;
+
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.Constants;
 
-public final class Pneumatics extends Subsystem implements Constants {
+public final class Pneumatics extends Subsystem {
 
 	public static final DoubleSolenoid.Value EXTEND = Value.kForward;
 	public static final DoubleSolenoid.Value RETRACT = Value.kReverse;
@@ -27,13 +28,15 @@ public final class Pneumatics extends Subsystem implements Constants {
 		shifter.set(v);
 	}
 
-	public void toggleArm(DoubleSolenoid.Value b){
-		if(b == EXTEND) intakeOpen = true;
-		else if(b == RETRACT) intakeOpen = false;
+	public void toggleArm(DoubleSolenoid.Value b) {
+		if (b == EXTEND)
+			intakeOpen = true;
+		else if (b == RETRACT)
+			intakeOpen = false;
 		arm.set(b);
 	}
 
-	public void climb(DoubleSolenoid.Value a){
+	public void climb(DoubleSolenoid.Value a) {
 		// climber.set(a);
 	}
 

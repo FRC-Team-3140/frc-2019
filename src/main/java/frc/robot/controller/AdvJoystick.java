@@ -1,4 +1,4 @@
-package frc.robot.libs;
+package frc.robot.controller;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 public final class AdvJoystick extends Joystick {
 	private static boolean internalControl = false;
+
 	// Buttons
 	private Button triggerButton;
 	private Button thumbButton;
@@ -25,14 +26,14 @@ public final class AdvJoystick extends Joystick {
 
 	public AdvJoystick(int port) {
 		super(port);
-		//Buttons
+		// Buttons
 		triggerButton = new JoystickButton(this, 1);
 		thumbButton = new JoystickButton(this, 2);
 		threeButton = new JoystickButton(this, 3);
 		fourButton = new JoystickButton(this, 4);
 		fiveButton = new JoystickButton(this, 5);
 		sixButton = new JoystickButton(this, 6);
-		//Internal Buttons
+		// Internal Buttons
 		trigger = new InternalButton();
 		thumb = new InternalButton();
 		three = new InternalButton();
@@ -42,7 +43,7 @@ public final class AdvJoystick extends Joystick {
 	}
 
 	public void check() {
-		if(!internalControl) {
+		if (!internalControl) {
 			trigger.setPressed(triggerButton.get());
 			thumb.setPressed(thumbButton.get());
 			three.setPressed(threeButton.get());
@@ -53,16 +54,16 @@ public final class AdvJoystick extends Joystick {
 	}
 
 	public double getMainX() {
-		return Math.sin(Math.PI/2 * super.getRawAxis(0));
+		return Math.sin(Math.PI / 2 * super.getRawAxis(0));
 	}
 
 	public double getMainY() {
-		return Math.sin(Math.PI/2 * super.getRawAxis(1));
+		return Math.sin(Math.PI / 2 * super.getRawAxis(1));
 	}
 
 	public void setButtonStatus(boolean trigger, boolean thumb, boolean three, boolean four, boolean five,
-								boolean six) {
-		if(internalControl) {
+			boolean six) {
+		if (internalControl) {
 			this.trigger.setPressed(trigger);
 			this.thumb.setPressed(thumb);
 			this.three.setPressed(four);

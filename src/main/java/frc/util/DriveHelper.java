@@ -3,13 +3,9 @@ package frc.util;
 /**
  * @author Joseph Grube
  */
-public class DriveHelper {
-	private double negInertiaScalar,
-		negInertiaAccumulator,
-		oldTurn,
-		wheelNonLinearity,
-		throttleDeadband,
-		headingDeadband;
+public final class DriveHelper {
+	private double negInertiaScalar, negInertiaAccumulator, oldTurn, wheelNonLinearity, throttleDeadband,
+			headingDeadband;
 
 	public DriveHelper(double negInertiaScalar, double throttleDeadband, double headingDeadband) {
 		this.negInertiaScalar = negInertiaScalar;
@@ -21,7 +17,7 @@ public class DriveHelper {
 		return handleOverPower(handleDeadband(throttle, throttleDeadband));
 	}
 
-	public double calculateTurn(double turn, boolean highGear){
+	public double calculateTurn(double turn, boolean highGear) {
 		return handleOverPower(accountForInertia(smoothTurning(handleDeadband(turn, headingDeadband), highGear)));
 	}
 
@@ -54,19 +50,14 @@ public class DriveHelper {
 		if (highGear) {
 			wheelNonLinearity = 0.6;
 			// Apply a sin function that's scaled to make it feel better.
-			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
 		} else {
 			wheelNonLinearity = 0.5;
 			// Apply a sin function that's scaled to make it feel better.
-			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
-			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn)
-					/ Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
+			turn = Math.sin(Math.PI / 2.0 * wheelNonLinearity * turn) / Math.sin(Math.PI / 2.0 * wheelNonLinearity);
 		}
 		return turn;
 	}
@@ -75,7 +66,7 @@ public class DriveHelper {
 		return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
 	}
 
-	public double handleOverPower(double joystickVal){
+	public double handleOverPower(double joystickVal) {
 		if (Math.abs(joystickVal) > 1.0)
 			return Math.signum(joystickVal);
 		else
@@ -90,9 +81,10 @@ public class DriveHelper {
 	}
 
 	public void setDeadbands(double throttle, double heading) {
-		if (!(Double.isFinite(throttle) && Double.isFinite(heading))) throw new IllegalArgumentException("Deadbands must be finite!");
+		if (!(Double.isFinite(throttle) && Double.isFinite(heading)))
+			throw new IllegalArgumentException("Deadbands must be finite!");
 
-		throttleDeadband=throttle;
-		headingDeadband=heading;
+		throttleDeadband = throttle;
+		headingDeadband = heading;
 	}
 }
