@@ -12,6 +12,7 @@ public final class Pneumatics extends Subsystem implements Constants {
 	public static final DoubleSolenoid.Value OFF = Value.kOff;
 
 	public boolean intakeOpen = false;
+	public boolean isClimbing = false;
 
 	@SuppressWarnings("unused")
 	private Compressor compressor = new Compressor(PCM);
@@ -35,6 +36,8 @@ public final class Pneumatics extends Subsystem implements Constants {
 
 	public void climb(DoubleSolenoid.Value a){
 		// climber.set(a);
+		if(a == EXTEND) isClimbing = false;
+		else if(a == RETRACT) isClimbing = true;
 	}
 
 	public void forklift(DoubleSolenoid.Value value) {

@@ -10,33 +10,18 @@ package frc.robot.commands.drivetrain;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SwitchDrive extends Command {
-	Command trueC;
-	Command falseC;
- 
-	public SwitchDrive(Command trueCommand, Command falseCommand) {
-	  trueC = trueCommand;
-	  falseC = falseCommand;
+public class StopDrive extends Command {
+	public StopDrive() {
+		requires(Robot.getRobot().drivetrain);
 	}
-	  
-	protected void initialize() {
-	  if(source()) {
-		Robot.getRobot().drivetrain.setDefaultCommand(trueC);
-		System.out.println("Switched to Voltage");
-	  }
-	  else {
-		Robot.getRobot().drivetrain.setDefaultCommand(falseC);
-		System.out.println("Switched to PID");
-	  }
+	
+	@Override
+	protected void execute() {
+		Robot.getRobot().drivetrain.tankDrive(0, 0);
 	}
-	  
-	public boolean source() {
-	  return Robot.getRobot().drivetrain.getIsPID();
-	}
-
+	
 	@Override
 	protected boolean isFinished() {
 		return true;
 	}
-	  
 }
