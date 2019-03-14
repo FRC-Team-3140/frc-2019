@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
@@ -12,7 +11,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Constants;
 import frc.robot.Hardware;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.drivetrain.DrivePID;
 import frc.robot.commands.drivetrain.DriveVoltage;
 import frc.util.DriveHelper;
 import frc.util.EncoderHelper;
@@ -60,7 +58,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 		setInverts();
 		pushToShuffleboard();
 		setPIDDefaults();
-		setNeutralMode(IdleMode.kCoast);
+		setNeutralMode(IdleMode.kBrake);
 	}
 
 	/*****************
@@ -157,8 +155,8 @@ public final class Drivetrain extends Subsystem implements Constants {
 		leftPIDController.setOutputRange(kMinOutput, kMaxOutput);
 		rightPIDController.setOutputRange(kMinOutput, kMaxOutput);
 
-		leftDriveMaster.setRampRate(rampRate);
-		rightDriveMaster.setRampRate(rampRate);
+		// leftDriveMaster.setRampRate(rampRate);
+		// rightDriveMaster.setRampRate(rampRate);
 	}
 
 	/****************
