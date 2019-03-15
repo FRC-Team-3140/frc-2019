@@ -32,7 +32,7 @@ public interface Constants {
         TILT_MOTOR = 9;
 
     // ELEVATOR 
-    public final int ELEVATOR_MASTER = 11, // el 1 (right1)
+    public final int ELEVATOR_MASTER = 11, // el 1 
         ELEVATOR_SLAVE = 12; // el 2
     
     /*
