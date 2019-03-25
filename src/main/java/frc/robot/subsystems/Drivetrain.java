@@ -72,7 +72,7 @@ public final class Drivetrain extends Subsystem {
 		setInverts();
 		pushToShuffleboard();
 		setPIDDefaults();
-		setNeutralMode(IdleMode.kCoast);
+		setNeutralMode(IdleMode.kBrake);
 		setLimits();
 	}
 
@@ -172,9 +172,6 @@ public final class Drivetrain extends Subsystem {
 
 		leftPIDController.setOutputRange(kMinOutput, kMaxOutput);
 		rightPIDController.setOutputRange(kMinOutput, kMaxOutput);
-
-		leftDriveMaster.setRampRate(rampRate);
-		rightDriveMaster.setRampRate(rampRate);
 	}
 
 	// SHUFFLEBOARD

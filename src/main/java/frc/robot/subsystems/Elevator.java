@@ -2,31 +2,36 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.*;
 
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Hardware;
 import frc.robot.commands.elevator.MoveWithJoystick;
 
 public final class Elevator extends Subsystem {
 
-	private double prevError = 0;
-	private double errorSum = 0;
-	private double lastTime = 0;
 	private double kP = 1;
 	private double kI = 0;
 	private double kD = 0;
-	private double deadband = 0.05;
+	private double deadband = 0.08;
 
 	private CANSparkMax elevatorMaster = new CANSparkMax(ELEVATOR_MASTER, CANSparkMaxLowLevel.MotorType.kBrushless);
 	private CANSparkMax elevatorSlave = new CANSparkMax(ELEVATOR_SLAVE, CANSparkMaxLowLevel.MotorType.kBrushless);
+
+	private CANEncoder elEncoder = elevatorMaster.getEncoder();
+	private CANPIDController elPIDController = elevatorMaster.getPIDController();
 
 	private Timer timer = new Timer();
 
 	public Elevator() {
 		setSlaves();
+		setNeutralMode(IdleMode.kBrake);
 	}
 
 	// MOVING
@@ -34,44 +39,27 @@ public final class Elevator extends Subsystem {
 	public void elevatorMove(double throttle) {
 		if (Math.abs(throttle) < deadband)
 			throttle = 0;
-		elevatorMaster.set(throttle);
+		elevatorMaster.set(-throttle);
 	}
 
 	public void moveDistancePID(double johns) {
-		if (johns > Hardware.elEncoder.getDistance()) {
-			double error = johns - Hardware.elEncoder.getDistance();
-			double t = timer.get();
-			double dt = lastTime - t;
-
-			errorSum += error * dt;
-			double p = kP * error;
-			double i = kI * (errorSum);
-			double d = kD * (error - prevError) / dt;
-			double throttle = p + i + d;
-			elevatorMaster.set(throttle);
-
-			prevError = error;
-			lastTime = t;
-		} else
-			System.out.println("ERROR: CANNOT MOVE TO A LOWER HEIGHT");
+		elPIDController.setReference(-johns, ControlType.kPosition);
 	}
 
 	// PID SUPPORT
 
-	public void startPID() {
-		timer.start();
-	}
-
-	public void endPID() {
-		timer.stop();
-		timer.reset();
-		prevError = 0;
-		lastTime = 0;
-		errorSum = 0;
+	public void configPID() {
+		elPIDController.setP(kP);
+		elPIDController.setI(kI);
+		elPIDController.setD(kD);
 	}
 
 	public boolean isElAtDitance(double johns) {
-		return Math.abs(Hardware.elEncoder.getDistance() - johns) < EL_TOL;
+		return Math.abs(getPosition() + johns) < EL_TOL;
+	}
+
+	public double getPosition() {
+		return elEncoder.getPosition();
 	}
 
 	// CONFIG
@@ -80,8 +68,13 @@ public final class Elevator extends Subsystem {
 		elevatorSlave.follow(elevatorMaster);
 	}
 
+	public void setNeutralMode(IdleMode mode) {
+		elevatorMaster.setIdleMode(mode);
+		elevatorSlave.setIdleMode(mode);
+	}
+
 	public void updateShuffleboard() {
-		SmartDashboard.putNumber("El encoder", Hardware.elEncoder.getDistance());
+		SmartDashboard.putNumber("El encoder", getPosition());
 
 		double newKP = SmartDashboard.getNumber("El kP", kP);
 		double newKI = SmartDashboard.getNumber("El kI", kI);
@@ -97,8 +90,7 @@ public final class Elevator extends Subsystem {
 	}
 
 	public void check() {
-		if (Hardware.isElDown() && Hardware.elSwitchWorking)
-			Hardware.elEncoder.reset();
+
 	}
 
 	@Override

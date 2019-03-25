@@ -15,27 +15,12 @@ public final class MovePID extends TimedCommand {
 	}
 
 	@Override
-	protected void initialize() {
-		robot.elevator.startPID();
-	}
-
-	@Override
 	protected void execute() {
 		robot.elevator.moveDistancePID(johns);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		return true; // robot.elevator.isElAtDitance(johns) || aboveTarget;
-	}
-
-	@Override
-	protected void end() {
-		robot.elevator.endPID();
-	}
-
-	@Override
-	protected void interrupted() {
-		robot.elevator.endPID();
+		return true;
 	}
 }
