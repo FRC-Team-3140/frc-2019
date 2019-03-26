@@ -16,8 +16,8 @@ public interface Constants {
     // PNEUMATICS
     // 0 and 7 are the current ports on chassis bot
     public static final int 
-        SHIFTER_EXTEND = 1, 
-        SHIFTER_RETRACT = 6,
+        SHIFTER_EXTEND = 0, 
+        SHIFTER_RETRACT = 3,
         ARM_EXTEND = 1, 
         ARM_RETRACT = 6,	
         CLIMBER_EXTEND = 1, 

@@ -16,7 +16,7 @@ public class Arm extends Subsystem implements Constants {
       kD = 0;
   private double deadband = 0.08;
 
-  //public static final WPI_TalonSRX tiltMotor = new WPI_TalonSRX(TILT_MOTOR);
+  public static final WPI_TalonSRX tiltMotor = new WPI_TalonSRX(TILT_MOTOR);
 
   public Arm() {
     configDefaults();
@@ -30,7 +30,7 @@ public class Arm extends Subsystem implements Constants {
       else if(Hardware.isArmBot() && throttle > 0) throttle = 0;
  	 }*/
 
-    //tiltMotor.set(throttle);
+    tiltMotor.set(throttle);
   }
 
   // Future use + TODO: add limit switch checking
@@ -54,8 +54,8 @@ public class Arm extends Subsystem implements Constants {
   }
 
   public void configDefaults() {
-    //tiltMotor.configFactoryDefault();
-    // future inverts and stuff go here
+    tiltMotor.configFactoryDefault();
+	tiltMotor.setInverted(true);
   }
 
   public void configSensors() {

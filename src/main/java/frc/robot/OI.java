@@ -9,6 +9,7 @@ import frc.robot.commands.elevator.*;
 import frc.robot.commands.drivetrain.DriveAlongLine;
 import frc.robot.commands.drivetrain.DrivePID;
 import frc.robot.commands.drivetrain.DriveVoltage;
+import frc.robot.commands.drivetrain.StopDrive;
 import frc.robot.libs.XboxController;
 
 public final class OI {
@@ -20,8 +21,10 @@ public final class OI {
 	private XboxController xbox2 = new XboxController(XBOX_PORT_2);
 
 	public OI() {
-		xbox1.leftBumper.whenPressed(new ShiftUp());
-		xbox1.leftBumper.whenReleased(new ShiftDown());
+		xbox1.leftBumper.whileHeld(new StopDrive());
+		xbox1.leftJoystickPress.whenPressed(new ShiftUp());
+		xbox1.leftJoystickPress.whenReleased(new ShiftDown());
+		
 		//xbox1.start.whenPressed(new SwitchDrive(new DriveVoltage(), new DrivePID()));
 
 		// xbox2.leftBumper.whenPressed(new ArmOpen());
