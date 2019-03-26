@@ -14,10 +14,13 @@ public final class SwitchDrive extends Command {
 
 	@Override
 	protected void initialize() {
-		if (source())
+		if (source()) {
 			Robot.getRobot().drivetrain.setDefaultCommand(true_command);
-		else
+			System.out.println("Switched to Voltage");
+		} else {
 			Robot.getRobot().drivetrain.setDefaultCommand(false_command);
+			System.out.println("Switched to PID");
+		}
 	}
 
 	public boolean source() {

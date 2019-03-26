@@ -13,6 +13,7 @@ public final class Pneumatics extends Subsystem {
 	public static final DoubleSolenoid.Value OFF = Value.kOff;
 
 	public boolean intakeOpen = false;
+	public boolean isClimbing = false;
 
 	@SuppressWarnings("unused")
 	private Compressor compressor = new Compressor(PCM);
@@ -29,6 +30,7 @@ public final class Pneumatics extends Subsystem {
 	}
 
 	public void toggleArm(DoubleSolenoid.Value b) {
+		// TODO intakeOpen = b == EXTEND;
 		if (b == EXTEND)
 			intakeOpen = true;
 		else if (b == RETRACT)
@@ -38,6 +40,9 @@ public final class Pneumatics extends Subsystem {
 
 	public void climb(DoubleSolenoid.Value a) {
 		// climber.set(a);
+		// TODO is this what you mean? isClimbing = a == RETRACT;
+		if (a == EXTEND) isClimbing = false;
+		else if (a == RETRACT) isClimbing = true;
 	}
 
 	public void forklift(DoubleSolenoid.Value value) {

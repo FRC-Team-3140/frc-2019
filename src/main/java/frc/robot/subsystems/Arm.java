@@ -27,13 +27,6 @@ public final class Arm extends Subsystem {
 		if (Math.abs(throttle) < deadband)
 			throttle = 0;
 
-		if (Hardware.armSwitchesWorking) {
-			if (Hardware.isArmTop() && throttle < 0)
-				throttle = 0;
-			else if (Hardware.isArmBot() && throttle > 0)
-				throttle = 0;
-		}
-
 		tiltMotor.set(throttle);
 	}
 
@@ -71,9 +64,7 @@ public final class Arm extends Subsystem {
 	}
 
 	public void check() {
-		if (Hardware.armSwitchesWorking && Hardware.isArmTop()) {
-			resetEncoder();
-		}
+
 	}
 
 	public void updateShuffleboard() {
