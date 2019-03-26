@@ -142,20 +142,21 @@ public final class Drivetrain extends Subsystem {
 	// CONFIG METHODS
 
 	public void setSlaves() {
-		leftDriveSlave1.follow(leftDriveMaster);
-		leftDriveSlave2.follow(leftDriveMaster, true);
+		leftDriveSlave1.follow(leftDriveMaster, true);
+		leftDriveSlave2.follow(leftDriveMaster);
 		rightDriveSlave1.follow(rightDriveMaster);
-		rightDriveSlave2.follow(rightDriveMaster, true);
+		rightDriveSlave2.follow(rightDriveMaster);
 	}
 
 	private void setInverts() {
-		rightDriveMaster.setInverted(true);
-		rightDriveSlave1.setInverted(true);
+		// TODO unused
 	}
 
 	private void setNeutralMode(IdleMode mode) {
 		for (CANSparkMax motor : motors)
 			motor.setIdleMode(mode);
+		leftDriveSlave2.setIdleMode(IdleMode.kCoast);
+		rightDriveSlave2.setIdleMode(IdleMode.kCoast);
 	}
 
 	private void setLimits() {

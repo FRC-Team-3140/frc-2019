@@ -2,8 +2,6 @@ package frc.robot.subsystems;
 
 import static frc.robot.Constants.*;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -17,6 +15,8 @@ public final class Arm extends Subsystem {
 	private double kD = 0;
 	private double deadband = 0.08;
 
+	public static final WPI_TalonSRX tiltMotor = new WPI_TalonSRX(TILT_MOTOR);
+
 	public Arm() {
 		configDefaults();
 	}
@@ -24,6 +24,7 @@ public final class Arm extends Subsystem {
 	public void tiltArm(double throttle) {
 		if (Math.abs(throttle) < deadband)
 			throttle = 0;
+		tiltMotor.set(throttle);
 	}
 
 	// Future use + TODO: add limit switch checking
@@ -43,8 +44,8 @@ public final class Arm extends Subsystem {
 	}
 
 	public void configDefaults() {
-		// TODO do we need this?
-		// future inverts and stuff go here
+		tiltMotor.configFactoryDefault();
+		tiltMotor.setInverted(true);
 	}
 
 	public void configSensors() {

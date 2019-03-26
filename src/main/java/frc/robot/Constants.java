@@ -14,8 +14,8 @@ public final class Constants {
 
 	// PNEUMATICS
 	// 0 and 7 are the current ports on chassis bot
-	public static final int SHIFTER_EXTEND = 1;
-	public static final int SHIFTER_RETRACT = 6;
+	public static final int SHIFTER_EXTEND = 0;
+	public static final int SHIFTER_RETRACT = 3;
 	public static final int ARM_EXTEND = 1;
 	public static final int ARM_RETRACT = 6;
 	public static final int CLIMBER_EXTEND = 1;

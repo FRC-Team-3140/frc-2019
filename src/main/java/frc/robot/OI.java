@@ -3,6 +3,7 @@ package frc.robot;
 import frc.robot.commands.pneumatics.arm.*;
 import frc.robot.commands.pneumatics.shifter.*;
 import frc.robot.controller.XboxController;
+import frc.robot.commands.drivetrain.StopDrive;
 
 public final class OI {
 
@@ -13,8 +14,9 @@ public final class OI {
 	private XboxController xbox2 = new XboxController(XBOX_PORT_2);
 
 	public OI() {
-		xbox1.leftBumper.whenPressed(new ShiftUp());
-		xbox1.leftBumper.whenReleased(new ShiftDown());
+		xbox1.leftBumper.whileHeld(new StopDrive());
+		xbox1.leftJoystickPress.whenPressed(new ShiftUp());
+		xbox1.leftJoystickPress.whenReleased(new ShiftDown());
 		xbox2.leftBumper.whenPressed(new SwitchArm(new ArmClose(), new ArmOpen()));
 		/*
 		xbox1.start.whenPressed(new SwitchDrive(new DriveVoltage(), new DrivePID()));

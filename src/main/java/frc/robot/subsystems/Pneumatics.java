@@ -15,12 +15,17 @@ public final class Pneumatics extends Subsystem {
 	public boolean intakeOpen = false;
 	public boolean isClimbing = false;
 
+	@SuppressWarnings("unused")
+	private Compressor compressor = new Compressor(PCM);
+
+	private DoubleSolenoid shifter = new DoubleSolenoid(PCM, SHIFTER_EXTEND, SHIFTER_RETRACT);
+
 	// Disabled climber and forklift for the upcoming practice robot
 	// private DoubleSolenoid climber = new DoubleSolenoid(PCM, CLIMBER_EXTEND, CLIMBER_RETRACT);
 	// private DoubleSolenoid forklift = new DoubleSolenoid(PCM, FORKLIFT_EXTEND, FORKLIFT_RETRACT);
 
 	public void shift(DoubleSolenoid.Value v) {
-		// TODO need?
+		shifter.set(v);
 	}
 
 	public void toggleArm(DoubleSolenoid.Value b) {
