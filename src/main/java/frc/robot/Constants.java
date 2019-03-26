@@ -29,7 +29,7 @@ public final class Constants {
 	public static final int TILT_MOTOR = 9;
 
 	// ELEVATOR
-	public static final int ELEVATOR_MASTER = 11; // el 1 (right1)
+	public static final int ELEVATOR_MASTER = 11; // el 1
 	public static final int ELEVATOR_SLAVE = 12; // el 2
 
 	// SENSORS

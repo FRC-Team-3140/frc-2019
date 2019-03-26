@@ -39,11 +39,11 @@ public final class Elevator extends Subsystem {
 	public void elevatorMove(double throttle) {
 		if (Math.abs(throttle) < deadband)
 			throttle = 0;
-		elevatorMaster.set(-throttle);
+		elevatorMaster.set(throttle);
 	}
 
 	public void moveDistancePID(double johns) {
-		elPIDController.setReference(-johns, ControlType.kPosition);
+		elPIDController.setReference(johns, ControlType.kPosition);
 	}
 
 	// PID SUPPORT
@@ -55,7 +55,7 @@ public final class Elevator extends Subsystem {
 	}
 
 	public boolean isElAtDitance(double johns) {
-		return Math.abs(getPosition() + johns) < EL_TOL;
+		return Math.abs(getPosition() - johns) < EL_TOL;
 	}
 
 	public double getPosition() {
