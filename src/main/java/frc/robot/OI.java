@@ -22,8 +22,10 @@ public final class OI {
 
 	public OI() {
 		xbox1.leftBumper.whileHeld(new StopDrive());
-		xbox1.leftJoystickPress.whenPressed(new ShiftUp());
-		xbox1.leftJoystickPress.whenReleased(new ShiftDown());
+		//xbox1.leftJoystickPress.whenPressed(new ShiftUp());
+		//xbox1.leftJoystickPress.whenReleased(new ShiftDown());
+
+		xbox1.rightBumper.whenPressed(new SwitchShift(new ShiftDown(), new ShiftUp()));
 		
 		//xbox1.start.whenPressed(new SwitchDrive(new DriveVoltage(), new DrivePID()));
 

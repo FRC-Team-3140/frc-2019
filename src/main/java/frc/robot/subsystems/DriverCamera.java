@@ -10,7 +10,8 @@ public class DriverCamera {
 	public DriverCamera() {
 		camServer = CameraServer.getInstance();
 		cam = camServer.startAutomaticCapture();
-		cam.setFPS(30);
+		//cam.getProperty("compression").set(-1);
+		cam.setFPS(15);
 		cam.setResolution(320, 240);
 	}
 

@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
+import frc.robot.Hardware;
+import frc.robot.Robot;
 import frc.robot.commands.elevator.MoveWithJoystick;
 
 public final class Elevator extends Subsystem implements Constants {
@@ -37,10 +39,11 @@ public final class Elevator extends Subsystem implements Constants {
    * MOVING *
    **********/
   public void elevatorMove(double throttle) {
-	// if(Hardware.isElDown() && throttle < 0) throttle = 0;
+	  if(!Robot.getRobot().oi.getXboxController2().y.get())
+	  	if(Hardware.isElDown() && throttle < 0) throttle = 0;
  
-	 if(Math.abs(throttle) < deadband) throttle = 0;
-	 elevatorMaster.set(throttle);
+	  if(Math.abs(throttle) < deadband) throttle = 0;
+	  elevatorMaster.set(throttle);
    }
  
    public void moveDistancePID(double johns) {
@@ -93,6 +96,7 @@ public final class Elevator extends Subsystem implements Constants {
    }
  
    public void check() {
+	   //if(Hardware.isElDown()) 
    }
 
   @Override

@@ -104,6 +104,9 @@ public final class Drivetrain extends Subsystem implements Constants {
 		rightDriveMaster.set(right);
 	}
 
+	/***************
+	 * AUTO DRIVES *
+	 ***************/
 	public void driveAlongLine() {
 		// TODO figure out + and - headings here... 		
 		double rightCorrection = rightLineFactor * (lineTarget1- Hardware.rightLineSensor.getValue());
@@ -121,14 +124,18 @@ public final class Drivetrain extends Subsystem implements Constants {
 		driveVelocityPID(0.15, heading);
 	}
 
+	public void driveDistanceStraight(int distance) {
+		
+	}
+
 	/******************
 	 * CONFIG METHODS *
 	 ******************/
 	public void setSlaves() {
 		leftDriveSlave1.follow(leftDriveMaster, true);
 		leftDriveSlave2.follow(leftDriveMaster);
-		rightDriveSlave1.follow(rightDriveMaster);
-		rightDriveSlave2.follow(rightDriveMaster);
+		rightDriveSlave1.follow(rightDriveMaster, true);
+		rightDriveSlave2.follow(rightDriveMaster, true);
 	}
 
 	private void setInverts() {		

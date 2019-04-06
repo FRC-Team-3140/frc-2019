@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants;
 import frc.robot.Hardware;
+import frc.robot.Robot;
 import frc.robot.commands.arm.TiltArm;
 
 public class Arm extends Subsystem implements Constants {
@@ -25,10 +26,10 @@ public class Arm extends Subsystem implements Constants {
   public void tiltArm(double throttle){
     if(Math.abs(throttle) < deadband) throttle = 0;
 
-	/*if(Hardware.armSwitchesWorking) {
-      if(Hardware.isArmTop() && throttle < 0) throttle = 0;
-      else if(Hardware.isArmBot() && throttle > 0) throttle = 0;
- 	 }*/
+	if(!Robot.getRobot().oi.getXboxController2().y.get()) {
+   		if(Hardware.isArmTop() && throttle < 0) throttle = 0;
+		//else if(Hardware.isArmBot() && throttle > 0) throttle = 0;
+	}
 
     tiltMotor.set(throttle);
   }
@@ -84,8 +85,7 @@ public class Arm extends Subsystem implements Constants {
       kP = p;
       kI = i;
       kD = d;
-      if(Hardware.armSwitchesWorking)
-       configPID();
+	  //configPID();
     }
 
   }
