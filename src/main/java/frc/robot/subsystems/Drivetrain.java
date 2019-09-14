@@ -96,7 +96,6 @@ public final class Drivetrain extends Subsystem implements Constants {
 		arcadeDrive(driveHelper.calculateThrottle(throttle),
 				driveHelper.handleOverPower(driveHelper.handleDeadband(heading, headingDeadband)));
 
-		System.out.println("voltage");
 	}
 
 	public void arcadeDrive(double throttle, double heading) {
@@ -209,7 +208,11 @@ public final class Drivetrain extends Subsystem implements Constants {
 		double[] leftVolts = {leftDriveMaster.getAppliedOutput(), leftDriveSlave1.getAppliedOutput(), leftDriveSlave2.getAppliedOutput()};
 		SmartDashboard.putNumberArray("DT Right", rightVolts);
 		SmartDashboard.putNumberArray("DT Left", leftVolts);
+
+		double[] rightCurrent = {rightDriveMaster.getOutputCurrent(), rightDriveSlave1.getOutputCurrent(), rightDriveSlave2.getOutputCurrent()};
+		SmartDashboard.putNumberArray("Current", rightCurrent);
 	}
+
 
 	/***************
 	 * GET METHODS *

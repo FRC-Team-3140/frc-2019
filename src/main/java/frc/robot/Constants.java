@@ -10,9 +10,9 @@ public interface Constants {
     public final int LEFT_DRIVE_MASTER = 3, // 6
     LEFT_DRIVE_SLAVE1 = 5, // 5
     LEFT_DRIVE_SLAVE2 = 4, // 4
-    RIGHT_DRIVE_MASTER = 7, // 2
-    RIGHT_DRIVE_SLAVE1 = 8, // 3
-    RIGHT_DRIVE_SLAVE2 = 6; // 1
+    RIGHT_DRIVE_MASTER = 6, // 2
+    RIGHT_DRIVE_SLAVE1 = 7, // 3
+    RIGHT_DRIVE_SLAVE2 = 8; // 1
 
     // PNEUMATICS
     // Only shiter, climber, and arm are the correct ports on the competition bot
@@ -20,7 +20,7 @@ public interface Constants {
         SHIFTER_EXTEND = 2,
         SHIFTER_RETRACT = 5,
         ARM_EXTEND = 0,
-        ARM_RETRACT = 7,	
+        ARM_RETRACT = 3,	
         CLIMBER_EXTEND = 1, 
         CLIMBER_RETRACT = 6,
 

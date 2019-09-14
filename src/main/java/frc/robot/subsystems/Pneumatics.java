@@ -16,14 +16,14 @@ public final class Pneumatics extends Subsystem implements Constants {
 
 	@SuppressWarnings("unused")
 	private Compressor compressor = new Compressor(PCM);
-	@SuppressWarnings("unused")
-	private Compressor compressor2 = new Compressor(PCM2);
+	//@SuppressWarnings("unused")
+	//private Compressor compressor2 = new Compressor(PCM2);
 
-	private DoubleSolenoid shifter = new DoubleSolenoid(PCM2, SHIFTER_EXTEND, SHIFTER_RETRACT);
-	private DoubleSolenoid arm = new DoubleSolenoid(PCM2, ARM_EXTEND, ARM_RETRACT);
+	private DoubleSolenoid shifter = new DoubleSolenoid(PCM, SHIFTER_EXTEND, SHIFTER_RETRACT);
+	private DoubleSolenoid arm = new DoubleSolenoid(PCM, ARM_EXTEND, ARM_RETRACT);
 
 	// Disabled climber and forklift for the upcoming practice robot
-	private DoubleSolenoid climber = new DoubleSolenoid(PCM2, CLIMBER_EXTEND, CLIMBER_RETRACT);
+	//private DoubleSolenoid climber = new DoubleSolenoid(PCM2, CLIMBER_EXTEND, CLIMBER_RETRACT);
 	// private DoubleSolenoid forklift = new DoubleSolenoid(PCM, FORKLIFT_EXTEND, FORKLIFT_RETRACT);
 
 	public Pneumatics() {
@@ -31,8 +31,8 @@ public final class Pneumatics extends Subsystem implements Constants {
 		shifter.set(OFF);
 		arm.set(RETRACT);
 		arm.set(OFF);
-		climber.set(EXTEND);
-		climber.set(OFF);
+		//climber.set(EXTEND);
+		//climber.set(OFF);
 	}
 
 	public void shift(DoubleSolenoid.Value v) {
@@ -48,7 +48,7 @@ public final class Pneumatics extends Subsystem implements Constants {
 	public void climb(DoubleSolenoid.Value a){
 		if(a == EXTEND) isClimbing = false;
 		else if(a == RETRACT) isClimbing = true;
-		climber.set(a);
+		//climber.set(a);
 	}
 
 	public void forklift(DoubleSolenoid.Value value) {
