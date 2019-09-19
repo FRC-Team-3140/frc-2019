@@ -131,7 +131,7 @@ public final class Drivetrain extends Subsystem implements Constants {
 	public void setSlaves() {
 		leftDriveSlave1.follow(leftDriveMaster);
 		leftDriveSlave2.follow(leftDriveMaster, true);
-		rightDriveSlave1.follow(rightDriveMaster, true);
+		rightDriveSlave1.follow(rightDriveMaster);
 		rightDriveSlave2.follow(rightDriveMaster, true);
 	}
 

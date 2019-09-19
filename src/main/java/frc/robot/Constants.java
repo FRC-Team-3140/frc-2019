@@ -7,8 +7,8 @@ public interface Constants {
      */
     // DRIVETRAIN
     // Comments are mechanical markers of the competition bot
-    public final int LEFT_DRIVE_MASTER = 3, // 6
-    LEFT_DRIVE_SLAVE1 = 5, // 5
+    public final int LEFT_DRIVE_MASTER = 5, // 6
+    LEFT_DRIVE_SLAVE1 = 3, // 5
     LEFT_DRIVE_SLAVE2 = 4, // 4
     RIGHT_DRIVE_MASTER = 6, // 2
     RIGHT_DRIVE_SLAVE1 = 7, // 3

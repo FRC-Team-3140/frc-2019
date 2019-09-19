@@ -85,7 +85,7 @@ public final class Elevator extends Subsystem implements Constants {
    * CONFIG *
    **********/
   public void setSlaves(){
-    elevatorSlave.follow(elevatorMaster);
+    elevatorSlave.follow(elevatorMaster, false);
   }
 
   public void setNeutralMode(IdleMode mode) {

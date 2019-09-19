@@ -20,10 +20,10 @@ public final class OI {
 	private XboxController xbox2 = new XboxController(XBOX_PORT_2);
 
 	public OI() {
-		xbox1.leftJoystickPress.whenPressed(new ShiftUp());
-		xbox1.leftJoystickPress.whenReleased(new ShiftDown());
+		xbox1.leftBumper.whenPressed(new ShiftUp());
+		xbox1.leftBumper.whenReleased(new ShiftDown());
 		//xbox1.start.whenPressed(new SwitchDrive(new DriveVoltage(), new DrivePID()));
-		xbox1.leftBumper.whileHeld(new StopDrive());
+		xbox1.rightBumper.whileHeld(new StopDrive());
 
 		xbox2.leftBumper.whenPressed(new SwitchArm(new ArmClose(), new ArmOpen()));
 		
@@ -32,7 +32,7 @@ public final class OI {
 		xbox2.y.whileHeld(new MoveLevel3());
 		xbox2.x.whenPressed(new MoveToBottom());*/
 
-		xbox1.a.whenPressed(new SwitchClimb(new ClimbUp() , new ClimbDown()));
+		//xbox1.a.whenPressed(new SwitchClimb(new ClimbUp() , new ClimbDown()));
 		/*xbox2.x.whenPressed(new ReleaseForklift());
 		xbox2.x.whenReleased(new HoldForklift());*/
 	}
