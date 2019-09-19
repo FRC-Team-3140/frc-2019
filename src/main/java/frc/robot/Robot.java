@@ -24,12 +24,18 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.robot.commands.pneumatics.arm.ArmOpen;
 import frc.robot.commands.pneumatics.shifter.ShiftUp;
 import frc.robot.subsystems.*;
+import frc.util.Logger;
+
+import java.time.LocalDateTime;   
+import java.time.format.DateTimeFormatter;
+
+
 
 public final class Robot extends TimedRobot {
 
 	private static Robot robot;
 
-	public Drivetrain drivetrain;
+	public static Drivetrain drivetrain;
 	public Pneumatics pneumatics;
 	public Elevator elevator;
 	public Intake intake;
@@ -37,6 +43,8 @@ public final class Robot extends TimedRobot {
 	public static DriverCamera camera; // disabled because it is missing
 	public OI oi;
 
+	public static Logger lg;
+	public static String runTime = "";
 
 	public static Robot getRobot() {
 		return robot;
@@ -54,6 +62,12 @@ public final class Robot extends TimedRobot {
 		camera = new DriverCamera();
 		// OI must be at the bottom
 		oi = new OI();
+
+		lg = new Logger();
+
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();  
+		runTime = dtf.format(now);
 	}
 
 	@Override
