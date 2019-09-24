@@ -2,8 +2,6 @@ package frc.robot;
 
 public interface Constants {
 
-	public final String outputPath = "/home/lvuser";
-
     /****
      * SUBSYSTEMS
      */
