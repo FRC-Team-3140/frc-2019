@@ -217,6 +217,14 @@ public final class Drivetrain extends Subsystem implements Constants {
 	/***************
 	 * GET METHODS *
 	 ***************/
+	public double getRightVoltage() {
+		return rightDriveMaster.getAppliedOutput();
+	}
+	
+	public double getLeftVoltage() {
+		return leftDriveMaster.getAppliedOutput();
+	}
+
 	public boolean getIsPID() {
 		return pid;
 	}

@@ -16,8 +16,8 @@ public final class OI {
 	private static final int XBOX_PORT_1 = 0;
 	private static final int XBOX_PORT_2 = 1;
 
-	private XboxController xbox1 = new XboxController(XBOX_PORT_1);
-	private XboxController xbox2 = new XboxController(XBOX_PORT_2);
+	private static XboxController xbox1 = new XboxController(XBOX_PORT_1);
+	private static XboxController xbox2 = new XboxController(XBOX_PORT_2);
 
 	public OI() {
 		xbox1.leftBumper.whenPressed(new ShiftUp());
@@ -42,11 +42,11 @@ public final class OI {
 		xbox2.check();
 	}
 
-	public XboxController getXboxController(){
+	public static XboxController getXboxController(){
 		return xbox1;
 	}
 
-	public XboxController getXboxController2(){
+	public static XboxController getXboxController2(){
 		return xbox2;
 	}
 }
