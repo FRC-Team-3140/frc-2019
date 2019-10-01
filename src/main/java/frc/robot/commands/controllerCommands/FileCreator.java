@@ -7,9 +7,8 @@ public class FileCreator extends Command {
 	public FileCreator() {
 	}
 	
-	// TODO this
     protected void initialize() {
-		//Robot.lg.createNewFile(Robot.getNewFileName());
+		Robot.lg.createNewFile(Robot.getNewFileName());
     }    	
 
 	@Override

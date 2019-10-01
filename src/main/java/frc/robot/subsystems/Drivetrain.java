@@ -237,6 +237,15 @@ public final class Drivetrain extends Subsystem implements Constants {
 		return EncoderHelper.revsToInches(rightEncoder.getPosition(), WHEEL_CIRCUM_TN) / LOW_GEAR_RATIO;
 	}
 
+	// returns inches per min
+	public double getLeftVelo() {
+		return EncoderHelper.revsToInches(leftEncoder.getVelocity(), WHEEL_CIRCUM_TN) / LOW_GEAR_RATIO;
+	}
+
+	public double getRightVelo() {
+		return EncoderHelper.revsToInches(rightEncoder.getVelocity(), WHEEL_CIRCUM_TN) / LOW_GEAR_RATIO;
+	}
+
 	public double getThrottleDeadband() {
 		return throttleDeadband;
 	}

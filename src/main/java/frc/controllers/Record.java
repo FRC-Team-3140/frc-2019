@@ -37,28 +37,21 @@ public class Record implements Loop, Constants {
 	}
 	
 	private void execute() {
-		System.out.println("Recording");
-		
+				
 		if(!reachedFirstNonZero && (Robot.drivetrain.getLeftVoltage() != 0 || Robot.drivetrain.getRightVoltage() != 0 ||
 				controller.a.get() || controller.b.get() || controller.x.get() || controller.y.get() || controller.leftBumper.get() ||
 				controller.rightBumper.get() || controller.select.get() || controller.start.get() || controller.leftJoystickPress.get() ||
 				controller.rightJoystickPress.get() || controller.leftTrigger.get() || controller.rightTrigger.get() || controller2.a.get() ||
 				controller2.b.get() || controller2.x.get() || controller2.y.get() || controller2.leftBumper.get() || controller2.rightBumper.get() || 
 				controller2.select.get() || controller2.start.get() || controller2.leftJoystickPress.get() || controller2.rightJoystickPress.get() ||
-				controller2.leftTrigger.get() || controller2.rightTrigger.get())) {
+				controller2.leftTrigger.get() || controller2.rightTrigger.get())) { // my genius idea btw :D
 			
 			reachedFirstNonZero = true;
 		}
 		
 		if(reachedFirstNonZero) {
-			/*Robot.lg.writeLine(Robot.dt.getLeftMasterVoltage() + "," + Robot.dt.getRightMasterVoltage() + "," + Robot.in.getLeftIntakeWheelValue() + "," + Robot.in.getRightIntakeWheelValue()
-							+ "," + controller.a.get() + "," + controller.b.get() + "," + controller.x.get() + "," + controller.y.get() + "," + controller.leftBumper.get() 
-							+ "," + controller.rightBumper.get() + "," + controller.select.get() + "," + controller.start.get() + "," + controller.leftJoystickPress.get() 
-							+ "," + controller.rightJoystickPress.get() + "," + controller.leftTrigger.get() + "," + controller.rightTrigger.get() + "," + controller2.a.get()
-							+ "," + controller2.b.get() + "," + controller2.x.get() + "," + controller2.y.get() + "," + controller2.leftBumper.get() + "," + controller2.rightBumper.get()
-							+ "," + controller2.select.get() + ","  + controller2.start.get() + "," + controller2.leftJoystickPress.get() + "," + controller2.rightJoystickPress.get() 
-							+ "," + controller2.leftTrigger.get() + "," + controller2.rightTrigger.get() + "," + Robot.el.getTicksTravelled() + "," + Robot.el.getElevatorVelocity());
-			*/
+			Robot.lg.writeLine(Robot.drivetrain.getLeftVelo() + "," + Robot.drivetrain.getRightVelo());
+			System.out.println("Recording");
 		}
 	}
 }

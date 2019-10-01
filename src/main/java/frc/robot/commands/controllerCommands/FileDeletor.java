@@ -1,14 +1,14 @@
 package frc.robot.commands.controllerCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
 
 public class FileDeletor extends Command {
 	public FileDeletor() {
 	}
 	
-	// TODO THIS
     protected void initialize() {
-		//Robot.lg.deleteFile(Robot.getFileChooser().getSelected().getName());
+		Robot.lg.deleteFile(Robot.getFileChooser().getSelected().getName());
     }    	
 
 	@Override
