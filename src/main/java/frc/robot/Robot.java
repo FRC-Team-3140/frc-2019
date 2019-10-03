@@ -87,7 +87,7 @@ public final class Robot extends TimedRobot implements Constants {
 		SmartDashboard.putData("Create a new file", new FileCreator()); 
 		// File deleter
 		SmartDashboard.putData("Delete a file", new FileDeletor());
-		//FileSelector
+		// FileSelector
     	fileChooser = new SendableChooser<>();
     	fileChooser.setDefaultOption("", new DoNothing());
 		SmartDashboard.putData("File Selector", fileChooser);
