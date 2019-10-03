@@ -136,7 +136,7 @@ public final class Robot extends TimedRobot implements Constants {
 		}
 		
 		// Executed when the value of the Command lastSelectedFile changes 
-		// (This is either activated by the if-statement below this one, or when a new file is selected in the SDB)
+		// (This is activated when a new file is selected in the SDB)
 		// Changes the value of lastSelected file to the working file path
 		if (fileChooser.getSelected() != lastSelectedFile && fileChooser.getSelected() != null) {
 			fileChooser.getSelected().start();
@@ -145,7 +145,7 @@ public final class Robot extends TimedRobot implements Constants {
 		
 		// Executed when the number of files in our folder changes
 		// (This is activated when a new file is created)
-		// Creates a new file and sets the working path to the newly created file. Updates the value of lastNumOfFiles
+		// Creates a new file. Updates the value of lastNumOfFiles and listOfFiles
 		if (lg.getFiles(outputPath).length != lastNumOfFiles) {
 			for (File file : lg.getFiles(outputPath))
 				if (!fileNameInListOfFiles(listOfFiles, file)) {

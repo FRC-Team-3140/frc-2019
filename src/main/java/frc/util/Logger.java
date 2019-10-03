@@ -23,9 +23,10 @@ public class Logger implements Constants {
 	private final List<File> restrictedFilesList = new ArrayList<File>();
 	
 	public Logger() {
-		//Adding Restricted Files
-		restrictedFilesList.add(new File(outputPath +"/README_File_Paths.txt"));
-		restrictedFilesList.add(new File(outputPath +"/crash_tracking.txt"));
+		// Adding Restricted Files
+		// TODO make these files on the rio
+		// restrictedFilesList.add(new File(outputPath +"/README_File_Paths.txt"));
+		// restrictedFilesList.add(new File(outputPath +"/crash_tracking.txt"));
 	}
 	
 	public void createNewFile(String name) {
