@@ -54,6 +54,7 @@ public class Logger implements Constants {
 	public void writeLine(String line) {
 		try {
 			if(bw != null) {
+				System.out.println("Writing: " + line);
 				bw.write(line);
 				bw.newLine();
 				bw.flush();

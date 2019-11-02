@@ -37,7 +37,6 @@ public class Record implements Loop, Constants {
 	}
 	
 	private void execute() {
-				
 		if(!reachedFirstNonZero && (Robot.drivetrain.getLeftVoltage() != 0 || Robot.drivetrain.getRightVoltage() != 0 ||
 				controller.a.get() || controller.b.get() || controller.x.get() || controller.y.get() || controller.leftBumper.get() ||
 				controller.rightBumper.get() || controller.select.get() || controller.start.get() || controller.leftJoystickPress.get() ||

@@ -3,7 +3,7 @@ package frc.robot;
 public interface Constants {
 
 	public final String outputPath = "home/lvuser/";
-	public final int kLooperDt = 100; //ms
+	public final double kLooperDt = .1; // s
 
     /****
      * SUBSYSTEMS

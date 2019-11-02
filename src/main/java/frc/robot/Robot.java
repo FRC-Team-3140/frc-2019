@@ -124,6 +124,11 @@ public final class Robot extends TimedRobot implements Constants {
 		SmartDashboard.putString("Working File", lg.getWorkingFile()); // to know where the path is
 	}
 
+	@Override
+	public void disabledInit() {
+		autoLooper.stop();
+	}
+
 	/****************
 	 * RECORD STUFF *
 	 ****************/
@@ -149,7 +154,7 @@ public final class Robot extends TimedRobot implements Constants {
 		if (lg.getFiles(outputPath).length != lastNumOfFiles) {
 			for (File file : lg.getFiles(outputPath))
 				if (!fileNameInListOfFiles(listOfFiles, file)) {
-					fileChooser.addOption(file.getName(), new FilePicker(file.getPath(), true)); //what does the boolean do? TODO
+					fileChooser.addOption(file.getName(), new FilePicker(file.getPath(), false)); //what does the boolean do? TODO
 					listOfFiles.add(file);
 				}
 			lastNumOfFiles = lg.getFiles(outputPath).length;
